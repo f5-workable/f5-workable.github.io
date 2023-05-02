@@ -1,9 +1,13 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CompanyRouter from "./routes/CompanyRouter";
 import MemberRouter from "./routes/MemberRouter";
 
 function App() {
-  const isCompany = useState(false);
+  const [isCompany, setIsCompany] = useState(false);
+
+  useEffect(() => {
+    setIsCompany(false);
+  }, []);
   
   return <>{isCompany ? <CompanyRouter /> : <MemberRouter />}</>;
 }
