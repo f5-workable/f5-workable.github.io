@@ -2,7 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { MdSearch } from "react-icons/md";
 import { useEffect, useState } from "react";
 
-const Header = ({ handleIsCompany }) => {
+const CompanyHeader = ({ handleIsCompany }) => {
   const [isLogined, setIsLogined] = useState(false);
   const navigate = useNavigate();
 
@@ -22,11 +22,11 @@ const Header = ({ handleIsCompany }) => {
 
   return (
     <>
-      <header className="w-full bg-neutral-50 fixed top-0 mx-auto my-0 z-50 border-b border-solid border-neutral-300 shadow-md">
+      <header className="w-full bg-neutral-50 fixed top-0 mx-auto my-0 shadow z-50">
         <nav className="w-11/12 h-99 flex flex-row justify-between items-center mx-auto my-0">
           <div className="flex justify-center">
             <Link to="/" className="py-3 mx-3 text-2xl text-orange-500">
-              장애인 구인구직
+              장애인 구인구직 - Company
             </Link>
           </div>
           <div className="flex flex-row items-center">
@@ -42,16 +42,8 @@ const Header = ({ handleIsCompany }) => {
                 required
               />
             </form>
-            <aside className="flex flex-row items-center before:content-['|'] before:mr-6 text-neutral-300">
+            <aside className="flex flex-row items-center before:content-['|'] before:mr-3 text-neutral-300">
               <ul className="flex items-center text-neutral-800">
-                <li className="inline-block">
-                  <Link
-                    to="/"
-                    className="flex items-center px-4 mr-3 h-9 bg-emerald-400 rounded-lg text-white"
-                  >
-                    이력서
-                  </Link>
-                </li>
                 {isLogined ? (
                   <li className="inline-flex relative mr-5 ml-2">
                     <button
@@ -74,7 +66,7 @@ const Header = ({ handleIsCompany }) => {
                           onClick={handleProfileClick}
                           className="w-36 hover:bg-neutral-200 rounded-xl px-4 py-4"
                         >
-                          회원 정보
+                          기업 정보
                         </Link>
                       </li>
                       <li className="flex justify-center px-2 pt-2">
@@ -83,7 +75,7 @@ const Header = ({ handleIsCompany }) => {
                           onClick={handleProfileClick}
                           className="w-36 hover:bg-neutral-200 rounded-xl px-4 py-4"
                         >
-                          지원 현황
+                          지원자 현황
                         </Link>
                       </li>
                       <li className="flex justify-center px-2">
@@ -92,7 +84,7 @@ const Header = ({ handleIsCompany }) => {
                           onClick={handleProfileClick}
                           className="w-36 hover:bg-neutral-200 rounded-xl px-4 py-4"
                         >
-                          제안받기 현황
+                          제안 현황
                         </Link>
                       </li>
                       <li className="flex justify-center px-2 pb-2 border-b border-solid border-neutral-400">
@@ -129,7 +121,7 @@ const Header = ({ handleIsCompany }) => {
                     className="px-3 py-2 mr-3 h-10 border-2 border-solid border-neutral-200 rounded-3xl text-neutral-500"
                   >
                     <button className="text-sm" onClick={handleIsCompany}>
-                      기업 서비스
+                      구직 서비스
                     </button>
                   </Link>
                 </li>
@@ -143,4 +135,4 @@ const Header = ({ handleIsCompany }) => {
   );
 };
 
-export default Header;
+export default CompanyHeader;
