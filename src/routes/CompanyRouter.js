@@ -1,17 +1,17 @@
 import { Navigate, Outlet, Route, Routes } from "react-router-dom";
 import Home from "../pages/company/Home";
-import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Login from "../pages/auth/Login";
 import SignUp from "../pages/auth/SignUp";
+import CompanyHeader from "../components/CompanyHeader";
 
-const CompanyRouter = () => {
+const CompanyRouter = ({ handleIsCompany }) => {
   return (
     <Routes>
       <Route
         element={
           <>
-            <Header />
+            <CompanyHeader handleIsCompany={handleIsCompany} />
             <Outlet />
             <Footer />
           </>
