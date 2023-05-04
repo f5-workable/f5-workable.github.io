@@ -4,7 +4,8 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Login from "../pages/auth/Login";
 import SignUp from "../pages/auth/SignUp";
-import Search from "../pages/member/Search";
+import UserDetail from "../components/UserDetail";
+import UserDetailBar from "../components/UserDetailBar";
 
 const MemberRouter = ({ handleIsCompany }) => {
   return (
@@ -24,8 +25,12 @@ const MemberRouter = ({ handleIsCompany }) => {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/jobs" element={<span>전체 구직 페이지</span>} />
         <Route path="/jobs/:jobId" element={<span>상세페이지</span>} />
-        <Route path="/search" element={<Search />} />
-        <Route path="/profile" element={<span>프로필</span>} />
+        <Route path="/profile" 
+          element={
+            <div className=" mx-24 flex justify-center">
+              <UserDetailBar />
+              <UserDetail />
+            </div>} />
       </Route>
     </Routes>
   );
