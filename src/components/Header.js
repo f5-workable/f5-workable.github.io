@@ -13,7 +13,10 @@ const Header = ({ handleIsCompany }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    navigate("/search");
+    const data = new FormData(e.target);
+    const keyword = data.get("keyword");
+    navigate(`/search?keyword=${keyword}`);
+    e.target[0].value = "";
   };
 
   useEffect(() => {
@@ -39,7 +42,6 @@ const Header = ({ handleIsCompany }) => {
                 id="keyword-search"
                 name="keyword"
                 className="w-full m-3 p-2 pl-10 bg-transparent border-2 border-neutral-300 rounded-3xl focus:outline-orange-500 text-sm"
-                required
               />
             </form>
             <aside className="flex flex-row items-center before:content-['|'] before:mr-6 text-neutral-300">

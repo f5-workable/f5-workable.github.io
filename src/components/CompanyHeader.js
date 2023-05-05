@@ -13,7 +13,10 @@ const CompanyHeader = ({ handleIsCompany }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    navigate("/search");
+    const data = new FormData(e.target);
+    const keyword = data.get("keyword");
+    navigate(`/search?keyword=${keyword}`);
+    e.target[0].value = "";
   };
 
   useEffect(() => {
