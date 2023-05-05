@@ -1,5 +1,6 @@
 import { Routes, Route, Navigate, Outlet } from "react-router-dom";
 import Home from "../pages/member/Home";
+import Resume from "../pages/member/Resume";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Login from "../pages/auth/Login";
@@ -31,6 +32,7 @@ const MemberRouter = ({ handleIsCompany }) => {
               <UserDetailBar />
               <UserDetail />
             </div>} />
+        <Route path="/resume" element={<Resume />} />
       </Route>
     </Routes>
   );
