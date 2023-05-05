@@ -6,19 +6,19 @@ const UserDetail = () => {
                 <div className=" h-32 mt-10">
                     <label className=" text-xl font-bold px-10">아이디</label>
                     <hr className=" bg-black h-0.5"></hr>
-                    <input className=" text-lg font-bold italic bg-white my-5 px-10" value="yelim1215" disabled />
+                    <input className=" text-lg font-bold italic bg-white my-5 px-10" value={"yelim1215"} disabled />
                     <hr></hr>
                 </div>
                 <div className=" h-32">
                     <label className=" text-xl font-bold px-10">연락처</label>
                     <hr className=" bg-black h-0.5"></hr>
-                    <input className=" text-lg font-bold italic bg-white my-5 px-10" value="010-3047-5988" disabled />
+                    <input className=" text-lg font-bold italic bg-white my-5 px-10" value={"010-3047-5988"} disabled />
                     <hr></hr>
                 </div>
                 <div className=" h-32">
                     <label className=" text-xl font-bold px-10">이메일</label>
                     <hr className=" bg-black h-0.5"></hr>
-                    <input className=" text-lg font-bold italic bg-white my-5 px-10" value="yerim1215jg@naver.com" disabled />
+                    <input className=" text-lg font-bold italic bg-white my-5 px-10" value={"yerim1215jg@naver.com"} disabled />
                     <hr></hr>
                 </div>
             </div>
