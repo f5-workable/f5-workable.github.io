@@ -17,6 +17,13 @@ const Resume = () => {
                         <input className="text-lg font-bold italic" type="email" value={"yerim1215jg@naver.com"} disabled />
                     </div>
                 </div>
+                <div>
+                        <label>개인정보</label>
+                        <label>경력</label>
+                        <label>희망근무조건</label>
+                        <label>상세정보</label>
+                        <label>자기소개서</label>
+                </div>
             </div>
         </div>
     );
