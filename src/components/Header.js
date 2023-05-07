@@ -48,7 +48,7 @@ const Header = ({ handleIsCompany }) => {
               <ul className="flex items-center text-neutral-800">
                 <li className="inline-block">
                   <Link
-                    to="/resume"
+                    to="/resumeadd"
                     className="flex items-center px-4 mr-3 h-9 bg-emerald-400 rounded-lg text-white"
                   >
                     이력서
