@@ -19,16 +19,6 @@ const MemberRouter = ({ handleIsCompany }) => {
     <Routes>
       <Route path="*" element={<Navigate to="/" replace />} />
       <Route
-        path="/"
-        element={
-          <>
-            <Header handleIsCompany={handleIsCompany} />
-            <Home />
-            <Footer />
-          </>
-        }
-      />
-      <Route
         element={
           <>
             <Header handleIsCompany={handleIsCompany} />
@@ -36,6 +26,26 @@ const MemberRouter = ({ handleIsCompany }) => {
           </>
         }
       >
+        <Route
+          path="/"
+          element={
+            <>
+              <Home />
+              <Footer />
+            </>
+          }
+        />
+        <Route
+          path="/jobs/:jobId"
+          element={
+            <>
+              <CompanyDetail />
+              <div className="hidden xl:block">
+                <Footer />
+              </div>
+            </>
+          }
+        />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/resume" element={<Resume />} />
@@ -43,7 +53,6 @@ const MemberRouter = ({ handleIsCompany }) => {
         <Route path="/search" element={<Search />} />
         <Route path="/resumeadd" element={<ResumeAdd />} />
         <Route path="/status/application" element={<ApplicationStatus />} />
-        <Route path="/jobs/:jobId" element={<CompanyDetail />} />
         <Route
           path="/profile"
           element={

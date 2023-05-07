@@ -22,4 +22,7 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+#env
+.env
+
 #pull-request-test-yelim1215-230502-14:12
