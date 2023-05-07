@@ -48,7 +48,7 @@ const Header = ({ handleIsCompany }) => {
               <ul className="flex items-center text-neutral-800">
                 <li className="inline-block">
                   <Link
-                    to="/"
+                    to="/resume"
                     className="flex items-center px-4 mr-3 h-9 bg-emerald-400 rounded-lg text-white"
                   >
                     이력서
@@ -81,7 +81,7 @@ const Header = ({ handleIsCompany }) => {
                       </li>
                       <li className="flex justify-center px-2 pt-2">
                         <Link
-                          to="/"
+                          to="/status/application"
                           onClick={handleProfileClick}
                           className="w-36 hover:bg-neutral-200 rounded-xl px-4 py-4"
                         >
@@ -99,7 +99,7 @@ const Header = ({ handleIsCompany }) => {
                       </li>
                       <li className="flex justify-center px-2 pb-2 border-b border-solid border-neutral-400">
                         <Link
-                          to="/"
+                          to="/bookmark"
                           onClick={handleProfileClick}
                           className="w-36 hover:bg-neutral-200 rounded-xl px-4 py-4"
                         >
