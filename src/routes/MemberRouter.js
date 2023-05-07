@@ -19,19 +19,6 @@ const MemberRouter = ({ handleIsCompany }) => {
     <Routes>
       <Route path="*" element={<Navigate to="/" replace />} />
       <Route
-        path="/"
-        element={
-          <>
-            <Header handleIsCompany={handleIsCompany} />
-            <Outlet />
-            <Footer />
-          </>
-        }
-      >
-        <Route path="/" element={<Home />} />
-        <Route path="/jobs/:jobId" element={<CompanyDetail />} />
-      </Route>
-      <Route
         element={
           <>
             <Header handleIsCompany={handleIsCompany} />
@@ -39,6 +26,26 @@ const MemberRouter = ({ handleIsCompany }) => {
           </>
         }
       >
+        <Route
+          path="/"
+          element={
+            <>
+              <Home />
+              <Footer />
+            </>
+          }
+        />
+        <Route
+          path="/jobs/:jobId"
+          element={
+            <>
+              <CompanyDetail />
+              <div className="hidden xl:block">
+                <Footer />
+              </div>
+            </>
+          }
+        />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/resume" element={<Resume />} />
