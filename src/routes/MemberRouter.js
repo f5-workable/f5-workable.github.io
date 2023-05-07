@@ -8,33 +8,48 @@ import SignUp from "../pages/auth/SignUp";
 import UserDetail from "../components/UserDetail";
 import UserDetailBar from "../components/UserDetailBar";
 import Search from "../pages/member/Search";
+import Bookmark from "../pages/member/Bookmark";
+import ApplicationStatus from "../pages/member/ApplicationStatus";
+import CompanyDetail from "../pages/member/CompanyDetail";
 
 const MemberRouter = ({ handleIsCompany }) => {
   return (
     <Routes>
+      <Route path="*" element={<Navigate to="/" replace />} />
+      <Route
+        path="/"
+        element={
+          <>
+            <Header handleIsCompany={handleIsCompany} />
+            <Home />
+            <Footer />
+          </>
+        }
+      />
       <Route
         element={
           <>
             <Header handleIsCompany={handleIsCompany} />
             <Outlet />
-            <Footer />
           </>
         }
       >
-        <Route path="*" element={<Navigate to="/" replace />} />
-        <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
-        <Route path="/jobs" element={<span>전체 구직 페이지</span>} />
-        <Route path="/jobs/:jobId" element={<span>상세페이지</span>} />
+        <Route path="/resume" element={<Resume />} />
+        <Route path="/bookmark" element={<Bookmark />} />
         <Route path="/search" element={<Search />} />
-        <Route path="/profile" 
+        <Route path="/status/application" element={<ApplicationStatus />} />
+        <Route path="/jobs/:jobId" element={<CompanyDetail />} />
+        <Route
+          path="/profile"
           element={
             <div className=" mx-24 flex justify-center">
               <UserDetailBar />
               <UserDetail />
-            </div>} />
-        <Route path="/resume" element={<Resume />} />
+            </div>
+          }
+        />
       </Route>
     </Routes>
   );

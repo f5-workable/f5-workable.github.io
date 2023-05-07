@@ -24,7 +24,7 @@ const SearchDetail = () => {
   };
 
   return (
-    <div className="mb-10 w-5/6 max-w-4xl mx-auto bg-neutral-100 p-10 rounded-2xl border-2 border-solid border-neutral-200">
+    <div className="mb-20 w-5/6 max-w-4xl mx-auto bg-neutral-100 p-10 rounded-2xl border-2 border-solid border-neutral-200">
       <div className="relative mb-4">
         <input
           id="keyword"
