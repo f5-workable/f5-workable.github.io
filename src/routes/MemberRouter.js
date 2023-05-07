@@ -23,11 +23,14 @@ const MemberRouter = ({ handleIsCompany }) => {
         element={
           <>
             <Header handleIsCompany={handleIsCompany} />
-            <Home />
+            <Outlet />
             <Footer />
           </>
         }
-      />
+      >
+        <Route path="/" element={<Home />} />
+        <Route path="/jobs/:jobId" element={<CompanyDetail />} />
+      </Route>
       <Route
         element={
           <>
@@ -43,7 +46,6 @@ const MemberRouter = ({ handleIsCompany }) => {
         <Route path="/search" element={<Search />} />
         <Route path="/resumeadd" element={<ResumeAdd />} />
         <Route path="/status/application" element={<ApplicationStatus />} />
-        <Route path="/jobs/:jobId" element={<CompanyDetail />} />
         <Route
           path="/profile"
           element={
