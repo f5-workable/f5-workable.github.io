@@ -1,4 +1,12 @@
+import { useState } from "react";
+import Disorder from "../../components/member/resumeDetail/Disorder";
+import Location from "../../components/member/searchDetail/location";
+
 const Resume = () => {
+    const [gender, setGender] = useState("남자");
+    const [career, setCareer] = useState("신입");
+    const [severe, setSevere] = useState("중증");
+
     return (
         <div className=" p-12 h-auto">
             <div className=" pb-12 block text-center text-3xl font-bold">이력서</div>
@@ -22,16 +30,37 @@ const Resume = () => {
                     </div>
                 </div>
             </div>
-                <div className="px-52 py-10">
+                <div className="px-40 py-10">
                     <label className="px-10 text-xl font-bold">개인정보</label>
                     <hr className="bg-black h-0.5"></hr>
 
                     <div className="pt-5 flex items-start">
                         <label className="w-32 py-2 text-center font-bold text-md">성별</label>
-                        <input type="radio" id="male" className=" hidden" />
-                        <label htmlFor="male" className="inline-flex justify-center items-center h-8 w-20 bg-gray-300 text-center font-bold text-md">남자</label>
-                        <input type="radio" id="female" className=" hidden" />
-                        <label htmlFor="female" className="inline-flex justify-center items-center h-8 w-20 bg-gray-300 text-center font-bold text-md">여자</label>
+                    
+                        {gender === "남자" ? (
+                            <>
+                        <button className="h-8 w-20 bg-gray-400 font-bold text-md"
+                            onClick={() => setGender("남자")}>
+                            남자
+                        </button>
+                        <button className="h-8 w-20 bg-gray-300 text-white font-bold text-md"
+                            onClick={() => setGender("여자")}>
+                            여자
+                        </button>
+                        </>
+                        )
+                         : (
+                        <>
+                        <button className="h-8 w-20 bg-gray-300 text-white font-bold text-md"
+                            onClick={() => setGender("남자")}>
+                            남자
+                        </button>
+                        <button className="h-8 w-20 bg-gray-400 font-bold text-md"
+                            onClick={() => setGender("여자")}>
+                            여자
+                        </button>
+                        </>)
+                        }
                     </div>
 
                     <div className="pt-5 flex items-start">
@@ -41,28 +70,51 @@ const Resume = () => {
                     </div>
                 </div>
 
-                <div className="px-52 py-10">
+                <div className="px-40 py-10">
                     <label className="px-10 text-xl font-bold">경력</label>
                     <hr className="bg-black h-0.5"></hr>
 
                     <div className="pt-5 flex items-start">
                         <label className="w-32 py-2 text-center font-bold text-md">경력구분</label>
-                        <input type="radio" id="newcomer" className=" hidden" />
-                        <label htmlFor="newcomer" className="inline-flex justify-center items-center h-8 w-20 bg-gray-300 text-center font-bold text-md">신입</label>
-                        <input type="radio" id="career" className=" hidden" />
-                        <label htmlFor="career" className="inline-flex justify-center items-center h-8 w-20 bg-gray-300 text-center font-bold text-md">경력</label>
+                        
+                        {career === "신입" ? (
+                            <>
+                        <button className="h-8 w-20 bg-gray-400 font-bold text-md"
+                            onClick={() => setCareer("신입")}>
+                            신입
+                        </button>
+                        <button className="h-8 w-20 bg-gray-300 text-white font-bold text-md"
+                            onClick={() => setCareer("경력")}>
+                            경력
+                        </button>
+                        </>
+                        )
+                         : (
+                        <>
+                        <button className="h-8 w-20 bg-gray-300 text-white font-bold text-md"
+                            onClick={() => setCareer("신입")}>
+                            신입
+                        </button>
+                        <button className="h-8 w-20 bg-gray-400 font-bold text-md"
+                            onClick={() => setCareer("경력")}>
+                            경력
+                        </button>
+                        </>)
+                        }
                     </div>
+                    
                     <div className="flex flex-col px-32 pt-3">
                         <input type="text" className=" w-full h-24 bg-gray-300 placeholder:text-gray-500 placeholder:font-bold placeholder:p-3" placeholder="경력자만 작성"/>
                     </div>
                 </div>
 
-                <div className="px-52 py-10">
+                <div className=" px-40 py-10">
                     <label className="px-10 text-xl font-bold">희망근무조건</label>
                     <hr className="bg-black h-0.5"></hr>
 
-                    <div className="pt-5 flex items-start">
+                    <div className="pt-5 flex items-start w-full">
                         <label className="w-32 py-2 text-center font-bold text-md">희망근무지</label>
+                        <Location />
                     </div>
 
                     <div className="pt-5 flex items-start">
@@ -76,37 +128,46 @@ const Resume = () => {
                     </div>
                 </div>
 
-                <div className="px-52 py-10">
+                <div className="px-40 py-10">
                     <label className="px-10 text-xl font-bold">장애정보</label>
                     <hr className="bg-black h-0.5"></hr>
 
                     <div className="pt-5 flex items-start">
                         <label className="w-32 py-2 text-center font-bold text-md">장애유형</label>
-                        <span className=" pt-2 bg-gray-300">
-                            <input type="checkbox" />
-                            <label>지체장애</label>
-                            <input type="checkbox" />
-                            <label>시각장애</label>
-                            <input type="checkbox" />
-                            <label>청각장애</label>
-                            <input type="checkbox" />
-                            <label>기타장애</label>
-                        </span>
-                    </div>
-                    <div className="flex flex-col px-32 pt-3">
-                        <input type="text" className=" w-full h-24 bg-gray-300 placeholder:text-gray-500 placeholder:font-bold placeholder:p-3" placeholder="기타장애만 작성"/>
+                        <Disorder />
                     </div>
 
                     <div className="pt-5 flex items-start">
                         <label className="w-32 py-2 text-center font-bold text-md">중증여부</label>
-                        <input type="radio" id="severe" className=" hidden" />
-                        <label htmlFor="severe" className="inline-flex justify-center items-center h-8 w-20 bg-gray-300 text-center font-bold text-md">중증</label>
-                        <input type="radio" id="slight" className=" hidden" />
-                        <label htmlFor="slight" className="inline-flex justify-center items-center h-8 w-20 bg-gray-300 text-center font-bold text-md">경증</label>
+                        
+                        {severe === "중증" ? (
+                            <>
+                        <button className="h-8 w-20 bg-gray-400 font-bold text-md"
+                            onClick={() => setSevere("중증")}>
+                            중증
+                        </button>
+                        <button className="h-8 w-20 bg-gray-300 text-white font-bold text-md"
+                            onClick={() => setSevere("경증")}>
+                            경증
+                        </button>
+                        </>
+                        )
+                         : (
+                        <>
+                        <button className="h-8 w-20 bg-gray-300 text-white font-bold text-md"
+                            onClick={() => setSevere("중증")}>
+                            중증
+                        </button>
+                        <button className="h-8 w-20 bg-gray-400 font-bold text-md"
+                            onClick={() => setSevere("경증")}>
+                            경증
+                        </button>
+                        </>)
+                        }
                     </div>
                 </div>
 
-                <div className=" px-52 py-10">
+                <div className=" px-40 py-10">
                     <label className="px-10 text-xl font-bold">자기소개서</label>
                     <hr className="bg-black h-0.5"></hr>
 
