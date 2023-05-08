@@ -1,5 +1,6 @@
 import { useState } from "react";
-import Location from "../../components/member/resumeDetail/location";
+import Disorder from "../../components/member/resumeDetail/Disorder";
+import Location from "../../components/member/searchDetail/location";
 
 const Resume = () => {
     const [gender, setGender] = useState("남자");
@@ -29,7 +30,7 @@ const Resume = () => {
                     </div>
                 </div>
             </div>
-                <div className="px-52 py-10">
+                <div className="px-40 py-10">
                     <label className="px-10 text-xl font-bold">개인정보</label>
                     <hr className="bg-black h-0.5"></hr>
 
@@ -69,7 +70,7 @@ const Resume = () => {
                     </div>
                 </div>
 
-                <div className="px-52 py-10">
+                <div className="px-40 py-10">
                     <label className="px-10 text-xl font-bold">경력</label>
                     <hr className="bg-black h-0.5"></hr>
 
@@ -107,12 +108,13 @@ const Resume = () => {
                     </div>
                 </div>
 
-                <div className="px-52 py-10">
+                <div className=" px-40 py-10">
                     <label className="px-10 text-xl font-bold">희망근무조건</label>
                     <hr className="bg-black h-0.5"></hr>
 
-                    <div className="pt-5 flex items-start">
+                    <div className="pt-5 flex items-start w-full">
                         <label className="w-32 py-2 text-center font-bold text-md">희망근무지</label>
+                        <Location />
                     </div>
 
                     <div className="pt-5 flex items-start">
@@ -126,13 +128,13 @@ const Resume = () => {
                     </div>
                 </div>
 
-                <div className="px-52 py-10">
+                <div className="px-40 py-10">
                     <label className="px-10 text-xl font-bold">장애정보</label>
                     <hr className="bg-black h-0.5"></hr>
 
                     <div className="pt-5 flex items-start">
                         <label className="w-32 py-2 text-center font-bold text-md">장애유형</label>
-                        <Location />
+                        <Disorder />
                     </div>
 
                     <div className="pt-5 flex items-start">
@@ -165,7 +167,7 @@ const Resume = () => {
                     </div>
                 </div>
 
-                <div className=" px-52 py-10">
+                <div className=" px-40 py-10">
                     <label className="px-10 text-xl font-bold">자기소개서</label>
                     <hr className="bg-black h-0.5"></hr>
 
