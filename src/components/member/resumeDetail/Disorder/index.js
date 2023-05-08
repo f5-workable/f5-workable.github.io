@@ -1,6 +1,6 @@
 import SubDisorder from "./SubDisorder";
 
-const Location = () => {
+const Disorder = () => {
     return(
         <span className=" pt-2 grid grid-cols-4 gap-4">
             <SubDisorder value="간장애" />
@@ -23,4 +23,4 @@ const Location = () => {
     );
 };
 
-export default Location;
+export default Disorder;
