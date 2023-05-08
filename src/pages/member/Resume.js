@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Location from "../../components/member/resumeDetail/location";
 
 const Resume = () => {
     const [gender, setGender] = useState("남자");
@@ -131,19 +132,7 @@ const Resume = () => {
 
                     <div className="pt-5 flex items-start">
                         <label className="w-32 py-2 text-center font-bold text-md">장애유형</label>
-                        <span className=" pt-2 bg-gray-300">
-                            <input type="checkbox" />
-                            <label>지체장애</label>
-                            <input type="checkbox" />
-                            <label>시각장애</label>
-                            <input type="checkbox" />
-                            <label>청각장애</label>
-                            <input type="checkbox" />
-                            <label>기타장애</label>
-                        </span>
-                    </div>
-                    <div className="flex flex-col px-32 pt-3">
-                        <input type="text" className=" w-full h-24 bg-gray-300 placeholder:text-gray-500 placeholder:font-bold placeholder:p-3" placeholder="기타장애만 작성"/>
+                        <Location />
                     </div>
 
                     <div className="pt-5 flex items-start">
