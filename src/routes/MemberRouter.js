@@ -1,7 +1,8 @@
 import { Routes, Route, Navigate, Outlet } from "react-router-dom";
 import Home from "../pages/member/Home";
+import ResumeRead from "../pages/member/ResumeRead";
+import ResumeWrite from "../pages/member/ResumeWrite";
 import Resume from "../pages/member/Resume";
-import ResumeAdd from "../pages/member/ResumeAdd";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Login from "../pages/auth/Login";
@@ -41,7 +42,9 @@ const MemberRouter = ({ handleIsCompany }) => {
         <Route path="/resume" element={<Resume />} />
         <Route path="/bookmark" element={<Bookmark />} />
         <Route path="/search" element={<Search />} />
-        <Route path="/resumeadd" element={<ResumeAdd />} />
+        <Route path="/resume" element={<Resume />} />
+        <Route path="/resume/:resumeId" element={<ResumeRead />} />
+        <Route path="/resume/Add" element={<ResumeWrite />} />
         <Route path="/status/application" element={<ApplicationStatus />} />
         <Route path="/jobs/:jobId" element={<CompanyDetail />} />
         <Route
