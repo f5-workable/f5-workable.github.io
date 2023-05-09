@@ -1,7 +1,7 @@
 const Private = () => {
     return (
         <>
-            <label className="px-2 hover:cursor-pointer">이력서 공개 여부</label>
+            <label className="px-2 font-semibold hover:cursor-pointer">이력서 공개 여부</label>
             <input
                 class="mr-2 mt-[0.3rem] h-3.5 w-8 appearance-none rounded-[0.4375rem] bg-neutral-300 
                 before:pointer-events-none before:absolute before:h-3.5 before:w-3.5 before:rounded-full before:bg-transparent before:content-[''] 
