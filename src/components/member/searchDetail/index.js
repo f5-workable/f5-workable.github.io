@@ -50,13 +50,18 @@ const SearchDetail = () => {
         <Deadline />
         <CompanyType />
         <EmploymentType />
-        <Location />
+        <div className="mt-8 w-full">
+          <p className="block text-lg font-semibold mb-2">지역</p>
+          <Location />
+        </div>
         <PaymentType />
         <Payment />
         <button className="px-8 py-4 mt-10 bg-white border-blue-400 text-blue-500 rounded-3xl border-2 mr-5">
           조건 초기화
         </button>
-        <button className="px-8 py-4 mt-10 bg-blue-400 text-white rounded-3xl border-2">검색</button>
+        <button className="px-8 py-4 mt-10 bg-blue-400 text-white rounded-3xl border-2">
+          검색
+        </button>
       </div>
     </div>
   );

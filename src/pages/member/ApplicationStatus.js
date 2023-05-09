@@ -1,5 +1,5 @@
 import { useState } from "react";
-import SearchedItems from "../../components/member/SearchedItems";
+import SearchedItems from "../../components/member/searchedItems";
 
 const ApplicationStatus = () => {
   const [status, setStatus] = useState("전체");

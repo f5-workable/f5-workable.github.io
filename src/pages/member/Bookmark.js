@@ -1,4 +1,4 @@
-import SearchedItems from "../../components/member/SearchedItems";
+import SearchedItems from "../../components/member/searchedItems";
 
 const Bookmark = () => {
   return (
