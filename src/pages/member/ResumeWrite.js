@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from 'react-router-dom';
 import Disorder from "../../components/member/resumeDetail/Disorder";
 import Location from "../../components/member/searchDetail/location";
 
@@ -183,7 +184,7 @@ const ResumeWrite = () => {
                 </div>
             
             <div className="flex justify-center">
-                <button className=" w-1/6 h-10 mx-5 text-lg font-extrabold bg-gray-200 hover:bg-gray-500 hover:text-white">작성 취소</button>
+                <button className=" w-1/6 h-10 mx-5 text-lg font-extrabold bg-gray-200 hover:bg-gray-500 hover:text-white"><Link to={"/resume"}>작성 취소</Link></button>
                 <button className=" w-1/6 h-10 mx-5 text-lg font-extrabold bg-orange-200 hover:bg-orange-400 hover:text-white">이력서 작성 완료</button>
             </div>
         </div>
