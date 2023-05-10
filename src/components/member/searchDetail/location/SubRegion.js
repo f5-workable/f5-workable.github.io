@@ -4,7 +4,7 @@ const SubRegion = ({value, labelValue}) => {
       <input
         type="checkbox"
         id={value}
-        name="region"
+        name="location"
         value={value}
         className="h-4 w-4 mb-1 border-gray-300 align-middle"
       />
