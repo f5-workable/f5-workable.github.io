@@ -7,19 +7,32 @@ const UserDetail = () => {
                 <div className=" h-32 mt-10">
                     <label className=" text-xl font-bold px-10">아이디</label>
                     <hr className=" bg-black h-0.5"></hr>
-                    <input className=" text-lg font-bold italic bg-white my-5 px-10" value={"yelim1215"}  />
+                    <input className=" w-80 text-lg font-bold italic bg-white my-5 mx-10" value={"yelim1215"}  />
+                    <hr></hr>
+                </div>
+                <div className=" h-60 mt-10">
+                    <label className=" text-xl font-bold px-10">비밀번호</label>
+                    <hr className=" bg-black h-0.5"></hr>
+                    <div>
+                        <label className=" text-xl font-bold px-10">새로운 비밀번호 입력</label>
+                        <input type="password" className=" w-80 text-lg font-bold italic bg-white my-5 border-2" />
+                    </div>
+                    <div>
+                        <label className=" text-xl font-bold px-10">새로운 비밀번호 확인</label>
+                        <input type="password" className=" w-80 text-lg font-bold italic bg-white my-5 border-2" />
+                    </div>
                     <hr></hr>
                 </div>
                 <div className=" h-32">
                     <label className=" text-xl font-bold px-10">연락처</label>
                     <hr className=" bg-black h-0.5"></hr>
-                    <input className=" text-lg font-bold italic bg-white my-5 px-10" value={"010-3047-5988"}  />
+                    <input className=" w-80 text-lg font-bold italic bg-white my-5 mx-10" value={"010-3047-5988"}  />
                     <hr></hr>
                 </div>
                 <div className=" h-32">
                     <label className=" text-xl font-bold px-10">이메일</label>
                     <hr className=" bg-black h-0.5"></hr>
-                    <input className=" text-lg font-bold italic bg-white my-5 px-10" value={"yerim1215jg@naver.com"}  />
+                    <input className=" w-80 text-lg font-bold italic bg-white my-5 mx-10" value={"yerim1215jg@naver.com"}  />
                     <hr></hr>
                 </div>
             </div>
