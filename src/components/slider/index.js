@@ -1,7 +1,7 @@
 import Slider from "react-slick";
 import HeadItem from "./HeadItem";
 import Item from "./Item";
-import ArrowBtn from "../../ArrowBtn";
+import ArrowBtn from "../ArrowBtn";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
