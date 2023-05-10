@@ -1,5 +1,5 @@
 import { MdAdd } from "react-icons/md";
-import CustomSlider from "../../components/slider";
+import CustomSlider from "../../components/member/slider";
 
 function Home() {
   return (
