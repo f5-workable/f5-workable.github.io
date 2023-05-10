@@ -65,3 +65,13 @@ table {
 .slick-dots {
 	bottom: -35px !important;
 }
+
+/* ( 크롬, 사파리, 오페라, 엣지 ) 동작 */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none; /* 인터넷 익스플로러 */
+  scrollbar-width: none; /* 파이어폭스 */
+}

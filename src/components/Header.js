@@ -1,22 +1,13 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { MdSearch } from "react-icons/md";
 import { useEffect, useState } from "react";
 
 const Header = ({ handleIsCompany }) => {
   const [isLogined, setIsLogined] = useState(false);
-  const navigate = useNavigate();
 
   const handleProfileClick = () => {
     const dropdownMenu = document.querySelector("#dropdown-menu");
     dropdownMenu.classList.toggle("hidden");
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const data = new FormData(e.target);
-    const keyword = data.get("keyword");
-    navigate(`/search?keyword=${keyword}`);
-    e.target[0].value = "";
   };
 
   useEffect(() => {
@@ -33,7 +24,7 @@ const Header = ({ handleIsCompany }) => {
             </Link>
           </div>
           <div className="flex flex-row items-center">
-            <form className="relative mr-8" onSubmit={handleSubmit}>
+            <Link to="/search" className="relative mr-8">
               <label htmlFor="keyword-search">
                 <MdSearch className="absolute bottom-5 left-6" size={24} />
               </label>
@@ -41,9 +32,10 @@ const Header = ({ handleIsCompany }) => {
                 type="search"
                 id="keyword-search"
                 name="keyword"
-                className="w-full m-3 p-2 pl-10 bg-transparent border-2 border-neutral-300 rounded-3xl focus:outline-orange-500 text-sm"
+                disabled
+                className="w-full m-3 p-2 pl-10 bg-transparent border-2 border-neutral-300 hover:border-orange-500 rounded-3xl transition-colors cursor-pointer"
               />
-            </form>
+            </Link>
             <aside className="flex flex-row items-center before:content-['|'] before:mr-6 text-neutral-300">
               <ul className="flex items-center text-neutral-800">
                 <li className="inline-block">
