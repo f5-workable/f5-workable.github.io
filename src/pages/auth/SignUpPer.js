@@ -1,4 +1,4 @@
-const SignUp = () => {
+const SignUpPer = () => {
   return (
       <div className=" w-3/5 mx-auto shadow-2xl flex content-center p-10 flex-col my-24">
         <div className="text-center text-3xl font-bold">회원가입</div>
@@ -64,4 +64,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default SignUpPer;

@@ -4,8 +4,10 @@ import ResumeWrite from "../pages/member/ResumeWrite";
 import Resume from "../pages/member/Resume";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import Login from "../pages/auth/Login";
-import SignUp from "../pages/auth/SignUp";
+import LoginPer from "../pages/auth/LoginPer";
+import SignUpPer from "../pages/auth/SignUpPer";
+import LoginCom from "../pages/auth/LoginCom";
+import SignUpCom from "../pages/auth/SignUpCom";
 import UserDetail from "../components/UserDetail";
 import UserDetailModify from "../components/UserDetailModify";
 import UserDetailBar from "../components/UserDetailBar";
@@ -48,10 +50,10 @@ const MemberRouter = ({ handleIsCompany }) => {
             </>
           }
         />
-        <Route path="/login/member" element={<Login />} />
-        <Route path="/login/company" element={<Login />} />
-        <Route path="/signup/member" element={<SignUp />} />
-        <Route path="/signup/company" element={<SignUp />} />
+        <Route path="/login/member" element={<LoginPer />} />
+        <Route path="/login/company" element={<LoginCom />} />
+        <Route path="/signup/member" element={<SignUpPer />} />
+        <Route path="/signup/company" element={<SignUpCom />} />
         <Route path="/signup" element={<UserTypeSelectionBeforeSignUp />} />
         <Route path="/login" element={<UserTypeSelectionBeforeLogin />} />
         <Route path="/resume" element={<Resume />} />
