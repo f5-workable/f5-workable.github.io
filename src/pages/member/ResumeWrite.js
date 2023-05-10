@@ -186,6 +186,7 @@ const ResumeWrite = () => {
             <div className="flex justify-center">
                 <button className=" w-1/6 h-10 mx-5 text-lg font-extrabold bg-gray-200 hover:bg-gray-500 hover:text-white"><Link to={"/resume"}>작성 취소</Link></button>
                 <button className=" w-1/6 h-10 mx-5 text-lg font-extrabold bg-orange-200 hover:bg-orange-400 hover:text-white">이력서 작성 완료</button>
+                <button className=" w-1/6 h-10 mx-5 text-lg font-extrabold bg-red-300 text-white hover:bg-red-500 hover:text-white">삭제</button>
             </div>
         </div>
     );
