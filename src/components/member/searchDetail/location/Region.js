@@ -10,6 +10,7 @@ const Region = ({ selectedLocation, onClick, value }) => {
           }
         >
           <button
+            type="button"
             onClick={onClick}
             className={
               "w-full h-full text-left p-3" +
@@ -23,11 +24,11 @@ const Region = ({ selectedLocation, onClick, value }) => {
         <li
           id="location"
           className={
-            "w-full h-10" +
-            (selectedLocation === value ? " bg-blue-50" : " bg-white")
+            "w-full h-10" + (selectedLocation === value ? " bg-blue-50" : " bg-white")
           }
         >
           <button
+            type="button"
             onClick={onClick}
             className={
               "w-full h-full text-left p-3" +

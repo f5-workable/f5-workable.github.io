@@ -10,7 +10,7 @@ const Location = () => {
   };
   return (
     <div className="w-full h-96 flex bg-white rounded-md overflow-hidden border border-solid border-neutral-400">
-      <div className="w-1/4 h-full bg-white border-r border-solid border-neutral-400 overflow-y-scroll">
+      <div className="w-1/4 h-full bg-white border-r border-solid border-neutral-400 overflow-y-scroll scrollbar-hide">
         <ul className="grid grid-cols-2">
           <Region
             value="전체"
@@ -104,7 +104,7 @@ const Location = () => {
           />
         </ul>
       </div>
-      <div className="w-3/4 h-full overflow-y-scroll">
+      <div className="w-3/4 h-full overflow-y-scroll scrollbar-hide">
         <ul className="grid grid-cols-3">
           {selectedLocation === "전체" && (
             <li>
