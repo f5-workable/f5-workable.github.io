@@ -1,24 +1,33 @@
-import logo from "../..//logo.svg";
-import "../../App.css";
+import { MdAdd } from "react-icons/md";
+import CustomSlider from "../../components/slider";
 
 function Home() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <main className="w-full mx-auto">
+      <section className="w-full mt-7 mb-20">
+        <CustomSlider isHeader />
+      </section>
+      <section className="w-5/6 lg:w-3/4 mb-20 mx-auto">
+        <div className="flex items-center border-b border-solid pb-3 border-neutral-500">
+          <h2 className="text-2xl font-medium inline mr-5">새로운 지원자</h2>
+          <MdAdd
+            className="inline border border-solid border-orange-500 text-orange-500 rounded-full"
+            fontSize={30}
+          />
+        </div>
+        <CustomSlider />
+      </section>
+      <section className="w-5/6 lg:w-3/4 mb-20 mx-auto">
+        <div className="flex items-center border-b border-solid pb-3 border-neutral-500">
+          <h2 className="text-2xl font-medium inline mr-5">최근 본 지원자</h2>
+          <MdAdd
+            className="inline border border-solid border-orange-500 text-orange-500 rounded-full"
+            fontSize={30}
+          />
+        </div>
+        <CustomSlider />
+      </section>
+    </main>
   );
 }
 
