@@ -1,4 +1,4 @@
-const Login = () => {
+const LoginPer = () => {
   return (
     <div className=" my-24">
       <div className=" w-3/5 mx-auto shadow-2xl flex content-center">
@@ -41,4 +41,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default LoginPer;
