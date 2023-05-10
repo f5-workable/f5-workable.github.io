@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+
+/* Noto Sans KR Font */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap');
+
+* {
+	font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif !important;
+}
+
 /* http://meyerweb.com/eric/tools/css/reset/ 
    v2.0 | 20110126
    License: none (public domain)

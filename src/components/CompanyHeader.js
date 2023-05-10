@@ -25,7 +25,7 @@ const CompanyHeader = ({ handleIsCompany }) => {
 
   return (
     <>
-      <header className="w-full bg-neutral-50 fixed top-0 mx-auto my-0 shadow z-50">
+      <header className="w-full bg-neutral-50 fixed top-0 mx-auto my-0 z-50 border-b border-solid border-neutral-300 shadow-md">
         <nav className="w-11/12 h-99 flex flex-row justify-between items-center mx-auto my-0">
           <div className="flex justify-center">
             <Link to="/" className="py-3 mx-3 text-2xl text-orange-500">
@@ -42,10 +42,9 @@ const CompanyHeader = ({ handleIsCompany }) => {
                 id="keyword-search"
                 name="keyword"
                 className="w-full m-3 p-2 pl-10 bg-transparent border-2 border-neutral-300 rounded-3xl focus:outline-orange-500 text-sm"
-                required
               />
             </form>
-            <aside className="flex flex-row items-center before:content-['|'] before:mr-3 text-neutral-300">
+            <aside className="flex flex-row items-center before:content-['|'] before:mr-6 text-neutral-300">
               <ul className="flex items-center text-neutral-800">
                 {isLogined ? (
                   <li className="inline-flex relative mr-5 ml-2">
@@ -88,15 +87,6 @@ const CompanyHeader = ({ handleIsCompany }) => {
                           className="w-36 hover:bg-neutral-200 rounded-xl px-4 py-4"
                         >
                           제안 현황
-                        </Link>
-                      </li>
-                      <li className="flex justify-center px-2 pb-2 border-b border-solid border-neutral-400">
-                        <Link
-                          to="/"
-                          onClick={handleProfileClick}
-                          className="w-36 hover:bg-neutral-200 rounded-xl px-4 py-4"
-                        >
-                          북마크
                         </Link>
                       </li>
                       <li className="flex justify-center px-2 py-2">
