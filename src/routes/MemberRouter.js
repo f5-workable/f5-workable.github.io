@@ -13,6 +13,8 @@ import Search from "../pages/member/Search";
 import Bookmark from "../pages/member/Bookmark";
 import ApplicationStatus from "../pages/member/ApplicationStatus";
 import CompanyDetail from "../pages/member/CompanyDetail";
+import UserTypeSelectionBeforeLogin from "../pages/auth/UserTypeSelectionBeforeLogin";
+import UserTypeSelectionBeforeSignUp from "../pages/auth/UserTypeSelectionBeforeSignUp";
 
 const MemberRouter = ({ handleIsCompany }) => {
   return (
@@ -46,8 +48,12 @@ const MemberRouter = ({ handleIsCompany }) => {
             </>
           }
         />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<SignUp />} />
+        <Route path="/login/member" element={<Login />} />
+        <Route path="/login/company" element={<Login />} />
+        <Route path="/signup/member" element={<SignUp />} />
+        <Route path="/signup/company" element={<SignUp />} />
+        <Route path="/signup" element={<UserTypeSelectionBeforeSignUp />} />
+        <Route path="/login" element={<UserTypeSelectionBeforeLogin />} />
         <Route path="/resume" element={<Resume />} />
         <Route path="/bookmark" element={<Bookmark />} />
         <Route path="/search" element={<Search />} />
