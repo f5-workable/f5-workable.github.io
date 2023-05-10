@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { MdArrowDropDown, MdArrowDropUp, MdSearch } from "react-icons/md";
-import { useSearchParams } from "react-router-dom";
 import Location from "./location";
 import CompanyType from "./companyType";
 import EmploymentType from "./employmentType";
@@ -8,9 +7,7 @@ import Deadline from "./deadline";
 import PaymentType from "./paymentType";
 
 const SearchDetail = () => {
-  const [searchParams] = useSearchParams();
   const [isArrowBtnClicked, setIsArrowBtnClicked] = useState(false);
-  const keyword = searchParams.get("keyword");
 
   const toggleIsArrowBtnClicked = () => {
     setIsArrowBtnClicked((prev) => !prev);
@@ -34,7 +31,6 @@ const SearchDetail = () => {
         </select>
         <input
           id="keyword"
-          defaultValue={keyword || ""}
           className="w-full pl-28 px-4 py-4 rounded-3xl border-2 focus:outline-orange-500 text-lg"
           placeholder="검색어를 입력해주세요."
         />
