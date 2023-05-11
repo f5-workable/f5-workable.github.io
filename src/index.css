@@ -66,6 +66,7 @@ table {
 	bottom: -35px !important;
 }
 
+// 스크롤 바 숨김
 /* ( 크롬, 사파리, 오페라, 엣지 ) 동작 */
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
@@ -74,4 +75,17 @@ table {
 .scrollbar-hide {
   -ms-overflow-style: none; /* 인터넷 익스플로러 */
   scrollbar-width: none; /* 파이어폭스 */
+}
+
+// input[type=number]으로 설정했을 때 박스를 차지하는 화살표 컴포넌트 삭제
+/* ( 크롬, 사파리, 오페라, 엣지 ) 동작 */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* 파이어폭스 */
+input[type=number] {
+  -moz-appearance: textfield;
 }
