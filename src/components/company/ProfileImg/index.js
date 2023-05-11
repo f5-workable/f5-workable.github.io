@@ -1,4 +1,4 @@
-const Logo = () => {
+const Profile = () => {
     return (
         <form method="post" enctype="multipart/form-data">
             {/* <div class="button">
@@ -11,4 +11,4 @@ const Logo = () => {
     );
 };
 
-export default Logo;
+export default Profile;

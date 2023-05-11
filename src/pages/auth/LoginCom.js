@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 const LoginCom = () => {
     return (
       <div className=" my-24">
@@ -33,7 +35,7 @@ const LoginCom = () => {
             <hr className="my-5"></hr>
             <div className="w-4/5 mx-auto">
               <span className="">Don't have an account?</span>
-              <span className="float-right text-red-600">Sign Up</span>
+              <span className="float-right text-blue-600"><Link to="/signup/company">Sign Up</Link></span>
             </div>
           </div>
         </div>

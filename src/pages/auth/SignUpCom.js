@@ -1,4 +1,4 @@
-import Logo from "../../components/company/logoImg";
+import Profile from "../../components/company/ProfileImg";
 import Kind from "../../components/company/signup";
 import { Link } from 'react-router-dom';
 
@@ -125,7 +125,7 @@ const SignUpCom = () => {
                           기업로고
                       </label>
                     </div>
-                    <Logo/>
+                    <Profile/>
                   </div>
                   <hr className="border border-gray-100"></hr>
 
@@ -137,7 +137,7 @@ const SignUpCom = () => {
                 </div>
   
                 <div className="flex justify-center">
-                  <button className=" bg-orange-200 hover:bg-orange-400 rounded-md py-2 px-5 mr-2 w-28">회원가입</button>
+                  <button className=" bg-blue-200 hover:bg-blue-400 rounded-md py-2 px-5 mr-2 w-28">회원가입</button>
                 </div>
               </div>
             </div>
@@ -147,7 +147,7 @@ const SignUpCom = () => {
             </div>
             <div className=" w-1/4 px-5 mx-auto">
               <span>Do you have an account?</span>
-              <span className="float-right text-red-600"><Link to="/login/company">Login</Link></span>
+              <span className="float-right text-blue-600"><Link to="/login/company">Login</Link></span>
             </div>
           </div>
     );
