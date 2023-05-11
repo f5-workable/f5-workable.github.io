@@ -6,7 +6,7 @@ const Logo = () => {
                     파일 업로드
                 </label>
             </div> */}
-            <input type="file" id="chooseFile" name="chooseFile" accept="image/*" onchange="loadFile(this)" />
+            <input type="file" id="chooseFile" name="chooseFile" accept="image/*" onChange="loadFile(this)" />
         </form>
     );
 };

@@ -17,7 +17,7 @@ const Private = () => {
                 type="checkbox"
                 role="switch"
                 id="Switch"
-                onClick={console.log("ddd")}
+                onChange={console.log("click")}
                 />
             {/* <label
                 class="inline-block pl-[0.15rem] hover:cursor-pointer"
