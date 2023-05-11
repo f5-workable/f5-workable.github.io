@@ -5,8 +5,9 @@ import CompanyType from "./companyType";
 import EmploymentType from "./employmentType";
 import Deadline from "./deadline";
 import PaymentType from "./paymentType";
+import DisabilityType from "./disabilityType";
+import SeverityType from "./severityType";
 import CareerType from "./careerType";
-import EducationType from "./educationType";
 
 const SearchDetail = () => {
   const [isArrowBtnClicked, setIsArrowBtnClicked] = useState(false);
@@ -28,7 +29,6 @@ const SearchDetail = () => {
           name="keyword-type"
           className="absolute top-1/2 -translate-y-1/2 left-3 p-3 bg-transparent outline-none text-lg"
         >
-          <option value="기업명">기업명</option>
           <option value="업종">업종</option>
         </select>
         <input
@@ -54,10 +54,11 @@ const SearchDetail = () => {
         <CompanyType />
         <EmploymentType />
         <PaymentType />
+        <DisabilityType />
+        <SeverityType />
         <CareerType />
-        <EducationType />
         <div className="mt-8 w-full">
-          <p className="block text-lg font-semibold mb-2">지역</p>
+          <p className="block text-lg font-semibold mb-2">희망지역</p>
           <Location />
         </div>
         <Deadline />

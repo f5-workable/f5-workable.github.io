@@ -53,7 +53,7 @@ const Header = ({ handleIsCompany }) => {
                       className="w-10 h-10 rounded-full bg-neutral-500 border border-solid border-neutral-600 focus:ring-2 focus:ring-blue-500 focus:border-white overflow-hidden"
                     >
                       <img
-                        src="https://pbs.twimg.com/profile_images/1374979417915547648/vKspl9Et_400x400.jpg"
+                        src="/default-profile.png"
                         alt="profile-img"
                         className="object-cover"
                       ></img>
