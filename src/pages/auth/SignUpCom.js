@@ -1,105 +1,138 @@
 import Logo from "../../components/company/logoImg";
+import Kind from "../../components/company/signup";
+import { Link } from 'react-router-dom';
 
 const SignUpCom = () => {
     return (
-        <div className=" w-3/5 mx-auto shadow-2xl flex content-center p-10 flex-col my-24">
+        <div className=" w-4/5 mx-auto shadow-2xl flex content-center p-10 flex-col my-24">
           <div className="text-center text-3xl font-bold">회원가입</div>
             <div className="flex justify-center">
-              <div className=" w-2/3">
-                <div>
-                  <div className="flex flex-row justify-between my-0.5 mt-8 ">
-                    <label htmlFor="id" className=" font-bold text-base ">
-                      아이디
-                    </label>
-                    <button className=" bg-gray-400 text-white text-xs px-3 w-20 h-5">중복확인</button>
+              <div className=" w-full">
+                <div className="pt-12">
+                  <h1 className=" text-xl font-bold pb-5">아이디/비밀번호</h1>
+                  <hr class="border-2 border-black" />
+                  <div className="flex flex-row my-1.5 ">
+                    <div className=" w-52 flex items-center">
+                      <label htmlFor="id" className=" px-5 font-bold text-base">
+                          아이디
+                      </label>
+                    </div>
+                    <div className="flex flex-col">
+                      <div className="flex flex-row">
+                        <input id="id" className=" w-64 h-8 p-2 border-2"/>
+                        <button className="w-24 h-8 mx-1.5 px-3 text-base border-2">중복확인</button>
+                      </div>
+                      <p className="py-3">5~24자 이내로 입력하세요.</p>
+                    </div>
                   </div>
-                  <input id="id" className=" w-full p-2 my-1.5 bg-gray-200"/>
-                </div>
-                <div>
-                  <label htmlFor="password" className="block my-1.5 font-bold text-base">
-                    비밀번호
-                  </label>
-                  <input type="password" id="password" className=" w-full p-2 my-1.5 bg-gray-200 flex justify-center" />
-                </div>
-                <div>
-                  <label htmlFor="passwordCheck" className="block my-1.5 font-bold text-base">
-                    비밀번호 확인
-                  </label>
-                  <input type="password" id="passwordCheck" className=" w-full p-2 my-1.5 bg-gray-200 flex justify-center" />
-                </div>
-                <div>
-                  <label htmlFor="name" className="block my-1.5 font-bold text-base">
-                    기업명
-                  </label>
-                  <input id="name" className=" w-full p-2 my-1.5 bg-gray-200 flex justify-center" />
-                </div>
-                <div>
-                  <label htmlFor="kind" className="block my-1.5 font-bold text-base">
-                    기업형태
-                  </label>
-                  <div className="flex flex-wrap">
-                    <label htmlFor="kind1" className="flex items-center mr-4 my-2">
-                      <input type="radio" id="kind1" name="kind" value="개인" />
-                      <span className="ml-2">개인</span>
-                    </label>
-                    <label htmlFor="kind2" className="flex items-center mr-4 my-2">
-                      <input type="radio" id="kind2" name="kind" value="공사" />
-                      <span className="ml-2">공사/공공</span>
-                    </label>
-                    <label htmlFor="kind3" className="flex items-center mr-4 my-2">
-                      <input type="radio" id="kind3" name="kind" value="대기업" />
-                      <span className="ml-2">대기업</span>
-                    </label>
-                    <label htmlFor="kind4" className="flex items-center mr-4 my-2">
-                      <input type="radio" id="kind4" name="kind" value="외국계" />
-                      <span className="ml-2">외국계</span>
-                    </label>
-                    <label htmlFor="kind5" className="flex items-center mr-4 my-2">
-                      <input type="radio" id="kind5" name="kind" value="중소" />
-                      <span className="ml-2">중소</span>
-                    </label>
-                    <label htmlFor="kind6" className="flex items-center mr-4 my-2">
-                      <input type="radio" id="kind6" name="kind" value="협회" />
-                      <span className="ml-2">협회/단체</span>
-                    </label>
+                  <hr className="border border-gray-100"></hr>
+
+                  <div className="flex flex-row my-1.5 ">
+                    <div className=" w-52 flex items-center">
+                      <label htmlFor="id" className=" px-5 font-bold text-base">
+                          비밀번호
+                      </label>
+                    </div>
+                    <div className="flex flex-col">
+                      <input type="password" id="id" className=" w-64 h-8 p-2 border-2"/>
+                      <p className="py-3">8~24자 이내로 입력하세요.</p>
+                    </div>
                   </div>
-                </div>
-                <div>
-                  <label htmlFor="phone" className="block my-1.5 font-bold text-base">
-                    연락처
-                  </label>
-                  <input type="tel" id="phone" className=" w-full p-2 my-1.5 bg-gray-200 flex justify-center" />
-                </div>
-                <div>
-                  <label htmlFor="address" className="block my-1.5 font-bold text-base">
-                    사업지 주소
-                  </label>
-                  <input id="address" className=" w-full p-2 my-1.5 bg-gray-200 flex justify-center" />
-                </div>
-                <div>
-                  <label htmlFor="registerNumber" className="block my-1.5 font-bold text-base">
-                    사업자등록번호
-                  </label>
-                  <div className="w-full flex flex-row justify-start">
-                    <input id="registerNumber" className=" w-16 p-2 my-1.5 bg-gray-200 flex justify-center text-center" />
-                    <p className=" text-3xl mx-3">-</p>
-                    <input id="registerNumber" className=" w-10 p-2 my-1.5 bg-gray-200 flex justify-center text-center" />
-                    <p className=" text-3xl mx-3">-</p>
-                    <input id="registerNumber" className=" w-24 p-2 my-1.5 bg-gray-200 flex justify-center text-center" />
+                  <hr className="border border-gray-100"></hr>
+
+                  <div className="flex flex-row my-1.5 ">
+                    <div className=" w-52 flex items-center">
+                      <label htmlFor="id" className=" px-5 font-bold text-base">
+                          비밀번호 확인
+                      </label>
+                    </div>
+                    <div className="flex flex-col">
+                      <input type="password" id="id" className=" w-64 h-8 p-2 border-2"/>
+                      <p className="py-3">비밀번호를 다시 한번 입력해주세요.</p>
+                    </div>
                   </div>
-                </div>
-                <div>
-                  <label htmlFor="logo" className="block my-1.5 font-bold text-base">
-                    기업 로고 사진
-                  </label>
-                  {/* <input id="logo" className=" w-full p-2 my-1.5 bg-gray-200 flex justify-center" /> */}
-                  <div className="mt-4">
-                    <Logo/>
-                  </div>
+                  <hr className="border border-gray-100"></hr>
                 </div>
 
-                <div className="pt-10">
-                  <input type="checkbox" className="text-sm m-1.5 mb-7"></input>
+                <div className="pt-12">
+                  <h1 className=" text-xl font-bold pb-5">기업 상세 정보</h1>
+                  <hr class="border-2 border-black" />
+                  <div className="flex flex-row my-1.5 ">
+                    <div className=" w-52 flex items-center">
+                      <label htmlFor="id" className=" px-5 font-bold text-base">
+                          기업명
+                      </label>
+                    </div>
+                    <input id="id" className=" w-96 h-8 p-2 border-2"/>
+                  </div>
+                  <hr className="border border-gray-100"></hr>
+
+                  <div className="flex flex-row my-1.5">
+                    <div className=" w-52 flex items-center">
+                      <label htmlFor="id" className=" px-5 font-bold text-base">
+                          기업형태
+                      </label>
+                    </div>
+                    <Kind />
+                  </div>
+                  <hr className="border border-gray-100"></hr>
+
+                  <div className="flex flex-row my-1.5 ">
+                    <div className=" w-52 flex items-center">
+                      <label htmlFor="id" className=" px-5 font-bold text-base">
+                          연락처
+                      </label>
+                    </div>
+                    <div className="flex flex-row justify-start">
+                      <input id="registerNumber" className=" w-20 h-8 p-2 border-2 flex justify-center text-center" />
+                      <p className=" text-3xl mx-3">-</p>
+                      <input id="registerNumber" className=" w-20 h-8 p-2 border-2 flex justify-center text-center" />
+                      <p className=" text-3xl mx-3">-</p>
+                      <input id="registerNumber" className=" w-20 h-8 p-2 border-2 flex justify-center text-center" />
+                    </div>
+                  </div>
+                  <hr className="border border-gray-100"></hr>
+
+                  <div className="flex flex-row my-1.5 ">
+                    <div className=" w-52 flex items-center">
+                      <label htmlFor="id" className=" px-5 font-bold text-base">
+                          사업자등록번호
+                      </label>
+                    </div>
+                    <div className="flex flex-row justify-start">
+                      <input id="registerNumber" className=" w-16 h-8 p-2 border-2 flex justify-center text-center" />
+                      <p className=" text-3xl mx-3">-</p>
+                      <input id="registerNumber" className=" w-10 h-8 p-2 border-2 flex justify-center text-center" />
+                      <p className=" text-3xl mx-3">-</p>
+                      <input id="registerNumber" className=" w-24 h-8 p-2 border-2 flex justify-center text-center" />
+                    </div>
+                  </div>
+                  <hr className="border border-gray-100"></hr>
+
+                  <div className="flex flex-row my-1.5 ">
+                    <div className=" w-52 flex items-center">
+                      <label htmlFor="id" className=" px-5 font-bold text-base">
+                          사업지주소
+                      </label>
+                    </div>
+                    <input id="id" className=" w-[45rem] h-8 p-2 border-2"/>
+                  </div>
+                  <hr className="border border-gray-100"></hr>
+
+                  <div className="flex flex-row my-1.5 ">
+                    <div className=" w-52 flex items-center">
+                      <label htmlFor="id" className=" px-5 font-bold text-base">
+                          기업로고
+                      </label>
+                    </div>
+                    <Logo/>
+                  </div>
+                  <hr className="border border-gray-100"></hr>
+
+                </div>
+
+                <div className="pt-12 flex justify-center my-5">
+                  <input type="checkbox" className="text-sm"></input>
                     개인정보 동의
                 </div>
   
@@ -110,11 +143,11 @@ const SignUpCom = () => {
             </div>
   
             <div className="flex justify-center ">
-              <hr className=" w-1/2 my-5"></hr>
+              <hr className=" w-full border border-gray-200 my-5"></hr>
             </div>
-            <div className=" w-1/3 mx-auto">
-              <span className="">Do you have an account?</span>
-              <span className="float-right text-red-600">Login</span>
+            <div className=" w-1/4 px-5 mx-auto">
+              <span>Do you have an account?</span>
+              <span className="float-right text-red-600"><Link to="/login/company">Login</Link></span>
             </div>
           </div>
     );
