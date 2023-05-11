@@ -5,6 +5,8 @@ import CompanyType from "./companyType";
 import EmploymentType from "./employmentType";
 import Deadline from "./deadline";
 import PaymentType from "./paymentType";
+import CareerType from "./careerType";
+import EducationType from "./educationType";
 
 const SearchDetail = () => {
   const [isArrowBtnClicked, setIsArrowBtnClicked] = useState(false);
@@ -49,14 +51,16 @@ const SearchDetail = () => {
         </button>
       </div>
       <div id="detail-search-dropdown" className="px-5 hidden">
-        <Deadline />
         <CompanyType />
         <EmploymentType />
         <PaymentType />
+        <CareerType />
+        <EducationType />
         <div className="mt-8 w-full">
           <p className="block text-lg font-semibold mb-2">지역</p>
           <Location />
         </div>
+        <Deadline />
         <button
           type="button"
           className="px-8 py-4 mt-10 bg-white border-blue-400 text-blue-500 rounded-3xl border-2 mr-5"

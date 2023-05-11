@@ -1,6 +1,6 @@
 const Deadline = () => {
   return (
-    <div>
+    <div className="mt-8 mb-4">
       <p className="block my-2 text-lg font-semibold">마감기간</p>
       <div className="flex items-center">
         <div className="w-96 p-2 bg-white rounded-3xl flex justify-center items-center mr-5 border border-solid border-neutral-400">
