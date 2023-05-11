@@ -61,7 +61,8 @@ const Resume = () => {
             <Link to={`/resume/${index}`} key={index}>
               <div className="bg-white rounded-lg shadow-lg hover:shadow-xl transition duration-300">
                 <div className="p-6">
-                  <div className="bg-gray-200 h-40"></div>
+                  {/* <div className="bg-gray-200 h-40"></div> */}
+                  <img src="/images/interview.PNG" alt="interview" loading="lazy" />
                   <div className="mt-6 flex justify-between items-center">
                     <div className="truncate font-bold text-lg">이력서 제목</div>
                     <BsChevronRight />

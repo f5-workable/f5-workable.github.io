@@ -38,6 +38,7 @@ const LoginCom = () => {
               <span className="float-right text-blue-600"><Link to="/signup/company">Sign Up</Link></span>
             </div>
           </div>
+          <div className='w-1/2 p-10'><img src="/images/loginCompanyRight.PNG" alt="loginRight" loading="lazy" /></div>
         </div>
       </div>
     );
