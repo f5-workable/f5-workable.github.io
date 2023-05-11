@@ -1,10 +1,9 @@
 import { Navigate, Outlet, Route, Routes } from "react-router-dom";
 import Home from "../pages/company/Home";
 import Footer from "../components/Footer";
-import Login from "../pages/auth/Login";
-import SignUp from "../pages/auth/SignUp";
+import LoginCom from "../pages/auth/LoginCom";
+import SignUpCom from "../pages/auth/SignUpCom";
 import CompanyHeader from "../components/CompanyHeader";
-import Search from "../pages/company/Search";
 
 const CompanyRouter = ({ handleIsCompany }) => {
   return (
@@ -20,11 +19,10 @@ const CompanyRouter = ({ handleIsCompany }) => {
       >
         <Route path="*" element={<Navigate to="/" replace />} />
         <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<SignUp />} />
+        <Route path="/logincom" element={<LoginCom />} />
+        <Route path="/signupcom" element={<SignUpCom />} />
         <Route path="/jobs" element={<span>전체 구직 페이지</span>} />
         <Route path="/jobs/:jobId" element={<span>상세페이지</span>} />
-        <Route path="/search" element={<Search />} />
         <Route path="/profile" element={<span>프로필</span>} />
       </Route>
     </Routes>
