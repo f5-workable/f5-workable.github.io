@@ -65,14 +65,14 @@ const CompanyHeader = ({ handleIsCompany }) => {
                       </li>
                       <li className="flex justify-center px-2 pt-2">
                         <Link
-                          to="/"
+                          to="/status/applicant"
                           onClick={handleProfileClick}
                           className="w-36 hover:bg-neutral-200 rounded-xl px-4 py-4"
                         >
                           지원자 현황
                         </Link>
                       </li>
-                      <li className="flex justify-center px-2">
+                      <li className="flex justify-center px-2 pb-2 border-b border-solid border-neutral-400">
                         <Link
                           to="/"
                           onClick={handleProfileClick}
