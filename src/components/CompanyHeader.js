@@ -39,7 +39,7 @@ const CompanyHeader = ({ handleIsCompany }) => {
             <aside className="flex flex-row items-center before:content-['|'] before:mr-6 text-neutral-300">
               <ul className="flex items-center text-neutral-800">
                 {isLogined ? (
-                  <li className="inline-flex relative mr-5 ml-2">
+                  <li className="inline-flex relative mr-5">
                     <button
                       onClick={handleProfileClick}
                       className="w-10 h-10 rounded-full bg-neutral-500 border border-solid border-neutral-600 focus:ring-2 focus:ring-blue-500 focus:border-white overflow-hidden"
@@ -65,14 +65,14 @@ const CompanyHeader = ({ handleIsCompany }) => {
                       </li>
                       <li className="flex justify-center px-2 pt-2">
                         <Link
-                          to="/"
+                          to="/status/applicant"
                           onClick={handleProfileClick}
                           className="w-36 hover:bg-neutral-200 rounded-xl px-4 py-4"
                         >
                           지원자 현황
                         </Link>
                       </li>
-                      <li className="flex justify-center px-2">
+                      <li className="flex justify-center px-2 pb-2 border-b border-solid border-neutral-400">
                         <Link
                           to="/"
                           onClick={handleProfileClick}
