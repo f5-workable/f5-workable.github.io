@@ -1,5 +1,7 @@
-const Private = () => {
+const Private = ({setState, setState2}) => {
     const handleCheck = (e) => {
+        setState(e.target.checked);
+        setState2(e.target.checked);
         console.log(e.target.checked);
     }
 
