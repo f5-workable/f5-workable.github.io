@@ -4,64 +4,81 @@ import Private from "../../components/member/resumeDetail/Private";
 import { BsFileEarmarkPlus, BsChevronRight } from "react-icons/bs";
 
 const Resume = () => {
-    // const [value, setValue] = useState("이력서 공개");
-
-    // const handleToggle = (event) => {
-    //     console.log(event.target.checked);
-    //     event.target.checked === false
-    //         ? setValue("이력서 공개")
-    //         : setValue("이력서 비공개")
-    // }
-
     const [resumeList, setResumeList] = useState([{}]);
+    const [modalOpen, setModalOpen] = useState(false);
+    const [selectedResumeIndex, setSelectedResumeIndex] = useState(null);
+    const [privateChecked, setPrivateChecked] = useState(false);
 
-    const handleClick = () => {
+    const handleCreateClick = () => {
       if (resumeList.length < 3) {
         setResumeList([...resumeList, {}]);
       }
     };
 
-    return (
-      //   <div className="p-10 flex flex-col">
-      //   <h1 className="text-center text-3xl font-bold">이력서 목록</h1>
-      //   <div className=" px-60 py-10 flex justify-end">
-      //     <Private />
-      //   </div>
-      //   <div className="flex justify-center">
-      //     {resumeList.map((_, index) => (
-      //       <Link to={`/resume/${index}`} key={index}>
-      //           <div className="mx-5 bg-orange-100 w-48 h-64 rounded-md"></div>
-      //       </Link>
-      //     ))}
-      //   </div>
-      //   {resumeList.length < 3 ? (
-      //       <div className="py-10 flex items-center justify-center">
-      //           <button className="w-28 h-10 hover:bg-orange-300 border-2 flex items-center justify-center font-bold rounded-md" onClick={handleClick}>
-      //               <BsFileEarmarkPlus className="pr-1 text-2xl"/>
-      //               <span className="pl-1 ">추가하기</span>
-      //           </button>
-      //       </div>
-      //   ) : (
-      //       <div className="py-10 flex items-center justify-center">
-      //           <button className="w-28 h-10 border-2 flex items-center justify-center font-bold rounded-md opacity-50 cursor-not-allowed" disabled>
-      //               <BsFileEarmarkPlus className=" pr-1 text-2xl"/>
-      //               <span className="pl-1">추가하기</span>
-      //           </button>
-      //       </div>
-      //   )}
-      // </div>
+    const handleClick = () => {
+      setModalOpen(true);
+    };
 
-      <div className="p-10 flex flex-col bg-gray-50 min-h-screen">
+    const handleResumeSelect = (index) => {
+      setSelectedResumeIndex(index);
+      setModalOpen(false);
+    };
+    
+
+    return (
+      <div className="p-10 flex flex-col bg-gray-50 h-auto">
         <h1 className="text-center text-3xl font-bold mb-10">이력서 목록</h1>
-        <div className="px-10 py-5 flex justify-end">
-          <Private />
+        <div className="px-10 flex justify-end">
+          <label className="px-2 font-semibold hover:cursor-pointer my-auto">대표 이력서</label>
+          <div className=" flex justify-end">
+            {privateChecked ? 
+            (<button className="w-[3.438rem] h-[1.875rem] rounded-[1.25rem] bg-[#ccc] shadow-md" onClick={handleClick}>
+              선택
+            </button>) :
+            (<button className="w-[3.438rem] h-[1.875rem] rounded-[1.25rem] bg-[#ccc] shadow-md cursor-not-allowed" disabled onClick={handleClick}>
+              선택
+            </button>)
+            }
+
+            {modalOpen && (
+              <div className="fixed inset-0 bg-gray-500 bg-opacity-50 flex justify-center items-center">
+                <div className="w-1/2 h-auto bg-white rounded-lg p-10 overflow-y-auto">
+                  <h2 className="text-xl font-bold mb-5 text-center">대표 이력서 선택</h2>
+                  {resumeList.map((_, index) => (
+                    <div
+                      className={`p-4 rounded-md cursor-pointer hover:bg-gray-200 ${selectedResumeIndex === index ? 'bg-gray-200' : ''}`}
+                      key={index}
+                      onClick={() => handleResumeSelect(index)}
+                    >
+                      {/* {resume.title} */}
+                      이력서 제목
+                    </div>
+                  ))}
+                  <div className="flex justify-center">
+                    {selectedResumeIndex === null ? (<button className="mt-5 bg-gray-200 hover:bg-gray-300 px-5 py-2 rounded-md cursor-not-allowed" disabled onClick={() => setModalOpen(false)}>
+                      취소
+                    </button>) : 
+                    (<button className="mt-5 bg-gray-200 hover:bg-gray-300 px-5 py-2 rounded-md" onClick={() => setModalOpen(false)}>
+                      취소
+                    </button>)
+                    }
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+
         </div>
+
+        <div className="px-10 py-5 flex justify-end">
+          <Private setState={setModalOpen} setState2={setPrivateChecked} />
+        </div>
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {resumeList.map((_, index) => (
             <Link to={`/resume/${index}`} key={index}>
               <div className="bg-white rounded-lg shadow-lg hover:shadow-xl transition duration-300">
                 <div className="p-6">
-                  {/* <div className="bg-gray-200 h-40"></div> */}
                   <img src="/images/interview.PNG" alt="interview" loading="lazy" />
                   <div className="mt-6 flex justify-between items-center">
                     <div className="truncate font-bold text-lg">이력서 제목</div>
@@ -75,14 +92,14 @@ const Resume = () => {
             <div className="bg-white rounded-lg shadow-lg hover:shadow-xl transition duration-300 flex items-center justify-center">
               <button
                 className="w-full h-full font-bold rounded-md flex items-center justify-center"
-                onClick={handleClick}
+                onClick={handleCreateClick}
               >
                 <BsFileEarmarkPlus className="pr-1 text-xl" />
                 <span>추가하기</span>
               </button>
             </div>
           ) : (
-            <div className="bg-gray-300 rounded-lg shadow-lg flex items-center justify-center opacity-50 cursor-not-allowed">
+            <div className="hidden">
               <button
                 className="w-full h-10 bg-gray-300 text-gray-500 font-bold rounded-md flex items-center justify-center"
                 disabled
@@ -94,7 +111,6 @@ const Resume = () => {
           )}
         </div>
       </div>
-
     );
 };
 
