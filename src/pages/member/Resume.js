@@ -10,7 +10,7 @@ const Resume = () => {
     const [privateChecked, setPrivateChecked] = useState(false);
 
     const handleCreateClick = () => {
-      if (resumeList.length < 3) {
+      if (resumeList.length < 3) {  
         setResumeList([...resumeList, {}]);
       }
     };
@@ -39,7 +39,7 @@ const Resume = () => {
               선택
             </button>)
             }
-
+ 
             {modalOpen && (
               <div className="fixed inset-0 bg-gray-500 bg-opacity-50 flex justify-center items-center">
                 <div className="w-1/2 h-auto bg-white rounded-lg p-10 overflow-y-auto">
