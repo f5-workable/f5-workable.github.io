@@ -1,19 +1,18 @@
+import { useEffect } from "react";
 import Checkbox from "./Checkbox";
 
-const CareerType = ({ setState }) => {
+const CareerType = ({ state, setState }) => {
   const changeCareerType = (e) => {
     const checkboxes = document.getElementsByName("career-type");
     const targetValue = e.target.value;
     const targetChecked = e.target.checked;
 
     if (targetValue === "경력전체") {
-      checkboxes[0].checked = targetChecked;
-      checkboxes.forEach((checkbox, idx) => {
-        if (idx !== 0) {
-          checkbox.checked = false;
-        }
+      checkboxes.forEach((checkbox) => {
+        checkbox.checked = false;
       });
-      targetChecked ? setState(["신입", "경력"]) : setState([]);
+      checkboxes[0].checked = targetChecked;
+      setState([]);
     } else {
       const arr = [];
       checkboxes[0].checked = false;
@@ -25,6 +24,17 @@ const CareerType = ({ setState }) => {
       setState(arr);
     }
   };
+
+  useEffect(() => {
+    const checkboxes = document.getElementsByName("career-type");
+    if (state.length === 0) {
+      checkboxes.forEach((checkbox) => {
+        checkbox.checked = false;
+      });
+      checkboxes[0].checked = true;
+    }
+  }, [state]);
+
   return (
     <div className="mt-8">
       <p className="block mb-2 text-lg font-semibold">경력</p>
