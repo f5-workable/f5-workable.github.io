@@ -17,6 +17,15 @@ const SearchDetail = () => {
   const [location, setLocation] = useState([]);
   const [paymentType, setPaymentType] = useState([]);
 
+  const initSearchCondition = () => {
+    setCareerType([]);
+    setCompanyType([]);
+    setEducationType([]);
+    setEmploymentType([]);
+    setLocation([]);
+    setPaymentType([]);
+  };
+
   const toggleIsArrowBtnClicked = () => {
     setIsArrowBtnClicked((prev) => !prev);
   };
@@ -46,7 +55,11 @@ const SearchDetail = () => {
           <MdSearch fontSize={28} />
         </button>
       </div>
-      <button type="button" className="flex justify-between w-full border-b-white border-solid" onClick={toggleDropdown}>
+      <button
+        type="button"
+        className="flex justify-between w-full border-b-white border-solid"
+        onClick={toggleDropdown}
+      >
         <p className="my-2 text-xl font-bold">상세 조건</p>
         {isArrowBtnClicked ? (
           <MdArrowDropUp fontSize={35} />
@@ -67,6 +80,7 @@ const SearchDetail = () => {
         <button
           type="button"
           className="px-8 py-4 mt-10 bg-white border-blue-400 text-blue-500 rounded-3xl border-2 mr-5"
+          onClick={initSearchCondition}
         >
           조건 초기화
         </button>
