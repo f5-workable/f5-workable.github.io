@@ -1,21 +1,18 @@
+import { useEffect } from "react";
 import Checkbox from "./Checkbox";
 
-const CompanyType = ({ setState }) => {
+const CompanyType = ({ state, setState }) => {
   const changeCompanyType = (e) => {
     const checkboxes = document.getElementsByName("company-type");
     const targetValue = e.target.value;
     const targetChecked = e.target.checked;
 
     if (targetValue === "기업형태전체") {
-      checkboxes[0].checked = targetChecked;
-      checkboxes.forEach((checkbox, idx) => {
-        if (idx !== 0) {
-          checkbox.checked = false;
-        }
+      checkboxes.forEach((checkbox) => {
+        checkbox.checked = false;
       });
-      targetChecked
-        ? setState(["개인", "공사,공공", "대기업", "외국계", "중소", "협회,단체"])
-        : setState([]);
+      checkboxes[0].checked = targetChecked;
+      setState([]);
     } else {
       const arr = [];
       checkboxes[0].checked = false;
@@ -27,6 +24,17 @@ const CompanyType = ({ setState }) => {
       setState(arr);
     }
   };
+
+  useEffect(() => {
+    const checkboxes = document.getElementsByName("company-type");
+    if (state.length === 0) {
+      checkboxes.forEach((checkbox) => {
+        checkbox.checked = false;
+      });
+      checkboxes[0].checked = true;
+    }
+  }, [state]);
+
   return (
     <div className="mt-8">
       <p className="block mb-2 text-lg font-semibold">기업형태</p>
