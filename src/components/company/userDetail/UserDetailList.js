@@ -28,7 +28,7 @@ const UserDetailList = () => {
                     <hr></hr>
                 </div>
                 <div className=" h-32">
-                    <label className=" text-xl font-bold px-10">연락처</label>
+                    <label className=" text-xl font-bold px-10">사업자등록번호</label>
                     <hr className=" bg-black h-0.5"></hr>
                     <input className=" text-lg font-bold italic bg-white my-5 px-10" value={"455-12-16572"} disabled />
                     <hr></hr>
