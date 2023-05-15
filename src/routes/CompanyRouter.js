@@ -4,6 +4,7 @@ import Footer from "../components/Footer";
 import CompanyHeader from "../components/CompanyHeader";
 import Search from "../pages/company/Search";
 import ApplicantStatus from "../pages/company/ApplicantStatus";
+import UserDetail from "../pages/company/UserDetail";
 
 const CompanyRouter = ({ handleIsCompany }) => {
   return (
@@ -22,7 +23,7 @@ const CompanyRouter = ({ handleIsCompany }) => {
         <Route path="/status/applicant" element={<ApplicantStatus />} />
         <Route path="/search" element={<Search />} />
         <Route path="/jobs/:jobId" element={<span>상세페이지</span>} />
-        <Route path="/profile" element={<span>프로필</span>} />
+        <Route path="/userdetail" element={<UserDetail />} />
       </Route>
     </Routes>
   );

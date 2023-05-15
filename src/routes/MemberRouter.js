@@ -8,9 +8,9 @@ import LoginPer from "../pages/auth/LoginPer";
 import SignUpPer from "../pages/auth/SignUpPer";
 import LoginCom from "../pages/auth/LoginCom";
 import SignUpCom from "../pages/auth/SignUpCom";
-import UserDetail from "../components/UserDetail";
 import UserDetailModify from "../components/UserDetailModify";
 import UserDetailBar from "../components/UserDetailBar";
+import UserDetail from "../pages/member/UserDetail";
 import Search from "../pages/member/Search";
 import Bookmark from "../pages/member/Bookmark";
 import ApplicationStatus from "../pages/member/ApplicationStatus";
@@ -62,15 +62,7 @@ const MemberRouter = ({ handleIsCompany }) => {
         <Route path="/resume" element={<Resume />} />
         <Route path="/resume/:resumeId" element={<ResumeWrite />} />
         <Route path="/status/application" element={<ApplicationStatus />} />
-        <Route
-          path="/profile"
-          element={
-            <div className=" mx-24 flex justify-center">
-              <UserDetailBar />
-              <UserDetail />
-            </div>
-          }
-        />
+        <Route path="/userdetail" element={<UserDetail />} />
         <Route
           path="/userdetailmodify"
           element={
