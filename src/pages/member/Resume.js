@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from 'react-router-dom';
+import { FaCrown } from "react-icons/fa";
 // import Private from "../../components/member/resumeDetail/Private";
 import { BsFileEarmarkPlus, BsChevronRight } from "react-icons/bs";
 
@@ -10,7 +11,7 @@ const Resume = () => {
     // const [privateChecked, setPrivateChecked] = useState(false);
 
     const handleCreateClick = () => {
-      if (resumeList.length < 3) {  
+      if (resumeList.length < 3) {
         setResumeList([...resumeList, {}]);
       }
     };
@@ -23,12 +24,11 @@ const Resume = () => {
       setSelectedResumeIndex(index);
       setModalOpen(false);
     };
-    
 
     return (
       <div className="p-10 flex flex-col bg-gray-50 h-auto">
-        <h1 className="text-center text-3xl font-bold mb-10">이력서 목록</h1>
-        <div className="px-10 flex justify-end">
+        <h1 className="text-center text-3xl font-bold py-10">이력서 목록</h1>
+        <div className=" px-48 pb-5 flex justify-end">
           <label className="px-2 font-semibold hover:cursor-pointer my-auto">대표 이력서</label>
           <div className=" flex justify-end">
             {/* {privateChecked ? 
@@ -40,7 +40,7 @@ const Resume = () => {
             </button>)
             } */}
 
-            <button className="w-[3.438rem] h-[1.875rem] rounded-[1.25rem] bg-[#ccc] shadow-md" onClick={handleClick}>
+            <button className="w-[3.438rem] h-[1.875rem] rounded-[1.25rem] bg-yellow-400 shadow-md" onClick={handleClick}>
               선택
             </button>
  
@@ -82,11 +82,12 @@ const Resume = () => {
           <Private setState={setModalOpen} setState2={setPrivateChecked} />
         </div> */}
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className=" px-40 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {resumeList.map((_, index) => (
             <Link to={`/resume/${index}`} key={index}>
-              <div className="bg-white rounded-lg shadow-lg hover:shadow-xl transition duration-300">
+              <div className="bg-white rounded-lg shadow-md hover:shadow-2xl transition duration-300">
                 <div className="p-6">
+                  {selectedResumeIndex === index ? (<FaCrown className="absolute text-yellow-400 text-[3.25rem]" />) : null}
                   <img src="/images/interview.PNG" alt="interview" loading="lazy" />
                   <div className="mt-6 flex justify-between items-center">
                     <div className="truncate font-bold text-lg">이력서 제목</div>
