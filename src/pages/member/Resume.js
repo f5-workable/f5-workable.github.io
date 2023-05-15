@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { Link } from 'react-router-dom';
-import Private from "../../components/member/resumeDetail/Private";
+// import Private from "../../components/member/resumeDetail/Private";
 import { BsFileEarmarkPlus, BsChevronRight } from "react-icons/bs";
 
 const Resume = () => {
     const [resumeList, setResumeList] = useState([{}]);
     const [modalOpen, setModalOpen] = useState(false);
     const [selectedResumeIndex, setSelectedResumeIndex] = useState(null);
-    const [privateChecked, setPrivateChecked] = useState(false);
+    // const [privateChecked, setPrivateChecked] = useState(false);
 
     const handleCreateClick = () => {
       if (resumeList.length < 3) {  
@@ -31,14 +31,18 @@ const Resume = () => {
         <div className="px-10 flex justify-end">
           <label className="px-2 font-semibold hover:cursor-pointer my-auto">대표 이력서</label>
           <div className=" flex justify-end">
-            {privateChecked ? 
+            {/* {privateChecked ? 
             (<button className="w-[3.438rem] h-[1.875rem] rounded-[1.25rem] bg-[#ccc] shadow-md" onClick={handleClick}>
               선택
             </button>) :
             (<button className="w-[3.438rem] h-[1.875rem] rounded-[1.25rem] bg-[#ccc] shadow-md cursor-not-allowed" disabled onClick={handleClick}>
               선택
             </button>)
-            }
+            } */}
+
+            <button className="w-[3.438rem] h-[1.875rem] rounded-[1.25rem] bg-[#ccc] shadow-md" onClick={handleClick}>
+              선택
+            </button>
  
             {modalOpen && (
               <div className="fixed inset-0 bg-gray-500 bg-opacity-50 flex justify-center items-center">
@@ -55,24 +59,28 @@ const Resume = () => {
                     </div>
                   ))}
                   <div className="flex justify-center">
-                    {selectedResumeIndex === null ? (<button className="mt-5 bg-gray-200 hover:bg-gray-300 px-5 py-2 rounded-md cursor-not-allowed" disabled onClick={() => setModalOpen(false)}>
+                    {/* {selectedResumeIndex === null ? (<button className="mt-5 bg-gray-200 hover:bg-gray-300 px-5 py-2 rounded-md cursor-not-allowed" disabled onClick={() => setModalOpen(false)}>
                       취소
                     </button>) : 
                     (<button className="mt-5 bg-gray-200 hover:bg-gray-300 px-5 py-2 rounded-md" onClick={() => setModalOpen(false)}>
                       취소
                     </button>)
-                    }
+                    } */}
+
+                    <button className="mt-5 bg-gray-200 hover:bg-gray-300 px-5 py-2 rounded-md" onClick={() => setModalOpen(false)}>
+                      취소
+                    </button>
+
                   </div>
                 </div>
               </div>
             )}
           </div>
-
         </div>
 
-        <div className="px-10 py-5 flex justify-end">
+        {/* <div className="px-10 py-5 flex justify-end">
           <Private setState={setModalOpen} setState2={setPrivateChecked} />
-        </div>
+        </div> */}
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {resumeList.map((_, index) => (
