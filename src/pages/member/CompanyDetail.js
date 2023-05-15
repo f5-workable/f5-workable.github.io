@@ -1,8 +1,12 @@
 import { useCallback, useEffect, useState } from "react";
 import { MdBookmark, MdBookmarkBorder } from "react-icons/md";
+import ResumeSelectModal from "../../components/member/resumeSelectModal";
 
 const CompanyDetail = () => {
   const [isBookmark, setIsBookmark] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [selectedResumeId, setSelectedResumeId] = useState("");
+
   const { kakao } = window;
 
   const toggleIsBookmark = () => {
@@ -57,14 +61,14 @@ const CompanyDetail = () => {
           infoWindow.open(map, marker);
         });
 
-        // resize 이벤트 발생 시, 기업 좌표로 뷰 이동. 
+        // resize 이벤트 발생 시, 기업 좌표로 뷰 이동.
         let delay = 300;
         let timer = null;
 
         window.addEventListener("resize", function () {
           clearTimeout(timer);
           timer = setTimeout(function () {
-            map.panTo(targetPosition);          
+            map.panTo(targetPosition);
           }, delay);
         });
       }
@@ -156,7 +160,10 @@ const CompanyDetail = () => {
                       </>
                     )}
                   </button>
-                  <button className="w-[45%] xl:w-full h-14 bg-blue-500 text-white rounded-[2rem] text-lg font-semibold">
+                  <button
+                    onClick={() => setShowModal(true)}
+                    className="w-[45%] xl:w-full h-14 bg-blue-500 text-white rounded-[2rem] text-lg font-semibold"
+                  >
                     지원하기
                   </button>
                 </div>
@@ -166,6 +173,10 @@ const CompanyDetail = () => {
         </div>
       </main>
       <div className="block xl:hidden w-full h-24"></div>
+      <ResumeSelectModal
+        state={{ showModal, selectedResumeId }}
+        setState={{ setShowModal, setSelectedResumeId }}
+      />
     </>
   );
 };
