@@ -17,7 +17,7 @@ const companyBoard = {
 
   /**
    *
-   * @param {object} dto 검색 상세조건들
+   * @param {object} dto employment_type(고용형태) + payment_type(임금형태) + temp_address(지역) + tempcompany_type(기업형태) + tempjob_type(검색형태) + keyword(검색어)
    * @returns
    */
   search: (dto) => request.get("/jobinfo/search", dto),

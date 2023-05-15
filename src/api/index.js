@@ -2,6 +2,7 @@ import axios from "axios";
 import application from "./application";
 import applicant from "./applicant";
 import companyBoard from "./companyBoard";
+import resume from "./resume";
 
 const baseURL = process.env.REACT_APP_API_BASE_URL;
 
@@ -33,6 +34,7 @@ const api = {
   application,
   applicant,
   companyBoard,
+  resume,
 };
 
 export default api;
