@@ -76,7 +76,7 @@ const ResumeWrite = () => {
                     <label className="px-10 text-xl font-bold">경력</label>
                     <hr className="bg-black h-0.5"></hr>
 
-                    <div className="pt-5 flex items-start">
+                    <div className=" pt-5 flex items-start">
                         <label className="w-32 py-2 text-center font-bold text-md">경력구분</label>
                         
                         {career === "신입" ? (
@@ -92,21 +92,22 @@ const ResumeWrite = () => {
                         </>
                         )
                          : (
-                        <>
-                        <button className="h-8 w-20 bg-gray-300 text-white font-bold text-md"
-                            onClick={() => setCareer("신입")}>
-                            신입
-                        </button>
-                        <button className="h-8 w-20 bg-gray-400 font-bold text-md"
-                            onClick={() => setCareer("경력")}>
-                            경력
-                        </button>
-                        </>)
+                        <div className="w-full flex flex-col">
+                            <div>
+                                <button className="h-8 w-20 bg-gray-300 text-white font-bold text-md"
+                                    onClick={() => setCareer("신입")}>
+                                    신입
+                                </button>
+                                <button className="h-8 w-20 bg-gray-400 font-bold text-md"
+                                    onClick={() => setCareer("경력")}>
+                                    경력
+                                </button>
+                            </div>
+                            <div className=" pt-3">
+                                <input type="text" className=" w-full h-48 bg-gray-300 placeholder:text-gray-500 placeholder:font-bold placeholder:p-3" placeholder="경력자만 작성(200자 이하)"/>
+                            </div>
+                        </div>)
                         }
-                    </div>
-                    
-                    <div className="flex flex-col px-32 pt-3">
-                        <input type="text" className=" w-full h-24 bg-gray-300 placeholder:text-gray-500 placeholder:font-bold placeholder:p-3" placeholder="경력자만 작성"/>
                     </div>
                 </div>
 
@@ -149,7 +150,7 @@ const ResumeWrite = () => {
                             중증
                         </button>
                         <button className="h-8 w-20 bg-gray-300 text-white font-bold text-md"
-                            onClick={() => setSevere("경증")}>
+                            onClick={() => setSevere("경증")}>  
                             경증
                         </button>
                         </>
@@ -175,19 +176,14 @@ const ResumeWrite = () => {
 
                     <div className="pt-5 flex items-start">
                         <label className="w-32 py-2 text-center font-bold text-md">자기소개</label>
-                        <input type="text" className=" w-10/12 h-48 bg-gray-300 placeholder:text-gray-500 placeholder:font-bold placeholder:p-3" placeholder="500자 이하"/>
-                    </div>
-
-                    <div className="pt-5 flex items-start">
-                        <label className="w-32 py-2 text-center font-bold text-md">한마디</label>
-                        <input type="text" className=" w-10/12 h-48 bg-gray-300 placeholder:text-gray-500 placeholder:font-bold placeholder:p-3" placeholder="500자 이하"/>
+                        <input type="text" className=" w-full h-48 bg-gray-300 placeholder:text-gray-500 placeholder:font-bold placeholder:p-3" placeholder="200자 이하"/>
                     </div>
                 </div>
             
             <div className="flex justify-center">
-                <button className=" w-1/6 h-10 mx-5 text-lg font-extrabold bg-gray-200 hover:bg-gray-500 hover:text-white"><Link to={"/resume"}>작성 취소</Link></button>
-                <button className=" w-1/6 h-10 mx-5 text-lg font-extrabold bg-orange-200 hover:bg-orange-400 hover:text-white">이력서 작성 완료</button>
-                <button className=" w-1/6 h-10 mx-5 text-lg font-extrabold bg-red-300 text-white hover:bg-red-500 hover:text-white">삭제</button>
+                <button className=" w-1/6 h-10 mx-5 text-lg font-bold bg-gray-200 hover:bg-gray-500 hover:text-white"><Link to={"/resume"}>작성 취소</Link></button>
+                <button className=" w-1/6 h-10 mx-5 text-lg font-bold bg-orange-200 hover:bg-orange-400 hover:text-white">이력서 작성 완료</button>
+                <button className=" w-1/6 h-10 mx-5 text-lg font-bold bg-red-300 hover:bg-red-500 hover:text-white">삭제</button>
             </div>
         </div>
     );
