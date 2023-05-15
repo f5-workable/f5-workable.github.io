@@ -7,6 +7,7 @@ const ResumeWrite = () => {
     const [gender, setGender] = useState("남자");
     const [career, setCareer] = useState("신입");
     const [severe, setSevere] = useState("중증");
+    const [location, setLocation] = useState([]);
 
     return (
         <div className=" p-12 h-auto">
@@ -115,7 +116,7 @@ const ResumeWrite = () => {
 
                     <div className="pt-5 flex items-start w-full">
                         <label className="w-32 py-2 text-center font-bold text-md">희망근무지</label>
-                        <Location />
+                        <Location state={location} setState={setLocation} />
                     </div>
 
                     <div className="pt-5 flex items-start">
