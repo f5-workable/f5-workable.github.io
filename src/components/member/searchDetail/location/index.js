@@ -54,6 +54,9 @@ const Location = ({ state, setState }) => {
 
   return (
     <div className="w-full h-auto flex flex-col overflow-hidden bg-white rounded-md border border-solid border-neutral-400">
+      <p className="w-full h-12 flex items-center pl-6 text-neutral-500 border-b border-solid border-neutral-300">
+        최대 10개의 지역 선택이 가능합니다.
+      </p>
       <div className="w-full h-[25.1rem] flex border-b border-solid border-neutral-400">
         <div className="w-1/4 h-full bg-white border-r border-solid border-neutral-400 overflow-y-scroll scrollbar-hide">
           <ul className="grid grid-cols-2">
