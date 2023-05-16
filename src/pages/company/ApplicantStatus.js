@@ -1,10 +1,42 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SearchedItems from "../../components/company/searchedItems";
 import CompanyBoardAside from "../../components/company/companyBoardAside";
+import api from "../../api";
 
 const ApplicantStatus = () => {
   const [status, setStatus] = useState("전체");
-  const [isCompanyBoardClicked, setIsCompanyBoardClicked] = useState("");
+  const [clickedBoardId, setClickedBoardId] = useState(null);
+  const [countByStatus, setCountByStatus] = useState([]);
+  const [boards, setBoards] = useState([]);
+  const [applicants, setApplicants] = useState([]);
+
+  const getBoardsByCompanyId = async (companyId) => {
+    const { data } = await api.applicant.retrieveByCompanyId(companyId);
+    setClickedBoardId(data[0].j_id);
+    setBoards(data);
+  };
+
+  const getCountByBoardId = async (boardId) => {
+    const { data } = await api.applicant.count(boardId);
+    setCountByStatus(data);
+  };
+
+  const getApplicantByBoardIdAndState = async (boardId, state) => {
+    const { data } = await api.applicant.retrieveByBoardIdAndState(boardId, state);
+    setApplicants(data);
+  };
+
+  useEffect(() => {
+    getBoardsByCompanyId(1);
+  }, []);
+
+  useEffect(() => {
+    if (clickedBoardId !== null) {
+      getCountByBoardId(clickedBoardId);
+      getApplicantByBoardIdAndState(clickedBoardId, status);
+    }
+  }, [clickedBoardId, status]);
+
   return (
     <main className="w-full h-full pt-14 pb-10 ">
       <div className="w-11/12 lg:w-3/4 mx-auto">
@@ -18,13 +50,15 @@ const ApplicantStatus = () => {
                 우리 기업 공고
               </h3>
               <CompanyBoardAside
-                state={isCompanyBoardClicked}
-                setState={setIsCompanyBoardClicked}
+                boards={boards}
+                count={countByStatus[1]}
+                state={clickedBoardId}
+                setState={setClickedBoardId}
               />
             </aside>
           </div>
-          <section>
-            <div className="w-3/4 mx-auto my-16">
+          <section className="w-full min-h-[80vh]">
+            <div className="w-full md:w-3/4 mx-auto py-16">
               <ul className="flex justify-center">
                 <li
                   className={
@@ -34,7 +68,7 @@ const ApplicantStatus = () => {
                   onClick={() => setStatus("전체")}
                 >
                   <dl className="text-center">
-                    <dt className="text-5xl">0</dt>
+                    <dt className="text-5xl">{countByStatus[0]?.count}</dt>
                     <dd className="text-lg mt-2">전체</dd>
                   </dl>
                 </li>
@@ -46,7 +80,7 @@ const ApplicantStatus = () => {
                   onClick={() => setStatus("대기")}
                 >
                   <dl className="text-center">
-                    <dt className="text-5xl">0</dt>
+                    <dt className="text-5xl">{countByStatus[1]?.count}</dt>
                     <dd className="text-lg mt-2">대기</dd>
                   </dl>
                 </li>
@@ -58,7 +92,7 @@ const ApplicantStatus = () => {
                   onClick={() => setStatus("최종 합격")}
                 >
                   <dl className="text-center">
-                    <dt className="text-5xl">0</dt>
+                    <dt className="text-5xl">{countByStatus[2]?.count}</dt>
                     <dd className="text-lg mt-2">최종 합격</dd>
                   </dl>
                 </li>
@@ -70,13 +104,13 @@ const ApplicantStatus = () => {
                   onClick={() => setStatus("불합격")}
                 >
                   <dl className="text-center">
-                    <dt className="text-5xl">0</dt>
+                    <dt className="text-5xl">{countByStatus[3]?.count}</dt>
                     <dd className="text-lg mt-2">불합격</dd>
                   </dl>
                 </li>
               </ul>
             </div>
-            <SearchedItems />
+            <SearchedItems applicants={applicants} />
           </section>
         </div>
       </div>
