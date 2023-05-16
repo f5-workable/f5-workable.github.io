@@ -1,10 +1,10 @@
 import Item from "./Item";
 
-const CompanyBoardAside = ({ state, setState }) => {
+const CompanyBoardAside = ({ boards, state, setState }) => {
   return (
     <>
-      {[1, 2, 3].map((idx) => (
-        <Item state={state} setState={setState} idx={idx} />
+      {boards?.map((board) => (
+        <Item key={board.j_id} board={board} id={board.j_id} state={state} setState={setState} />
       ))}
     </>
   );
