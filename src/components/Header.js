@@ -64,7 +64,7 @@ const Header = ({ handleIsCompany }) => {
                     >
                       <li className="flex justify-center px-2 py-2 border-b border-solid border-neutral-400">
                         <Link
-                          to="/profile"
+                          to="/userdetail"
                           onClick={handleProfileClick}
                           className="w-36 hover:bg-neutral-200 rounded-xl px-4 py-4"
                         >

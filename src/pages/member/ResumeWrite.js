@@ -14,7 +14,7 @@ const ResumeWrite = () => {
             <div className=" pb-12 block text-center text-3xl font-bold">이력서</div>
             <div className="flex justify-center">
                 <div>
-                    <input className="w-full h-auto text-2xl bg-gray-200 placeholder:text-gray-400 placeholder:font-bold" placeholder="이력서 제목을 써주세요" />
+                    <input className="p-2 w-full h-auto text-xl font-bold bg-gray-100 placeholder:text-gray-400 placeholder:font-bold" placeholder="이력서 제목을 써주세요" />
 
                     <div className="py-10 flex flex-raw">
                         <div className="bg-gray-300 w-48 h-64"></div>
@@ -45,7 +45,7 @@ const ResumeWrite = () => {
                             onClick={() => setGender("남자")}>
                             남자
                         </button>
-                        <button className="h-8 w-20 bg-gray-300 text-white font-bold text-md"
+                        <button className="h-8 w-20 bg-gray-200 font-bold text-md"
                             onClick={() => setGender("여자")}>
                             여자
                         </button>
@@ -53,7 +53,7 @@ const ResumeWrite = () => {
                         )
                          : (
                         <>
-                        <button className="h-8 w-20 bg-gray-300 text-white font-bold text-md"
+                        <button className="h-8 w-20 bg-gray-200 font-bold text-md"
                             onClick={() => setGender("남자")}>
                             남자
                         </button>
@@ -64,19 +64,21 @@ const ResumeWrite = () => {
                         </>)
                         }
                     </div>
+                    <hr className="mt-5 border border-gray-100"></hr>
 
-                    <div className="pt-5 flex items-start">
+                    <div className="pt-5 flex items-center">
                         <label className="w-32 py-2 text-center font-bold text-md">나이</label>
-                        <input type="number" className=" w-14 bg-gray-300 text-center" min={1} />
+                        <input type="number" className=" w-14 p-2 mr-2 border-2 text-center" min={1} />
                         세
                     </div>
+                    <hr className="mt-5 border border-gray-100"></hr>
                 </div>
 
                 <div className="px-40 py-10">
                     <label className="px-10 text-xl font-bold">경력</label>
                     <hr className="bg-black h-0.5"></hr>
 
-                    <div className="pt-5 flex items-start">
+                    <div className=" pt-5 flex items-start">
                         <label className="w-32 py-2 text-center font-bold text-md">경력구분</label>
                         
                         {career === "신입" ? (
@@ -85,29 +87,31 @@ const ResumeWrite = () => {
                             onClick={() => setCareer("신입")}>
                             신입
                         </button>
-                        <button className="h-8 w-20 bg-gray-300 text-white font-bold text-md"
+                        <button className="h-8 w-20 bg-gray-200 font-bold text-md"
                             onClick={() => setCareer("경력")}>
                             경력
                         </button>
                         </>
                         )
                          : (
-                        <>
-                        <button className="h-8 w-20 bg-gray-300 text-white font-bold text-md"
-                            onClick={() => setCareer("신입")}>
-                            신입
-                        </button>
-                        <button className="h-8 w-20 bg-gray-400 font-bold text-md"
-                            onClick={() => setCareer("경력")}>
-                            경력
-                        </button>
-                        </>)
+                        <div className="w-full flex flex-col">
+                            <div>
+                                <button className="h-8 w-20 bg-gray-200 font-bold text-md"
+                                    onClick={() => setCareer("신입")}>
+                                    신입
+                                </button>
+                                <button className="h-8 w-20 bg-gray-400 font-bold text-md"
+                                    onClick={() => setCareer("경력")}>
+                                    경력
+                                </button>
+                            </div>
+                            <div className=" pt-3">
+                                <input type="text" className=" w-full h-48 bg-gray-100 placeholder:text-gray-400 placeholder:font-bold placeholder:p-3" placeholder="경력을 작성해주세요 (200자 이하로 작성)"/>
+                            </div>
+                        </div>)
                         }
                     </div>
-                    
-                    <div className="flex flex-col px-32 pt-3">
-                        <input type="text" className=" w-full h-24 bg-gray-300 placeholder:text-gray-500 placeholder:font-bold placeholder:p-3" placeholder="경력자만 작성"/>
-                    </div>
+                    <hr className="mt-5 border border-gray-100"></hr>
                 </div>
 
                 <div className=" px-40 py-10">
@@ -118,16 +122,31 @@ const ResumeWrite = () => {
                         <label className="w-32 py-2 text-center font-bold text-md">희망근무지</label>
                         <Location state={location} setState={setLocation} />
                     </div>
+                    <hr className="mt-5 border border-gray-100"></hr>
 
                     <div className="pt-5 flex items-start">
                         <label className="w-32 py-2 text-center font-bold text-md">희망업직종</label>
-                        <input type="text" className=" w-1/2 bg-gray-300 placeholder:text-gray-500 placeholder:font-bold placeholder:p-3" placeholder="희망하는 업직종을 작성해주세요"/>
+                        <input type="text" className=" w-1/2 p-2 border-2 placeholder:text-gray-400 placeholder:font-bold placeholder:p-3" placeholder="희망하는 업직종을 작성해주세요"/>
                     </div>
+                    <hr className="mt-5 border border-gray-100"></hr>
 
-                    <div className="pt-5 flex items-start">
-                        <label className="w-32 py-2 text-center font-bold text-md">희망임금</label>
-                        <input type="number" className=" w-1/6 bg-gray-300 text-center" min={1000}/>원
+                    <div className="pt-5 flex items-center">
+                        <label for="wage" class="w-32 py-2 text-center font-bold text-md">희망임금</label>
+                        <div className="w-full">
+                            <div>
+                                <input type="radio" id="hourly" name="wage" value="hourly" />
+                                <label for="hourly" className="px-3">시급</label>
+                                <input type="radio" id="daily" name="wage" value="daily" />
+                                <label for="daily" className="px-3">일급</label>
+                                <input type="radio" id="monthly" name="wage" value="monthly" />
+                                <label for="monthly" className="px-3">월급</label>
+                                <input type="radio" id="annual" name="wage" value="annual" />
+                                <label for="annual" className="px-3">연봉</label>
+                            </div>
+                            <input type="number" className=" w-1/2 mt-5 mr-2 p-2 border-2 text-right" min={1000} />원
+                        </div>
                     </div>
+                    <hr className="mt-5 border border-gray-100"></hr>
                 </div>
 
                 <div className="px-40 py-10">
@@ -138,6 +157,7 @@ const ResumeWrite = () => {
                         <label className="w-32 py-2 text-center font-bold text-md">장애유형</label>
                         <Disorder />
                     </div>
+                    <hr className="mt-5 border border-gray-100"></hr>
 
                     <div className="pt-5 flex items-start">
                         <label className="w-32 py-2 text-center font-bold text-md">중증여부</label>
@@ -148,15 +168,15 @@ const ResumeWrite = () => {
                             onClick={() => setSevere("중증")}>
                             중증
                         </button>
-                        <button className="h-8 w-20 bg-gray-300 text-white font-bold text-md"
-                            onClick={() => setSevere("경증")}>
+                        <button className="h-8 w-20 bg-gray-200 font-bold text-md"
+                            onClick={() => setSevere("경증")}>  
                             경증
                         </button>
                         </>
                         )
                          : (
                         <>
-                        <button className="h-8 w-20 bg-gray-300 text-white font-bold text-md"
+                        <button className="h-8 w-20 bg-gray-200 font-bold text-md"
                             onClick={() => setSevere("중증")}>
                             중증
                         </button>
@@ -167,6 +187,7 @@ const ResumeWrite = () => {
                         </>)
                         }
                     </div>
+                    <hr className="mt-5 border border-gray-100"></hr>
                 </div>
 
                 <div className=" px-40 py-10">
@@ -175,19 +196,15 @@ const ResumeWrite = () => {
 
                     <div className="pt-5 flex items-start">
                         <label className="w-32 py-2 text-center font-bold text-md">자기소개</label>
-                        <input type="text" className=" w-10/12 h-48 bg-gray-300 placeholder:text-gray-500 placeholder:font-bold placeholder:p-3" placeholder="500자 이하"/>
+                        <input type="text" className=" w-full h-48 bg-gray-100 placeholder:text-gray-400 placeholder:font-bold placeholder:p-3" placeholder="200자 이하로 작성해주세요" />
                     </div>
-
-                    <div className="pt-5 flex items-start">
-                        <label className="w-32 py-2 text-center font-bold text-md">한마디</label>
-                        <input type="text" className=" w-10/12 h-48 bg-gray-300 placeholder:text-gray-500 placeholder:font-bold placeholder:p-3" placeholder="500자 이하"/>
-                    </div>
+                    <hr className="mt-5 border border-gray-100"></hr>
                 </div>
             
             <div className="flex justify-center">
-                <button className=" w-1/6 h-10 mx-5 text-lg font-extrabold bg-gray-200 hover:bg-gray-500 hover:text-white"><Link to={"/resume"}>작성 취소</Link></button>
-                <button className=" w-1/6 h-10 mx-5 text-lg font-extrabold bg-orange-200 hover:bg-orange-400 hover:text-white">이력서 작성 완료</button>
-                <button className=" w-1/6 h-10 mx-5 text-lg font-extrabold bg-red-300 text-white hover:bg-red-500 hover:text-white">삭제</button>
+                <button className=" w-1/6 h-10 mx-5 text-lg font-bold bg-gray-200 hover:bg-gray-500 hover:text-white"><Link to={"/resume"}>작성 취소</Link></button>
+                <button className=" w-1/6 h-10 mx-5 text-lg font-bold bg-orange-200 hover:bg-orange-400 hover:text-white">이력서 작성 완료</button>
+                <button className=" w-1/6 h-10 mx-5 text-lg font-bold bg-red-300 hover:bg-red-500 hover:text-white">삭제</button>
             </div>
         </div>
     );

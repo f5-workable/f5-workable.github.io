@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const Item = ({ key, className }) => {
   return (
-    <Link to={`/jobs/${key}`} key={key} className="block w-full h-80">
+    <Link to={`/resume/${key}`} key={key} className="block w-full h-80">
       <div className="w-full h-full">
         <div className="flex justify-center items-center w-full h-3/5 rounded-md overflow-hidden shadow-md">
           <img
