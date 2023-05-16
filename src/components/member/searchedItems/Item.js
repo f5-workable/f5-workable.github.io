@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-const Item = ({ idx, className }) => {
+const Item = ({ idx }) => {
   return (
     <Link to={`/jobs/${idx}`} className="block w-full h-80">
       <div className="flex justify-center items-center w-full h-3/5 rounded-md overflow-hidden shadow-md">

@@ -11,7 +11,7 @@ const resume = {
   /**
    *
    * @param {*} id 이력서 시퀀스 아이디
-   * @returns
+   * @returns {object}
    */
   retrieve: (id) => request.get(`/resume/${id}`),
 
@@ -33,7 +33,7 @@ const resume = {
   /**
    *
    * @param {object} dto payment_type(임금형태) + disease(중증여부) + ob_type(장애유형) + place(희망지역) + job(희망직종)
-   * @returns
+   * @returns {object[]}
    */
   search: (dto) => request.get("/resume/search", dto),
 };
