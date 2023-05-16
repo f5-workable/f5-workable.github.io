@@ -4,21 +4,21 @@ const companyBoard = {
   /**
    *
    * @param {object} dto 입력받은 기업정보
-   * @returns
+   * @returns 
    */
   add: (dto) => request.post("/jobinfo", dto),
 
   /**
    *
    * @param {*} id 구직공고 시퀀스 아이디
-   * @returns
+   * @returns {object}
    */
   retrieve: (id) => request.get(`/jobinfo/${id}`),
 
   /**
    *
    * @param {object} dto employment_type(고용형태) + payment_type(임금형태) + temp_address(지역) + tempcompany_type(기업형태) + tempjob_type(검색형태) + keyword(검색어)
-   * @returns
+   * @returns {object[]}
    */
   search: (dto) => request.get("/jobinfo/search", dto),
 
