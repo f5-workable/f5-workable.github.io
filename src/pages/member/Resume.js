@@ -45,12 +45,12 @@ const Resume = () => {
             </button>
  
             {modalOpen && (
-              <div className="fixed inset-0 bg-gray-500 bg-opacity-50 flex justify-center items-center">
+              <div className="fixed inset-0 bg-gray-500 bg-opacity-50 flex justify-center items-center z-10">
                 <div className="w-1/2 h-auto bg-white rounded-lg p-10 overflow-y-auto">
                   <h2 className="text-xl font-bold mb-5 text-center">대표 이력서 선택</h2>
                   {resumeList.map((_, index) => (
                     <div
-                      className={`p-4 rounded-md cursor-pointer hover:bg-gray-200 ${selectedResumeIndex === index ? 'bg-gray-200' : ''}`}
+                      className={`p-4 my-2 rounded-md cursor-pointer border border-solid hover:bg-gray-500 hover:text-white ${selectedResumeIndex === index ? 'bg-gray-500 text-white' : ''}`}
                       key={index}
                       onClick={() => handleResumeSelect(index)}
                     >

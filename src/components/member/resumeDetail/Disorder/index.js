@@ -2,7 +2,7 @@ import SubDisorder from "./SubDisorder";
 
 const Disorder = () => {
     return(
-        <span className=" pt-2 grid grid-cols-4 gap-4">
+        <span className=" pt-2 grid grid-cols-5 gap-4">
             <SubDisorder value="간장애" />
             <SubDisorder value="뇌병변장애" />
             <SubDisorder value="뇌전증장애" />
