@@ -6,6 +6,7 @@ import Search from "../pages/company/Search";
 import ApplicantStatus from "../pages/company/ApplicantStatus";
 import UserDetail from "../pages/company/UserDetail";
 import UserDetailModify from "../pages/company/UserDetailModify";
+import ResumeRead from "../pages/company/ResumeRead";
 
 const CompanyRouter = ({ handleIsCompany }) => {
   return (
@@ -26,6 +27,7 @@ const CompanyRouter = ({ handleIsCompany }) => {
         <Route path="/jobs/:jobId" element={<span>상세페이지</span>} />
         <Route path="/userdetail" element={<UserDetail />} />
         <Route path="/userdetailmodify" element={<UserDetailModify />} />
+        <Route path="/resume/:resumeId" element={<ResumeRead />} />
       </Route>
     </Routes>
   );
