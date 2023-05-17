@@ -1,7 +1,10 @@
+import { useState } from "react";
 import Profile from "../../components/company/ProfileImg";
 import { Link } from 'react-router-dom';
 
 const SignUpPer = () => {
+  const [gender, setGender] = useState("남자");
+
   return (
       <div className=" w-4/5 mx-auto shsadow-2xl flex content-center p-10 flex-col my-24">
         <div className="text-center text-3xl font-bold">회원가입</div>
@@ -69,10 +72,73 @@ const SignUpPer = () => {
                   <div className="flex flex-row my-1.5 ">
                     <div className=" w-52 flex items-center">
                       <label htmlFor="id" className=" px-5 font-bold text-base">
+                          성별
+                      </label>
+                    </div>
+                    {gender === "남자" ? (
+                          <>
+                      <button className="h-8 w-20 bg-gray-400 font-bold text-md"
+                          onClick={() => setGender("남자")}>
+                          남자
+                      </button>
+                      <button className="h-8 w-20 bg-gray-200 font-bold text-md"
+                          onClick={() => setGender("여자")}>
+                          여자
+                      </button>
+                      </>
+                      )
+                        : (
+                      <>
+                      <button className="h-8 w-20 bg-gray-200 font-bold text-md"
+                          onClick={() => setGender("남자")}>
+                          남자
+                      </button>
+                      <button className="h-8 w-20 bg-gray-400 font-bold text-md"
+                          onClick={() => setGender("여자")}>
+                          여자
+                      </button>
+                      </>)
+                    }
+                  </div>
+                  <hr className="border border-gray-100"></hr>
+
+                  <div className="flex flex-row my-1.5">
+                    <div className="w-52 flex items-center">
+                      <label htmlFor="id" className="px-5 font-bold text-base">
+                        생년월일
+                      </label>
+                    </div>
+                    <div className="flex flex-row justify-start items-center">
+                      <select id="year" className="px-2 mr-3 border-2">
+                        <option className="text-center">년</option>
+                        {[...Array(100)].map((_, index) => (
+                          <option key={index} value={2023 - index}>{2023 - index}년</option>
+                        ))}
+                      </select>
+                      <select id="month" className="px-2 mr-3 border-2">
+                        <option className="text-center">월</option>
+                        {[...Array(12)].map((_, index) => (
+                          <option key={index} value={index + 1}>{index + 1}월</option>
+                        ))}
+                      </select>
+                      <select id="day" className="px-2 border-2">
+                        <option className="text-center">일</option>
+                        {[...Array(31)].map((_, index) => (
+                          <option key={index} value={index + 1}>{index + 1}일</option>
+                        ))}
+                      </select>
+                    </div>
+                  </div>
+
+                  <hr className="border border-gray-100"></hr>
+
+                  <div className="flex flex-row my-1.5 ">
+                    <div className=" w-52 flex items-center">
+                      <label htmlFor="id" className=" px-5 font-bold text-base">
                           연락처
                       </label>
                     </div>
-                    <div className="flex flex-row justify-start">
+                    <div className="flex flex-row justify-start ">
                       <input id="registerNumber" className=" w-20 h-8 p-2 border-2 flex justify-center text-center" />
                       <p className=" text-3xl mx-3">-</p>
                       <input id="registerNumber" className=" w-20 h-8 p-2 border-2 flex justify-center text-center" />
