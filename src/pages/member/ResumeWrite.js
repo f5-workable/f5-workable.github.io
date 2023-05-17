@@ -21,59 +21,27 @@ const ResumeWrite = () => {
                         <div className="px-5 flex flex-col justify-center">
                             <input className="pb-10 text-3xl font-bold bg-white" value={"이예림"} disabled />
                             <div className="flex flex-raw">
-                                <label className="pr-5 text-xl font-bold">연락처</label>
+                                <label className=" w-20 text-xl font-bold">성별</label>
+                                <input className=" text-xl font-bold italic bg-white" type="phone" value={"여자"} disabled />
+                            </div>
+                            <div className="flex flex-raw">
+                                <label className=" w-20 text-xl font-bold">나이</label>
+                                <p className="pr-5 text-xl font-bold italic">만</p>
+                                <input className=" w-8 text-xl font-bold italic bg-white" type="phone" value={"23"} disabled />
+                                <p className="text-xl font-bold italic">세</p>
+                            </div>
+                            <div className="flex flex-raw">
+                                <label className=" w-20 text-xl font-bold">연락처</label>
                                 <input className=" text-xl font-bold italic bg-white" type="phone" value={"010-3047-5988"} disabled />
                             </div>
                             <div className="flex flex-raw">
-                                <label className="pr-5 text-xl font-bold">이메일</label>
+                                <label className=" w-20 text-xl font-bold">이메일</label>
                                 <input className="text-xl font-bold italic bg-white" type="email" value={"yerim1215jg@naver.com"} disabled />
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-                <div className="px-40 py-10">
-                    <label className="px-10 text-xl font-bold">개인정보</label>
-                    <hr className="bg-black h-0.5"></hr>
-
-                    <div className="pt-5 flex items-start">
-                        <label className="w-32 py-2 text-center font-bold text-md">성별</label>
-                    
-                        {gender === "남자" ? (
-                            <>
-                        <button className="h-8 w-20 bg-gray-400 font-bold text-md"
-                            onClick={() => setGender("남자")}>
-                            남자
-                        </button>
-                        <button className="h-8 w-20 bg-gray-200 font-bold text-md"
-                            onClick={() => setGender("여자")}>
-                            여자
-                        </button>
-                        </>
-                        )
-                         : (
-                        <>
-                        <button className="h-8 w-20 bg-gray-200 font-bold text-md"
-                            onClick={() => setGender("남자")}>
-                            남자
-                        </button>
-                        <button className="h-8 w-20 bg-gray-400 font-bold text-md"
-                            onClick={() => setGender("여자")}>
-                            여자
-                        </button>
-                        </>)
-                        }
-                    </div>
-                    <hr className="mt-5 border border-gray-100"></hr>
-
-                    <div className="pt-5 flex items-center">
-                        <label className="w-32 py-2 text-center font-bold text-md">나이</label>
-                        <input type="number" className=" w-14 p-2 mr-2 border-2 text-center" min={1} />
-                        세
-                    </div>
-                    <hr className="mt-5 border border-gray-100"></hr>
-                </div>
-
                 <div className="px-40 py-10">
                     <label className="px-10 text-xl font-bold">경력</label>
                     <hr className="bg-black h-0.5"></hr>
@@ -132,7 +100,7 @@ const ResumeWrite = () => {
 
                     <div className="pt-5 flex items-center">
                         <label for="wage" class="w-32 py-2 text-center font-bold text-md">희망임금</label>
-                        <div className="w-full">
+                        <div className="w-[500px]">
                             <div>
                                 <input type="radio" id="hourly" name="wage" value="hourly" />
                                 <label for="hourly" className="px-3">시급</label>
@@ -143,7 +111,7 @@ const ResumeWrite = () => {
                                 <input type="radio" id="annual" name="wage" value="annual" />
                                 <label for="annual" className="px-3">연봉</label>
                             </div>
-                            <input type="number" className=" w-1/2 mt-5 mr-2 p-2 border-2 text-right" min={1000} />원
+                            <input type="number" className=" w-4/5 mt-5 mr-2 p-2 border-2 text-right" min={1000} />원
                         </div>
                     </div>
                     <hr className="mt-5 border border-gray-100"></hr>

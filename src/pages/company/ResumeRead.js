@@ -50,6 +50,16 @@ const ResumeRead = () => {
                         <div className="px-5 flex flex-col justify-center">
                             <input className="pb-10 text-3xl font-bold bg-white" value={memberName} disabled />
                             <div className="flex flex-raw">
+                                <label className=" w-20 text-xl font-bold">성별</label>
+                                <input className=" text-xl font-bold italic bg-white" type="phone" value={"여자"} disabled />
+                            </div>
+                            <div className="flex flex-raw">
+                                <label className=" w-20 text-xl font-bold">나이</label>
+                                <p className="pr-5 text-xl font-bold italic">만</p>
+                                <input className=" w-8 text-xl font-bold italic bg-white" type="phone" value={"23"} disabled />
+                                <p className="text-xl font-bold italic">세</p>
+                            </div>
+                            <div className="flex flex-raw">
                                 <label className="pr-5 text-xl font-bold">연락처</label>
                                 <input className=" text-xl font-bold italic bg-white" type="phone" value={memberPhone} disabled />
                             </div>
