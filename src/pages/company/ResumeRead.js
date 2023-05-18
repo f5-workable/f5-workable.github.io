@@ -3,22 +3,23 @@ import { Link } from 'react-router-dom';
 import api from "../../api";
 
 const ResumeRead = () => {
-    const [resumeName, setResumeName] = useState();
-    const [memberName, setMemberName] = useState();
-    const [memberPhone, setMemberPhone] = useState();
-    const [memberEmail, setMemberEmail] = useState();
-    const [memberGender, setMemberGender] = useState();
-    const [memberAge, setMemberAge] = useState();
-    const [memberCareer, setMemberCareer] = useState();
-    const [memberCareerDetail, setMemberCareerDetail] = useState();
-    const [memberCareerPlace, setMemberCareerPlace] = useState();
-    const [memberCareerType, setMemberCareerType] = useState();
-    const [memberWageType, setMemberWageType] = useState();
-    const [memberWage, setMemberWage] = useState();
-    const [disabilityType, setDisabilityType] = useState();
-    const [severeCondition, setSevereCondition] = useState();
-    const [memberSelf, setMemberSelf] = useState();
-
+    const [resumeName, setResumeName] = useState("");
+    const [memberName, setMemberName] = useState("");
+    const [memberPhone, setMemberPhone] = useState("");
+    const [memberEmail, setMemberEmail] = useState("");
+    const [memberGender, setMemberGender] = useState("");
+    const [memberAge, setMemberAge] = useState("");
+    const [memberAcademic, serMemberAcademic] = useState("");
+    const [memberCareer, setMemberCareer] = useState("");
+    const [memberCareerDetail, setMemberCareerDetail] = useState("");
+    const [memberCareerPlace, setMemberCareerPlace] = useState([]);
+    const [memberCareerType, setMemberCareerType] = useState("");
+    const [memberWageType, setMemberWageType] = useState("");
+    const [memberWage, setMemberWage] = useState("");
+    const [disabilityType, setDisabilityType] = useState("");
+    const [severeCondition, setSevereCondition] = useState([]);
+    const [memberSelf, setMemberSelf] = useState("");
+  
     const getResumeNameByStatus = async () => {
         const { data } = await api.resume.retrieve(1);
         console.log(data);
@@ -90,12 +91,20 @@ const ResumeRead = () => {
             </div>
 
             <div className="px-40 py-10">
-                <label className="px-10 text-xl font-bold">경력</label>
+                <label className="px-10 text-xl font-bold">학력/경력</label>
                 <hr className="bg-black h-0.5"></hr>
 
                 <div className=" pt-5 flex items-center">
-                    <label className="w-32 py-2 text-center font-bold text-md">경력구분</label>
+                    <label className="w-32 py-2 text-center font-bold text-md">학력</label>
                     <div className="flex flex-col">
+                        <input className=" bg-white" value={memberAcademic} disabled />
+                    </div>
+                </div>
+                <hr className="mt-5 border border-gray-100"></hr>
+
+                <div className=" pt-5 flex items-center">
+                    <label className="w-32 py-2 text-center font-bold text-md">경력구분</label>
+                    <div className="w-10/12 flex flex-col">
                         <input className=" bg-white" value={memberCareer} disabled />
                         {memberCareer === "경력" ? 
                         (<div className=" pt-3">
@@ -154,7 +163,7 @@ const ResumeRead = () => {
 
                 <div className="pt-5 flex items-center">
                     <label className="w-32 py-2 text-center font-bold text-md">자기소개</label>
-                    <input type="text" className=" w-full h-48 p-2 bg-gray-100 " value={memberSelf} disabled />
+                    <input type="text" className=" w-10/12 h-48 p-2 bg-gray-100 " value={memberSelf} disabled />
                 </div>
                 <hr className="mt-5 border border-gray-100"></hr>
             </div>
