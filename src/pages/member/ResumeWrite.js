@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from 'react-router-dom';
 import Disorder from "../../components/member/resumeDetail/Disorder";
 import Location from "../../components/member/searchDetail/location";
@@ -22,6 +22,26 @@ const ResumeWrite = () => {
     const [severeCondition, setSevereCondition] = useState("중증");
     const [memberSelf, setMemberSelf] = useState("");
 
+    const getResumeNameByStatus = async () => {
+        const { data } = await api.resume.retrieve(1);
+        console.log(data);
+        setResumeName(data.title);
+        setMemberCareer(data.career === null ? "신입" : "경력");
+        setMemberCareerDetail(data.career === null ? null : data.career);
+        // setMemberCareerPlace("경기도 수원시");
+        // setMemberCareerPlace(data.place);
+        setMemberCareerType(data.job);
+        setMemberWageType(data.payment_type);
+        setMemberWage(data.payment);
+        setDisabilityType(data.ob_type);
+        setSevereCondition(data.disease);
+        setMemberSelf(data.pr === null ? "" : data.pr);
+    };
+
+    useEffect(() => {
+        getResumeNameByStatus();
+    }, []);
+
     const updateMemberResume = async () => {
         const { data } = await api.resume.update(1, { 
             r_id: 1,
@@ -34,7 +54,7 @@ const ResumeWrite = () => {
             payment: memberWage.length === 0 ? null : memberWage,
             ob_type: disabilityType.length === 0 ? null : disabilityType,
             disease: severeCondition === 0 ? null : severeCondition,
-            career: memberCareer.length === "신입" ? severeCondition : memberCareerDetail,
+            career: memberCareer.length === "신입" ? null : memberCareerDetail,
             pr: memberSelf.length === 0 ? null : memberSelf,
             title: resumeName.length === 0 ? null : resumeName,
         });
@@ -47,7 +67,7 @@ const ResumeWrite = () => {
             <div className="flex justify-center">
                 <div>
                     <input className="p-2 w-full h-auto text-xl font-bold bg-gray-100 placeholder:text-gray-400 placeholder:font-bold"
-                        placeholder="이력서 제목을 써주세요" onChange={(e) => setResumeName(e.target.value)}
+                        placeholder="이력서 제목을 써주세요" onChange={(e) => setResumeName(e.target.value)} value={resumeName}
                     />
 
                     <div className="py-10 flex flex-raw">
@@ -126,7 +146,7 @@ const ResumeWrite = () => {
                             </div>
                             <div className=" pt-3">
                                 <input type="text" className="p-2 w-full h-48 bg-gray-100 placeholder:text-gray-400 placeholder:font-bold"
-                                    placeholder="경력을 작성해주세요 (200자 이하로 작성)" onChange={(e) => setMemberCareerDetail(e.target.value)}
+                                    placeholder="경력을 작성해주세요 (200자 이하로 작성)" onChange={(e) => setMemberCareerDetail(e.target.value)} value={memberCareerDetail}
                                 />
                             </div>
                         </div>)
@@ -148,7 +168,7 @@ const ResumeWrite = () => {
                     <div className="pt-5 flex items-start">
                         <label className="w-32 py-2 text-center font-bold text-md">희망업직종</label>
                         <input type="text" className=" w-1/2 p-2 border-2 placeholder:text-gray-400 placeholder:font-bold placeholder:p-3"
-                            placeholder="희망하는 업직종을 작성해주세요" onChange={(e) => setMemberCareerType(e.target.value)} 
+                            placeholder="희망하는 업직종을 작성해주세요" onChange={(e) => setMemberCareerType(e.target.value)} value={memberCareerType}
                         />
                     </div>
                     <hr className="mt-5 border border-gray-100"></hr>
@@ -166,7 +186,8 @@ const ResumeWrite = () => {
                                 <input type="radio" id="annual" name="wage" value="annual" onClick={() => setMemberWageType("연봉")} />
                                 <label for="annual" className="px-3">연봉</label>
                             </div>
-                            <input className=" w-4/5 mt-5 mr-2 p-2 border-2 text-right" min={1000} onChange={(e) => setMemberWage(e.target.value)} />
+                            <input className=" w-4/5 mt-5 mr-2 p-2 border-2 text-right" min={1000} onChange={(e) => setMemberWage(e.target.value)}
+                                value={memberWage} />
                                 원
                         </div>
                     </div>
@@ -179,7 +200,7 @@ const ResumeWrite = () => {
 
                     <div className="pt-5 flex items-start">
                         <label className="w-32 py-2 text-center font-bold text-md">장애유형</label>
-                        <Disorder setState={setDisabilityType} />
+                        <Disorder state={disabilityType} setState={setDisabilityType} />
                     </div>
                     <hr className="mt-5 border border-gray-100"></hr>
 
@@ -221,7 +242,7 @@ const ResumeWrite = () => {
                     <div className="pt-5 flex items-start">
                         <label className="w-32 py-2 text-center font-bold text-md">자기소개</label>
                         <input type="text" className="p-2 w-10/12 h-48 bg-gray-100 placeholder:text-gray-400 placeholder:font-bold placeholder:p-3" 
-                            placeholder="200자 이하로 작성해주세요" onChange={(e) => setMemberSelf(e.target.value)}
+                            placeholder="200자 이하로 작성해주세요" onChange={(e) => setMemberSelf(e.target.value)} value={memberSelf}
                         />
                     </div>
                     <hr className="mt-5 border border-gray-100"></hr>

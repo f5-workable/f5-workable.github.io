@@ -19,7 +19,7 @@ const ResumeRead = () => {
     const [disabilityType, setDisabilityType] = useState("");
     const [severeCondition, setSevereCondition] = useState([]);
     const [memberSelf, setMemberSelf] = useState("");
-
+  
     const getResumeNameByStatus = async () => {
         const { data } = await api.resume.retrieve(1);
         console.log(data);
