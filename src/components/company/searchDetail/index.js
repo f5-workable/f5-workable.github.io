@@ -71,7 +71,7 @@ const SearchDetail = () => {
         <SeverityType state={severityType} setState={setSeverityType} />
         <CareerType state={careerType} setState={setCareerType} />
         <div className="mt-8 w-full mb-5">
-          <p className="block text-lg font-semibold mb-2">희망지역</p>
+          <p className="block text-lg font-mediums mb-2">희망지역</p>
           <Location state={location} setState={setLocation} />
         </div>
         <button

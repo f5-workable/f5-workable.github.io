@@ -37,7 +37,7 @@ const SeverityType = ({ state, setState }) => {
 
   return (
     <div className="mt-8">
-      <p className="block mb-2 text-lg font-semibold">중증여부</p>
+      <p className="block mb-2 text-lg font-medium">중증여부</p>
       <div className="flex items-center">
         <Checkbox
           value="중증여부전체"

@@ -37,7 +37,7 @@ const PaymentType = ({ state, setState }) => {
 
   return (
     <div>
-      <p className="block my-2 text-lg font-semibold mt-8">임금형태</p>
+      <p className="block my-2 text-lg font-medium mt-8">임금형태</p>
       <div className="flex items-center">
         <Checkbox value="임금형태전체" labelValue="전체" onChange={changePaymentType} defaultChecked />
         <Checkbox value="시급" labelValue="시급" onChange={changePaymentType} />
