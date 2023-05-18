@@ -37,7 +37,7 @@ const EmploymentType = ({ state, setState }) => {
 
   return (
     <div className="mt-8">
-      <p className="block mb-2 text-lg font-semibold">고용형태</p>
+      <p className="block mb-2 text-lg font-medium">고용형태</p>
       <div className="flex items-center">
         <Checkbox
           value="고용형태전체"

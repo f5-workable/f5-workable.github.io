@@ -37,7 +37,7 @@ const DisabilityType = ({ state, setState }) => {
 
   return (
     <div className="mt-8">
-      <p className="block mb-2 text-lg font-semibold">장애유형</p>
+      <p className="block mb-2 text-lg font-medium">장애유형</p>
       <div className="grid grid-cols-4">
         <Checkbox
           value="장애유형전체"

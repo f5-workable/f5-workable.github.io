@@ -37,7 +37,7 @@ const EducationType = ({ state, setState }) => {
 
   return (
     <div className="mt-8">
-      <p className="block mb-2 text-lg font-semibold">학력</p>
+      <p className="block mb-2 text-lg font-medium">학력</p>
       <div className="flex items-center">
         <Checkbox
           value="학력전체"

@@ -37,7 +37,7 @@ const CareerType = ({ state, setState }) => {
 
   return (
     <div className="mt-8">
-      <p className="block mb-2 text-lg font-semibold">경력</p>
+      <p className="block mb-2 text-lg font-medium">경력</p>
       <div className="flex items-center">
         <Checkbox
           value="경력전체"
