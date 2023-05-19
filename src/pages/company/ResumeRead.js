@@ -48,12 +48,12 @@ const ResumeRead = () => {
                             <input className="pb-10 text-3xl font-bold bg-white" value={memberName} disabled />
                             <div className="flex flex-raw">
                                 <label className=" w-20 text-xl font-bold">성별</label>
-                                <input className=" text-xl font-bold italic bg-white" type="phone" value={"여자"} disabled />
+                                <input className=" text-xl font-bold italic bg-white" type="phone" value={memberGender} disabled />
                             </div>
                             <div className="flex flex-raw">
                                 <label className=" w-20 text-xl font-bold">나이</label>
                                 <p className="pr-5 text-xl font-bold italic">만</p>
-                                <input className=" w-8 text-xl font-bold italic bg-white" type="phone" value={"23"} disabled />
+                                <input className=" w-8 text-xl font-bold italic bg-white" type="phone" value={memberAge} disabled />
                                 <p className="text-xl font-bold italic">세</p>
                             </div>
                             <div className="flex flex-raw">
@@ -148,7 +148,7 @@ const ResumeRead = () => {
             </div>
         
             <div className="flex justify-center">
-                <button className=" w-1/6 h-10 mx-5 text-lg font-bold bg-gray-200 hover:bg-gray-500 hover:text-white"><Link to={"/resume"}>이전</Link></button>
+                <button className=" w-1/6 h-10 mx-5 text-lg font-bold bg-gray-200 hover:bg-gray-500 hover:text-white"><Link to={"/"}>이전</Link></button>
             </div>
         </div>
     );
