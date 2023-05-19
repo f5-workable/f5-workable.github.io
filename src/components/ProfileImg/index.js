@@ -16,7 +16,7 @@ const Profile = () => {
   };
 
   return (
-    <form method="post" enctype="multipart/form-data">
+    <div>
       <input
         type="file"
         id="chooseFile"
@@ -24,8 +24,8 @@ const Profile = () => {
         accept="image/*"
         onChange={handleFileInputChange}
       />
-      {previewUrl && <img src={previewUrl} alt="Preview" />}
-    </form>
+      {previewUrl && <img src={previewUrl} alt="Preview" className='w-1/2' />}
+    </div>
   );
 };
 

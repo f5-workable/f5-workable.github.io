@@ -17,14 +17,18 @@ import CompanyDetail from "../pages/member/CompanyDetail";
 import UserTypeSelectionBeforeLogin from "../pages/auth/UserTypeSelectionBeforeLogin";
 import UserTypeSelectionBeforeSignUp from "../pages/auth/UserTypeSelectionBeforeSignUp";
 
-const MemberRouter = ({ handleIsCompany }) => {
+const MemberRouter = ({ toggleIsCompany, isLogined, setIsLogined }) => {
   return (
     <Routes>
       <Route path="*" element={<Navigate to="/" replace />} />
       <Route
         element={
           <>
-            <Header handleIsCompany={handleIsCompany} />
+            <Header
+              toggleIsCompany={toggleIsCompany}
+              isLogined={isLogined}
+              setIsLogined={setIsLogined}
+            />
             <Outlet />
           </>
         }
@@ -49,8 +53,11 @@ const MemberRouter = ({ handleIsCompany }) => {
             </>
           }
         />
-        <Route path="/login/member" element={<LoginPer />} />
-        <Route path="/login/company" element={<LoginCom />} />
+        <Route path="/login/member" element={<LoginPer setIsLogined={setIsLogined} />} />
+        <Route
+          path="/login/company"
+          element={<LoginCom toggleIsCompany={toggleIsCompany} setIsLogined={setIsLogined} />}
+        />
         <Route path="/signup/member" element={<SignUpPer />} />
         <Route path="/signup/company" element={<SignUpCom />} />
         <Route path="/signup" element={<UserTypeSelectionBeforeSignUp />} />

@@ -2,7 +2,7 @@ import { Bar } from "react-chartjs-2";
 import "chart.js/auto";
 import ChartDataLabels from "chartjs-plugin-datalabels";
 
-const BarChart = ({ labels, datasets, title }) => {
+const HorizontalBarChart = ({ labels, datasets, title }) => {
   const data = {
     labels: labels,
     datasets: [
@@ -22,7 +22,7 @@ const BarChart = ({ labels, datasets, title }) => {
       padding: {
         top: 10,
         left: 20,
-        right: 40,
+        right: 20,
         bottom: 30,
       },
     },
@@ -80,4 +80,4 @@ const BarChart = ({ labels, datasets, title }) => {
   return <Bar data={data} options={options} plugins={[ChartDataLabels]} />;
 };
 
-export default BarChart;
+export default HorizontalBarChart;

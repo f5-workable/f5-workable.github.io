@@ -8,13 +8,13 @@ import UserDetail from "../pages/company/UserDetail";
 import UserDetailModify from "../pages/company/UserDetailModify";
 import ResumeRead from "../pages/company/ResumeRead";
 
-const CompanyRouter = ({ handleIsCompany }) => {
+const CompanyRouter = ({ toggleIsCompany, isLogined, setIsLogined }) => {
   return (
     <Routes>
       <Route
         element={
           <>
-            <CompanyHeader handleIsCompany={handleIsCompany} />
+            <CompanyHeader toggleIsCompany={toggleIsCompany} isLogined={isLogined} setIsLogined={setIsLogined} />
             <Outlet />
             <Footer />
           </>
