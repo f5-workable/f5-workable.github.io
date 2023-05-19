@@ -1,9 +1,11 @@
 import api from "../../api";
+import { useState } from "react";
 import Profile from "../../components/ProfileImg";
 import { Link, useNavigate } from "react-router-dom";
 
 const SignUpPer = () => {
   const navigate = useNavigate();
+  const [gender, setGender] = useState("남자");
 
   const handleSignUp = async (e) => {
     e.preventDefault();
@@ -12,18 +14,21 @@ const SignUpPer = () => {
     const password = data.get("pw");
     const pwCheck = data.get("pwCheck");
     const name = data.get("name");
+    const year = data.get("year");
+    const month = data.get("month");
+    const day = data.get("day");
     const phoneNumber1 = data.get("phoneNumber1");
     const phoneNumber2 = data.get("phoneNumber2");
     const phoneNumber3 = data.get("phoneNumber3");
     const email = data.get("email");
-    const birth = data.get("birth");
     const profil = data.get("chooseFile");
     if (password === pwCheck) {
       navigate("/login/member");
       await api.member.signUp({
         id,
         password,
-        birth,
+        birth: year + "-" + month + "-" + day,
+        gender,
         name,
         email,
         phone: phoneNumber1 + "-" + phoneNumber2 + "-" + phoneNumber3,
@@ -33,6 +38,7 @@ const SignUpPer = () => {
       alert("비밀번호가 서로 다릅니다.");
     }
   };
+
   return (
     <div className=" w-4/5 mx-auto shsadow-2xl flex content-center p-10 flex-col my-24">
       <div className="text-center text-3xl font-bold">회원가입</div>
@@ -113,6 +119,77 @@ const SignUpPer = () => {
 
             <div className="flex flex-row my-1.5 ">
               <div className=" w-52 flex items-center">
+                <label className=" px-5 font-bold text-base">성별</label>
+              </div>
+              {gender === "남자" ? (
+                <>
+                  <button
+                    className="h-8 w-20 bg-gray-400 font-bold text-md"
+                    onClick={() => setGender("남자")}
+                  >
+                    남자
+                  </button>
+                  <button
+                    className="h-8 w-20 bg-gray-200 font-bold text-md"
+                    onClick={() => setGender("여자")}
+                  >
+                    여자
+                  </button>
+                </>
+              ) : (
+                <>
+                  <button
+                    className="h-8 w-20 bg-gray-200 font-bold text-md"
+                    onClick={() => setGender("남자")}
+                  >
+                    남자
+                  </button>
+                  <button
+                    className="h-8 w-20 bg-gray-400 font-bold text-md"
+                    onClick={() => setGender("여자")}
+                  >
+                    여자
+                  </button>
+                </>
+              )}
+            </div>
+            <hr className="border border-gray-100"></hr>
+
+            <div className="flex flex-row my-1.5">
+              <div className="w-52 flex items-center">
+                <label className="px-5 font-bold text-base">생년월일</label>
+              </div>
+              <div className="flex flex-row justify-start items-center">
+                <select id="year" name="year" className="px-2 mr-3 border-2">
+                  <option className="text-center">년</option>
+                  {[...Array(100)].map((_, index) => (
+                    <option key={index} value={2023 - index}>
+                      {2023 - index}년
+                    </option>
+                  ))}
+                </select>
+                <select id="month" name="month" className="px-2 mr-3 border-2">
+                  <option className="text-center">월</option>
+                  {[...Array(12)].map((_, index) => (
+                    <option key={index} value={index + 1}>
+                      {index + 1}월
+                    </option>
+                  ))}
+                </select>
+                <select id="day" name="day" className="px-2 border-2">
+                  <option className="text-center">일</option>
+                  {[...Array(31)].map((_, index) => (
+                    <option key={index} value={index + 1}>
+                      {index + 1}일
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </div>
+            <hr className="border border-gray-100"></hr>
+
+            <div className="flex flex-row my-1.5 ">
+              <div className=" w-52 flex items-center">
                 <label htmlFor="phoneNumber1" className=" px-5 font-bold text-base">
                   연락처
                 </label>
@@ -161,22 +238,6 @@ const SignUpPer = () => {
                 type="email"
                 id="email"
                 name="email"
-                className=" w-[25rem] h-8 p-2 border-2"
-                required
-              />
-            </div>
-            <hr className="border border-gray-100"></hr>
-
-            <div className="flex flex-row my-1.5 ">
-              <div className=" w-52 flex items-center">
-                <label htmlFor="birth" className=" px-5 font-bold text-base">
-                  생년월일
-                </label>
-              </div>
-              <input
-                type="date"
-                id="birth"
-                name="birth"
                 className=" w-[25rem] h-8 p-2 border-2"
                 required
               />

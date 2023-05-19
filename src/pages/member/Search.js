@@ -25,7 +25,14 @@ const Search = () => {
       tempjob_type: keywordType.length === 0 ? null : keywordType,
       keyword: keyword.length === 0 ? null : keyword,
     });
-    console.log(data);
+    console.log(
+      employmentType.length === 0 ? null : employmentType,
+      paymentType.length === 0 ? null : paymentType,
+      location.length === 0 ? null : location,
+      companyType.length === 0 ? null : companyType,
+      keywordType.length === 0 ? null : keywordType,
+      keyword.length === 0 ? null : keyword
+    );
   };
 
   return (
