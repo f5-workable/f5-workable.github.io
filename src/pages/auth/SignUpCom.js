@@ -85,9 +85,9 @@ const SignUpCom = () => {
                     </div>
                     <div className="flex flex-row justify-start">
                       <input id="registerNumber" className=" w-20 h-8 p-2 border-2 flex justify-center text-center" />
-                      <p className=" text-3xl mx-3">-</p>
+                      <p className=" text-xl mx-3">-</p>
                       <input id="registerNumber" className=" w-20 h-8 p-2 border-2 flex justify-center text-center" />
-                      <p className=" text-3xl mx-3">-</p>
+                      <p className=" text-xl mx-3">-</p>
                       <input id="registerNumber" className=" w-20 h-8 p-2 border-2 flex justify-center text-center" />
                     </div>
                   </div>
@@ -101,9 +101,9 @@ const SignUpCom = () => {
                     </div>
                     <div className="flex flex-row justify-start">
                       <input id="registerNumber" className=" w-16 h-8 p-2 border-2 flex justify-center text-center" />
-                      <p className=" text-3xl mx-3">-</p>
+                      <p className=" text-xl mx-3">-</p>
                       <input id="registerNumber" className=" w-10 h-8 p-2 border-2 flex justify-center text-center" />
-                      <p className=" text-3xl mx-3">-</p>
+                      <p className=" text-xl mx-3">-</p>
                       <input id="registerNumber" className=" w-24 h-8 p-2 border-2 flex justify-center text-center" />
                     </div>
                   </div>
