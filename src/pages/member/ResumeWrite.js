@@ -22,7 +22,7 @@ const ResumeWrite = () => {
     const [severeCondition, setSevereCondition] = useState("중증");
     const [memberSelf, setMemberSelf] = useState("");
 
-    const getResumeNameByStatus = async () => {
+    const getMemberResume = async () => {
         const { data } = await api.resume.retrieve(1);
         console.log(data);
         setResumeName(data.title);
@@ -62,9 +62,9 @@ const ResumeWrite = () => {
         const { data } = await api.resume.delete(1);
         console.log(data);
     };
-    
+
     useEffect(() => {
-        getResumeNameByStatus();
+        getMemberResume();
     }, []);
 
     return (

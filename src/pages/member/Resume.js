@@ -9,12 +9,14 @@ const Resume = () => {
     const [resumeList, setResumeList] = useState([{}]);
     const [modalOpen, setModalOpen] = useState(false);
     const [selectedResumeIndex, setSelectedResumeIndex] = useState(null);
+
     const [resumeName, setResumeName] = useState("");
     // const [privateChecked, setPrivateChecked] = useState(false);
 
     const handleCreateClick = () => {
       if (resumeList.length < 3) {
         setResumeList([...resumeList, {}]);
+        addMemberResume();
       }
     };
 
@@ -31,6 +33,24 @@ const Resume = () => {
       const { data } = await api.resume.retrieve(1);
       console.log(data);
       setResumeName(data.title);
+    };
+
+    const addMemberResume = async () => {
+      const { data } = await api.resume.add({
+        r_id: 1,
+        age: null,
+        place: null,
+        // place: memberCareerPlace.length === 0 ? null : memberCareerPlace,
+        // education: memberAcademic.length === 0 ? null : memberAcademic,
+        job: null,
+        payment_type: null,
+        payment: null,
+        ob_type: null,
+        disease: null,
+        career: null,
+        pr: null,
+        title: null,
+      });
     };
 
     useEffect(() => {
@@ -67,7 +87,7 @@ const Resume = () => {
                       onClick={() => handleResumeSelect(index)}
                     >
                       {/* {resume.title} */}
-                      이력서 제목
+                      {resumeName}
                     </div>
                   ))}
                   <div className="flex justify-center">
