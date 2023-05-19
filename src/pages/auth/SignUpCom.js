@@ -143,7 +143,7 @@ const SignUpCom = () => {
                   className=" w-20 h-8 p-2 border-2 flex justify-center text-center"
                   required
                 />
-                <p className=" text-3xl mx-3">-</p>
+                <p className=" text-xl mx-3">-</p>
                 <input
                   type="tel"
                   minLength={3}
@@ -153,7 +153,7 @@ const SignUpCom = () => {
                   className=" w-20 h-8 p-2 border-2 flex justify-center text-center"
                   required
                 />
-                <p className=" text-3xl mx-3">-</p>
+                <p className=" text-xl mx-3">-</p>
                 <input
                   type="tel"
                   minLength={4}
@@ -180,14 +180,14 @@ const SignUpCom = () => {
                   className=" w-16 h-8 p-2 border-2 flex justify-center text-center"
                   required
                 />
-                <p className=" text-3xl mx-3">-</p>
+                <p className=" text-xl mx-3">-</p>
                 <input
                   id="registerNumber2"
                   name="registerNumber2"
                   className=" w-10 h-8 p-2 border-2 flex justify-center text-center"
                   required
                 />
-                <p className=" text-3xl mx-3">-</p>
+                <p className=" text-xl mx-3">-</p>
                 <input
                   id="registerNumber3"
                   name="registerNumber3"

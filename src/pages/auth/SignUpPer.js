@@ -204,7 +204,7 @@ const SignUpPer = () => {
                   className=" w-20 h-8 p-2 border-2 flex justify-center text-center"
                   required
                 />
-                <p className=" text-3xl mx-3">-</p>
+                <p className=" text-xl mx-3">-</p>
                 <input
                   type="tel"
                   minLength={3}
@@ -214,7 +214,7 @@ const SignUpPer = () => {
                   className=" w-20 h-8 p-2 border-2 flex justify-center text-center"
                   required
                 />
-                <p className=" text-3xl mx-3">-</p>
+                <p className=" text-xl mx-3">-</p>
                 <input
                   type="tel"
                   minLength={4}

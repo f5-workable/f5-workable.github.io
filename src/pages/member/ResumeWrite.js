@@ -22,7 +22,7 @@ const ResumeWrite = () => {
     const [severeCondition, setSevereCondition] = useState("중증");
     const [memberSelf, setMemberSelf] = useState("");
 
-    const getResumeNameByStatus = async () => {
+    const getMemberResume = async () => {
         const { data } = await api.resume.retrieve(1);
         console.log(data);
         setResumeName(data.title);
@@ -36,11 +36,8 @@ const ResumeWrite = () => {
         setDisabilityType(data.ob_type);
         setSevereCondition(data.disease);
         setMemberSelf(data.pr === null ? "" : data.pr);
+        console.log(data);
     };
-
-    useEffect(() => {
-        getResumeNameByStatus();
-    }, []);
 
     const updateMemberResume = async () => {
         const { data } = await api.resume.update(1, { 
@@ -59,7 +56,20 @@ const ResumeWrite = () => {
             title: resumeName.length === 0 ? null : resumeName,
         });
         console.log(data);
+        window.location.href = "/resume";
     };
+
+    const deleteMemberResume = async () => {
+        const confirmed = window.confirm("정말로 삭제하시겠습니까?");
+        if (confirmed) {
+          const { data } = await api.resume.delete(1);
+          console.log(data);
+        }
+      };      
+
+    useEffect(() => {
+        getMemberResume();
+    }, []);
 
     return (
         <div className=" p-12 h-auto">
@@ -104,13 +114,13 @@ const ResumeWrite = () => {
                         <label for="wage" class="w-32 py-2 text-center font-bold text-md">학력</label>
                         <div className="w-[500px]">
                             <div>
-                                <input type="radio" id="high" name="academic" value="high" onClick={() => serMemberAcademic("고졸")} />
+                                <input type="radio" id="high" name="academic" value="high" onClick={() => serMemberAcademic("고졸")} checked={memberAcademic==="고졸"} />
                                 <label for="high" className="px-3">고졸</label>
-                                <input type="radio" id="univer" name="academic" value="univer" onClick={() => serMemberAcademic("대졸")} />
+                                <input type="radio" id="univer" name="academic" value="univer" onClick={() => serMemberAcademic("대졸")} checked={memberAcademic==="대졸"} />
                                 <label for="univer" className="px-3">대졸</label>
-                                <input type="radio" id="univer2" name="academic" value="univer2" onClick={() => serMemberAcademic("초대졸")} />
+                                <input type="radio" id="univer2" name="academic" value="univer2" onClick={() => serMemberAcademic("초대졸")} checked={memberAcademic==="초대졸"} />
                                 <label for="univer2" className="px-3">초대졸</label>
-                                <input type="radio" id="master" name="academic" value="master" onClick={() => serMemberAcademic("석사")} />
+                                <input type="radio" id="master" name="academic" value="master" onClick={() => serMemberAcademic("석사")} checked={memberAcademic==="석사"} />
                                 <label for="master" className="px-3">석사</label>
                             </div>
                         </div>
@@ -177,13 +187,13 @@ const ResumeWrite = () => {
                         <label for="wage" class="w-32 py-2 text-center font-bold text-md">희망임금</label>
                         <div className="w-[500px]">
                             <div>
-                                <input type="radio" id="hourly" name="wage" value="hourly" onClick={() => setMemberWageType("시급")} />
+                                <input type="radio" id="hourly" name="wage" value="hourly" onClick={() => setMemberWageType("시급")} checked={memberWageType==="시급"} />
                                 <label for="hourly" className="px-3">시급</label>
-                                <input type="radio" id="daily" name="wage" value="daily" onClick={() => setMemberWageType("일급")} />
+                                <input type="radio" id="daily" name="wage" value="daily" onClick={() => setMemberWageType("일급")} checked={memberWageType==="일급"} />
                                 <label for="daily" className="px-3">일급</label>
-                                <input type="radio" id="monthly" name="wage" value="monthly" onClick={() => setMemberWageType("월급")} />
+                                <input type="radio" id="monthly" name="wage" value="monthly" onClick={() => setMemberWageType("월급")} checked={memberWageType==="월급"} />
                                 <label for="monthly" className="px-3">월급</label>
-                                <input type="radio" id="annual" name="wage" value="annual" onClick={() => setMemberWageType("연봉")} />
+                                <input type="radio" id="annual" name="wage" value="annual" onClick={() => setMemberWageType("연봉")} checked={memberWageType==="연봉"} />
                                 <label for="annual" className="px-3">연봉</label>
                             </div>
                             <input className=" w-4/5 mt-5 mr-2 p-2 border-2 text-right" min={1000} onChange={(e) => setMemberWage(e.target.value)}
@@ -251,7 +261,7 @@ const ResumeWrite = () => {
             <div className="flex justify-center">
                 <button className=" w-1/6 h-10 mx-5 text-lg font-bold bg-gray-200 hover:bg-gray-500 hover:text-white"><Link to={"/resume"}>작성 취소</Link></button>
                 <button className=" w-1/6 h-10 mx-5 text-lg font-bold bg-orange-200 hover:bg-orange-400 hover:text-white" onClick={updateMemberResume}>이력서 작성 완료</button>
-                <button className=" w-1/6 h-10 mx-5 text-lg font-bold bg-red-300 hover:bg-red-500 hover:text-white">삭제</button>
+                <button className=" w-1/6 h-10 mx-5 text-lg font-bold bg-red-300 hover:bg-red-500 hover:text-white" onClick={deleteMemberResume}>삭제</button>
             </div>
         </div>
     );

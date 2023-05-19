@@ -1,18 +1,22 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from 'react-router-dom';
 import { FaCrown } from "react-icons/fa";
 // import Private from "../../components/member/resumeDetail/Private";
 import { BsFileEarmarkPlus, BsChevronRight } from "react-icons/bs";
+import api from "../../api";
 
 const Resume = () => {
     const [resumeList, setResumeList] = useState([{}]);
     const [modalOpen, setModalOpen] = useState(false);
     const [selectedResumeIndex, setSelectedResumeIndex] = useState(null);
+
+    const [resumeName, setResumeName] = useState("");
     // const [privateChecked, setPrivateChecked] = useState(false);
 
     const handleCreateClick = () => {
       if (resumeList.length < 3) {
         setResumeList([...resumeList, {}]);
+        addMemberResume();
       }
     };
 
@@ -24,6 +28,33 @@ const Resume = () => {
       setSelectedResumeIndex(index);
       setModalOpen(false);
     };
+
+    const getResumeNameByStatus = async () => {
+      const { data } = await api.resume.retrieve(1);
+      console.log(data);
+      setResumeName(data.title);
+    };
+
+    const addMemberResume = async () => {
+      const { data } = await api.resume.add({
+        age: null,
+        place: null,
+        // place: memberCareerPlace.length === 0 ? null : memberCareerPlace,
+        // education: memberAcademic.length === 0 ? null : memberAcademic,
+        job: null,
+        payment_type: null,
+        payment: null,
+        ob_type: null,
+        disease: null,
+        career: null,
+        pr: null,
+        title: null,
+      });
+    };
+
+    useEffect(() => {
+      getResumeNameByStatus();
+    }, []);
 
     return (
       <div className="p-10 flex flex-col bg-gray-50 h-auto">
@@ -55,7 +86,7 @@ const Resume = () => {
                       onClick={() => handleResumeSelect(index)}
                     >
                       {/* {resume.title} */}
-                      이력서 제목
+                      {resumeName}
                     </div>
                   ))}
                   <div className="flex justify-center">
@@ -90,7 +121,7 @@ const Resume = () => {
                   {selectedResumeIndex === index ? (<FaCrown className="absolute text-yellow-400 text-[3.25rem]" />) : null}
                   <img src="/images/interview.PNG" alt="interview" loading="lazy" />
                   <div className="mt-6 flex justify-between items-center">
-                    <div className="truncate font-bold text-lg">이력서 제목</div>
+                    <div className="truncate font-bold text-lg">{resumeName}</div>
                     <BsChevronRight />
                   </div>
                 </div>

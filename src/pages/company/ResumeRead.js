@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import api from "../../api";
 
 const ResumeRead = () => {
-    const [resumeName, setResumeName] = useState("");
     const [memberName, setMemberName] = useState("");
     const [memberPhone, setMemberPhone] = useState("");
     const [memberEmail, setMemberEmail] = useState("");
@@ -23,7 +22,6 @@ const ResumeRead = () => {
     const getResumeNameByStatus = async () => {
         const { data } = await api.resume.retrieve(1);
         console.log(data);
-        setResumeName(data.title);
         setMemberCareer(data.career === null ? "신입" : "경력");
         setMemberCareerDetail(data.career);
         setMemberCareerPlace(data.place);
@@ -44,20 +42,18 @@ const ResumeRead = () => {
             <div className=" pb-12 block text-center text-3xl font-bold">이력서</div>
             <div className="flex justify-center">
                 <div>
-                    <input className="p-2 w-full h-auto text-xl font-bold bg-gray-100" value={resumeName} disabled />
-
                     <div className="py-10 flex flex-raw">
                         <div className="bg-gray-300 w-48 h-64"></div>
                         <div className="px-5 flex flex-col justify-center">
                             <input className="pb-10 text-3xl font-bold bg-white" value={memberName} disabled />
                             <div className="flex flex-raw">
                                 <label className=" w-20 text-xl font-bold">성별</label>
-                                <input className=" text-xl font-bold italic bg-white" type="phone" value={"여자"} disabled />
+                                <input className=" text-xl font-bold italic bg-white" type="phone" value={memberGender} disabled />
                             </div>
                             <div className="flex flex-raw">
                                 <label className=" w-20 text-xl font-bold">나이</label>
                                 <p className="pr-5 text-xl font-bold italic">만</p>
-                                <input className=" w-8 text-xl font-bold italic bg-white" type="phone" value={"23"} disabled />
+                                <input className=" w-8 text-xl font-bold italic bg-white" type="phone" value={memberAge} disabled />
                                 <p className="text-xl font-bold italic">세</p>
                             </div>
                             <div className="flex flex-raw">
@@ -71,23 +67,6 @@ const ResumeRead = () => {
                         </div>
                     </div>
                 </div>
-            </div>
-            <div className="px-40 py-10">
-                <label className="px-10 text-xl font-bold">개인정보</label>
-                <hr className="bg-black h-0.5"></hr>
-
-                <div className="pt-5 flex items-center">
-                    <label className="w-32 py-2 text-center font-bold text-md">성별</label>
-                    <input className="bg-white" value={memberGender} disabled />
-                </div>
-                <hr className="mt-5 border border-gray-100"></hr>
-
-                <div className="pt-5 flex items-center">
-                    <label className="w-32 py-2 text-center font-bold text-md">나이</label>
-                    <input type="number" className=" w-14 bg-white text-left" value={memberAge} disabled />
-                    세
-                </div>
-                <hr className="mt-5 border border-gray-100"></hr>
             </div>
 
             <div className="px-40 py-10">
@@ -169,7 +148,7 @@ const ResumeRead = () => {
             </div>
         
             <div className="flex justify-center">
-                <button className=" w-1/6 h-10 mx-5 text-lg font-bold bg-gray-200 hover:bg-gray-500 hover:text-white"><Link to={"/resume"}>이전</Link></button>
+                <button className=" w-1/6 h-10 mx-5 text-lg font-bold bg-gray-200 hover:bg-gray-500 hover:text-white"><Link to={"/"}>이전</Link></button>
             </div>
         </div>
     );
