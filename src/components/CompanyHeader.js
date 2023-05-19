@@ -1,18 +1,16 @@
 import { Link } from "react-router-dom";
 import { MdSearch } from "react-icons/md";
-import { useEffect, useState } from "react";
 
-const CompanyHeader = ({ handleIsCompany }) => {
-  const [isLogined, setIsLogined] = useState(false);
-
+const CompanyHeader = ({ toggleIsCompany, isLogined, setIsLogined }) => {
   const handleProfileClick = () => {
     const dropdownMenu = document.querySelector("#dropdown-menu");
     dropdownMenu.classList.toggle("hidden");
   };
 
-  useEffect(() => {
-    setIsLogined(true);
-  }, []);
+  const handleLogout = () => {
+    handleProfileClick();
+    setIsLogined(false);
+  };
 
   return (
     <>
@@ -84,7 +82,7 @@ const CompanyHeader = ({ handleIsCompany }) => {
                       <li className="flex justify-center px-2 py-2">
                         <Link
                           to="/"
-                          onClick={handleProfileClick}
+                          onClick={handleLogout}
                           className="w-36 bg-red-400 text-white rounded-xl px-4 py-4 text-center"
                         >
                           로그아웃
@@ -105,7 +103,7 @@ const CompanyHeader = ({ handleIsCompany }) => {
                     to="/"
                     className="px-3 py-2 mr-3 h-10 border-2 border-solid border-neutral-200 rounded-3xl text-neutral-500"
                   >
-                    <button className="text-sm" onClick={handleIsCompany}>
+                    <button className="text-sm" onClick={toggleIsCompany}>
                       구직 서비스
                     </button>
                   </Link>
