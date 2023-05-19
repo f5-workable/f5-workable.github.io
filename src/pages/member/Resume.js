@@ -37,7 +37,6 @@ const Resume = () => {
 
     const addMemberResume = async () => {
       const { data } = await api.resume.add({
-        r_id: 1,
         age: null,
         place: null,
         // place: memberCareerPlace.length === 0 ? null : memberCareerPlace,
