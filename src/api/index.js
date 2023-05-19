@@ -3,6 +3,9 @@ import application from "./application";
 import applicant from "./applicant";
 import companyBoard from "./companyBoard";
 import resume from "./resume";
+import company from "./company";
+import member from "./member";
+import applicantStatistics from "./applicantStatistics";
 
 const baseURL = process.env.REACT_APP_API_BASE_URL;
 
@@ -35,6 +38,9 @@ const api = {
   applicant,
   companyBoard,
   resume,
+  applicantStatistics,
+  company,
+  member,
 };
 
 export default api;
