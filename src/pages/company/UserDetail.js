@@ -1,5 +1,5 @@
 import UserDetailList from "../../components/company/userDetail/UserDetailList";
-import UserDetailBar from "../../components/UserDetailBar";
+import UserDetailBar from "../../components/company/userDetail/UserDetailBar";
 
 const UserDetail = () => {
     return (

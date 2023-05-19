@@ -1,5 +1,5 @@
 import UserModify from "../../components/member/userDetail/UserModify";
-import UserDetailBar from "../../components/UserDetailBar";
+import UserDetailBar from "../../components/member/userDetail/UserDetailBar";
 
 const UserDetailModify = () => {
     return(

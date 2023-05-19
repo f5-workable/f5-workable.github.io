@@ -39,7 +39,7 @@ const ResumeRead = () => {
 
     return (
         <div className=" p-12 h-auto">
-            <div className=" pb-12 block text-center text-3xl font-bold">이력서</div>
+            <div className=" pb-6 block text-center text-3xl font-bold">이력서</div>
             <div className="flex justify-center">
                 <div>
                     <div className="py-10 flex flex-raw">
