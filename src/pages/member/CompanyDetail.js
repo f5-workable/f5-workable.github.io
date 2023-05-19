@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { MdBookmark, MdBookmarkBorder } from "react-icons/md";
 import ResumeSelectModal from "../../components/member/resumeSelectModal";
 import KakaoMap from "../../components/member/KakaoMap";
 import PieChart from "../../components/member/charts/PieChart";
-import BarChart from "../../components/member/charts/BarChart";
+import HorizontalBarChart from "../../components/member/charts/HorizontalBarChart";
+import VerticalBarChart from "../../components/member/charts/VerticalBarChart";
+import api from "../../api";
 
 const CompanyDetail = () => {
   const [isBookmark, setIsBookmark] = useState(false);
@@ -13,6 +15,15 @@ const CompanyDetail = () => {
   const toggleIsBookmark = () => {
     setIsBookmark((prev) => !prev);
   };
+
+  const getApplicantStatistics = async () => {
+    const { data } = api.applicantStatistics.retrieve(1);
+    console.log(data);
+  };
+
+  useEffect(() => {
+    getApplicantStatistics();
+  }, []);
 
   return (
     <>
@@ -87,7 +98,7 @@ const CompanyDetail = () => {
                       </p>
                     </div>
                     <div className="w-full h-full border border-neutral-300">
-                      <BarChart
+                      <HorizontalBarChart
                         labels={[
                           "25세 이하",
                           "26세~35세",
@@ -101,16 +112,23 @@ const CompanyDetail = () => {
                       />
                     </div>
                     <div className="w-full h-full border border-neutral-300">
-                      <PieChart
+                      <VerticalBarChart
                         labels={["남자", "여자"]}
                         datasets={[12, 19]}
+                        backgroundColor={[
+                          "rgba(105, 175, 254, 0.7)",
+                          "rgba(253, 127, 142, 0.7)",
+                        ]}
+                        hoverBackgroundColor={[
+                          "rgba(105, 175, 254, 1)",
+                          "rgba(253, 127, 142, 1)",
+                        ]}
                         title="성별"
-                        setLegend={true}
                         setDataLabel={true}
                       />
                     </div>
                     <div className="w-full h-full border border-neutral-300">
-                      <BarChart
+                      <HorizontalBarChart
                         labels={["고졸", "대졸", "초대졸", "석사"]}
                         datasets={[7, 17, 5, 2]}
                         title="학력"
@@ -138,14 +156,19 @@ const CompanyDetail = () => {
                         ]}
                         datasets={[0, 0, 0, 1, 2, 1, 5, 0, 4, 5, 0, 5, 2, 1, 1, 2]}
                         title="장애유형"
-                        setLegend={false}
+                        setLegend={true}
                         setDataLabel={false}
                       />
                     </div>
                     <div className="w-full h-full border border-neutral-300">
-                      <PieChart
+                      <VerticalBarChart
                         labels={["경증", "중증"]}
                         datasets={[21, 10]}
+                        backgroundColor={["rgba(88, 182, 74, 0.8)", "rgba(252, 177, 92, 0.8)"]}
+                        hoverBackgroundColor={[
+                          "rgba(88, 182, 74, 1)",
+                          "rgba(252, 177, 92, 1)",
+                        ]}
                         title="중증여부"
                         setDataLabel={true}
                       />
