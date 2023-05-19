@@ -36,11 +36,8 @@ const ResumeWrite = () => {
         setDisabilityType(data.ob_type);
         setSevereCondition(data.disease);
         setMemberSelf(data.pr === null ? "" : data.pr);
+        console.log(data);
     };
-
-    useEffect(() => {
-        getResumeNameByStatus();
-    }, []);
 
     const updateMemberResume = async () => {
         const { data } = await api.resume.update(1, { 
@@ -60,6 +57,15 @@ const ResumeWrite = () => {
         });
         console.log(data);
     };
+
+    const deleteMemberResume = async () => {
+        const { data } = await api.resume.delete(1);
+        console.log(data);
+    };
+    
+    useEffect(() => {
+        getResumeNameByStatus();
+    }, []);
 
     return (
         <div className=" p-12 h-auto">
@@ -250,8 +256,8 @@ const ResumeWrite = () => {
             
             <div className="flex justify-center">
                 <button className=" w-1/6 h-10 mx-5 text-lg font-bold bg-gray-200 hover:bg-gray-500 hover:text-white"><Link to={"/resume"}>작성 취소</Link></button>
-                <button className=" w-1/6 h-10 mx-5 text-lg font-bold bg-orange-200 hover:bg-orange-400 hover:text-white" onClick={updateMemberResume}>이력서 작성 완료</button>
-                <button className=" w-1/6 h-10 mx-5 text-lg font-bold bg-red-300 hover:bg-red-500 hover:text-white">삭제</button>
+                <button className=" w-1/6 h-10 mx-5 text-lg font-bold bg-orange-200 hover:bg-orange-400 hover:text-white" onClick={updateMemberResume}><Link to={"/resume"}>이력서 작성 완료</Link></button>
+                <button className=" w-1/6 h-10 mx-5 text-lg font-bold bg-red-300 hover:bg-red-500 hover:text-white" onClick={deleteMemberResume}>삭제</button>
             </div>
         </div>
     );

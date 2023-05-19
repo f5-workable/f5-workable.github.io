@@ -1,13 +1,15 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from 'react-router-dom';
 import { FaCrown } from "react-icons/fa";
 // import Private from "../../components/member/resumeDetail/Private";
 import { BsFileEarmarkPlus, BsChevronRight } from "react-icons/bs";
+import api from "../../api";
 
 const Resume = () => {
     const [resumeList, setResumeList] = useState([{}]);
     const [modalOpen, setModalOpen] = useState(false);
     const [selectedResumeIndex, setSelectedResumeIndex] = useState(null);
+    const [resumeName, setResumeName] = useState("");
     // const [privateChecked, setPrivateChecked] = useState(false);
 
     const handleCreateClick = () => {
@@ -24,6 +26,16 @@ const Resume = () => {
       setSelectedResumeIndex(index);
       setModalOpen(false);
     };
+
+    const getResumeNameByStatus = async () => {
+      const { data } = await api.resume.retrieve(1);
+      console.log(data);
+      setResumeName(data.title);
+    };
+
+    useEffect(() => {
+      getResumeNameByStatus();
+    }, []);
 
     return (
       <div className="p-10 flex flex-col bg-gray-50 h-auto">
@@ -90,7 +102,7 @@ const Resume = () => {
                   {selectedResumeIndex === index ? (<FaCrown className="absolute text-yellow-400 text-[3.25rem]" />) : null}
                   <img src="/images/interview.PNG" alt="interview" loading="lazy" />
                   <div className="mt-6 flex justify-between items-center">
-                    <div className="truncate font-bold text-lg">이력서 제목</div>
+                    <div className="truncate font-bold text-lg">{resumeName}</div>
                     <BsChevronRight />
                   </div>
                 </div>
