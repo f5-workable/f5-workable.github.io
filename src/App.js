@@ -4,17 +4,26 @@ import MemberRouter from "./routes/MemberRouter";
 
 function App() {
   const [isCompany, setIsCompany] = useState(false);
+  const [isLogined, setIsLogined] = useState(false);
 
-  const handleIsCompany = () => {
+  const toggleIsCompany = () => {
     setIsCompany((prev) => !prev);
   };
 
   return (
     <>
-      {isCompany ? (
-        <CompanyRouter handleIsCompany={handleIsCompany} />
+      {isLogined && isCompany ? (
+        <CompanyRouter
+        toggleIsCompany={toggleIsCompany}
+          isLogined={isLogined}
+          setIsLogined={setIsLogined}
+        />
       ) : (
-        <MemberRouter handleIsCompany={handleIsCompany} />
+        <MemberRouter
+        toggleIsCompany={toggleIsCompany}
+          isLogined={isLogined}
+          setIsLogined={setIsLogined}
+        />
       )}
     </>
   );

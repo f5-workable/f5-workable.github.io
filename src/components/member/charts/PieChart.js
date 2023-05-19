@@ -1,18 +1,8 @@
 import { Pie } from "react-chartjs-2";
 import "chart.js/auto";
 import ChartDataLabels from "chartjs-plugin-datalabels";
-import autocolors from "chartjs-plugin-autocolors";
-import { color } from "chart.js/helpers";
 
-const PieChart = ({
-  labels,
-  datasets,
-  title,
-  setLegend,
-  setDataLabel,
-  backgroundColor,
-  borderColor,
-}) => {
+const PieChart = ({ labels, datasets, title, setLegend, setDataLabel }) => {
   let sortedData = null;
 
   if (title === "장애유형") {
@@ -34,8 +24,19 @@ const PieChart = ({
     datasets: [
       {
         data: sortedData ? Object.values(sortedData)?.slice(0, 10) : datasets,
-        backgroundColor: backgroundColor,
-        borderColor: borderColor,
+        backgroundColor: [
+          "rgba(213, 29, 30, 0.6)",
+          "rgba(233, 80, 21, 0.6)",
+          "rgba(245, 169, 26, 0.6)",
+          "rgba(203, 175, 27, 0.6)",
+          "rgba(146, 170, 30, 0.6)",
+          "rgba(72, 149, 42, 0.6)",
+          "rgba(33, 163, 117, 0.6)",
+          "rgba(28, 147, 185, 0.6)",
+          "rgba(63, 103, 171, 0.6)",
+          "rgba(100, 92, 179, 0.6)",
+        ],
+        borderColor: "#fff",
         borderWidth: 1,
       },
     ],
@@ -44,10 +45,10 @@ const PieChart = ({
   const options = {
     layout: {
       padding: {
-        top: 10,
+        top: 4,
         left: 20,
         right: 20,
-        bottom: 10,
+        bottom: 0,
       },
     },
     plugins: {
@@ -56,15 +57,13 @@ const PieChart = ({
         align: "start",
         text: title,
         font: { size: 19 },
-        padding: {
-          bottom: 20,
-        },
       },
       legend: {
         display: setLegend,
         position: "bottom",
-        align: "end",
-        labels: { padding: 10, font: { size: 14 } },
+        align: "center",
+        labels: { font: { size: 8 }, boxWidth: 10 },
+        maxWidth: 70,
       },
       tooltip: {
         titleFont: { size: 12 },
@@ -84,29 +83,12 @@ const PieChart = ({
           return value + "명";
         },
       },
-      autocolors: {
-        mode: "data",
-        customize(context) {
-          const colors = context.colors;
-          const lighten = (pickedColor, value) => color(pickedColor).alpha(value).rgbString();
-          return {
-            background: lighten(colors.background, 0.5),
-            border: lighten(colors.border, 0.5),
-          };
-        },
-      },
     },
     responsive: true,
     maintainAspectRatio: true,
   };
 
-  return (
-    <Pie
-      data={data}
-      options={options}
-      plugins={(setDataLabel && [ChartDataLabels], autocolors)}
-    />
-  );
+  return <Pie data={data} options={options} plugins={setDataLabel && [ChartDataLabels]} />;
 };
 
 export default PieChart;

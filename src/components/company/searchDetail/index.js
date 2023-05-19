@@ -4,6 +4,7 @@ import Location from "./location";
 import PaymentType from "./paymentType";
 import DisabilityType from "./disabilityType";
 import SeverityType from "./severityType";
+import EducationType from "./educationType";
 import CareerType from "./careerType";
 
 const SearchDetail = () => {
@@ -14,6 +15,7 @@ const SearchDetail = () => {
   const [location, setLocation] = useState([]);
   const [paymentType, setPaymentType] = useState([]);
   const [severityType, setSeverityType] = useState([]);
+  const [educationType, setEducationType] = useState([]);
 
   const initSearchCondition = () => {
     setCareerType([]);
@@ -70,6 +72,7 @@ const SearchDetail = () => {
         <DisabilityType state={disabilityType} setState={setDisabilityType} />
         <SeverityType state={severityType} setState={setSeverityType} />
         <CareerType state={careerType} setState={setCareerType} />
+        <EducationType state={educationType} setState={setEducationType} />
         <div className="mt-8 w-full mb-5">
           <p className="block text-lg font-mediums mb-2">희망지역</p>
           <Location state={location} setState={setLocation} />

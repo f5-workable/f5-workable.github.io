@@ -10,6 +10,8 @@ const ApplicantStatus = () => {
   const [boards, setBoards] = useState([]);
   const [applicants, setApplicants] = useState([]);
 
+  console.log(countByStatus);
+
   const getBoardsByCompanyId = async (companyId) => {
     const { data } = await api.applicant.retrieveByCompanyId(companyId);
     setClickedBoardId(data[0].j_id);
