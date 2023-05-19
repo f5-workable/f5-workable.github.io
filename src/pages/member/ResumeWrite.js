@@ -56,12 +56,16 @@ const ResumeWrite = () => {
             title: resumeName.length === 0 ? null : resumeName,
         });
         console.log(data);
+        window.location.href = "/resume";
     };
 
     const deleteMemberResume = async () => {
-        const { data } = await api.resume.delete(1);
-        console.log(data);
-    };
+        const confirmed = window.confirm("정말로 삭제하시겠습니까?");
+        if (confirmed) {
+          const { data } = await api.resume.delete(1);
+          console.log(data);
+        }
+      };      
 
     useEffect(() => {
         getMemberResume();
@@ -256,7 +260,7 @@ const ResumeWrite = () => {
             
             <div className="flex justify-center">
                 <button className=" w-1/6 h-10 mx-5 text-lg font-bold bg-gray-200 hover:bg-gray-500 hover:text-white"><Link to={"/resume"}>작성 취소</Link></button>
-                <button className=" w-1/6 h-10 mx-5 text-lg font-bold bg-orange-200 hover:bg-orange-400 hover:text-white" onClick={updateMemberResume}><Link to={"/resume"}>이력서 작성 완료</Link></button>
+                <button className=" w-1/6 h-10 mx-5 text-lg font-bold bg-orange-200 hover:bg-orange-400 hover:text-white" onClick={updateMemberResume}>이력서 작성 완료</button>
                 <button className=" w-1/6 h-10 mx-5 text-lg font-bold bg-red-300 hover:bg-red-500 hover:text-white" onClick={deleteMemberResume}>삭제</button>
             </div>
         </div>
