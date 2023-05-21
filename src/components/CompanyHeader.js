@@ -15,10 +15,10 @@ const CompanyHeader = ({ toggleIsCompany, isLogined, setIsLogined }) => {
   return (
     <>
       <header className="w-full bg-neutral-50 fixed top-0 mx-auto my-0 z-50 border-b border-solid border-neutral-300 shadow-md">
-        <nav className="w-11/12 h-99 flex flex-row justify-between items-center mx-auto my-0">
+        <nav className="w-11/12 flex flex-row justify-between items-center mx-auto my-0">
           <div className="flex justify-center">
             <Link to="/" className="py-3 mx-3 text-2xl text-orange-500">
-              장애인 구인구직 - Company
+              <img src="/images/logo.png" alt="main logo" className="h-12" />
             </Link>
           </div>
           <div className="flex flex-row items-center">
@@ -43,7 +43,7 @@ const CompanyHeader = ({ toggleIsCompany, isLogined, setIsLogined }) => {
                       className="w-10 h-10 rounded-full bg-neutral-500 border border-solid border-neutral-600 focus:ring-2 focus:ring-blue-500 focus:border-white overflow-hidden"
                     >
                       <img
-                        src="/default-profile.png"
+                        src="/images/default-profile.png"
                         alt="profile-img"
                         className="object-cover"
                       ></img>
