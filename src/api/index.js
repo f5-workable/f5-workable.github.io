@@ -1,5 +1,5 @@
 import axios from "axios";
-import application from "./application";
+import apply from "./apply";
 import applicant from "./applicant";
 import companyBoard from "./companyBoard";
 import resume from "./resume";
@@ -34,7 +34,7 @@ request.interceptors.response.use(
 );
 
 const api = {
-  application,
+  apply,
   applicant,
   companyBoard,
   resume,
