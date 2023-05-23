@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Disorder from "../../components/member/resumeDetail/Disorder";
 import Location from "../../components/member/searchDetail/location";
 import api from "../../api";
 
 const ResumeWrite = () => {
+    const navigate = useNavigate();
     const [resumeName, setResumeName] = useState("");
     const [memberName, setMemberName] = useState("");
     const [memberPhone, setMemberPhone] = useState("");
@@ -29,7 +30,7 @@ const ResumeWrite = () => {
         serMemberAcademic(data.education);
         setMemberCareer(data.career === null ? "신입" : "경력");
         setMemberCareerDetail(data.career === null ? null : data.career);
-        setMemberCareerRegion([data.region.map(item => item.region)]);
+        setMemberCareerRegion(data.region.map(item => item.region));
         setMemberCareerType(data.job);
         setMemberWageType(data.payment_type);
         setMemberWage(data.payment);
@@ -37,14 +38,14 @@ const ResumeWrite = () => {
         setSevereCondition(data.disease);
         setMemberSelf(data.pr === null ? "" : data.pr);
         console.log(data);
-        console.log(memberCareerRegion);
     };
 
     const updateMemberResume = async () => {
-        const { data } = await api.resume.update(1, { 
-            r_id: 1,
+        console.log(memberCareerRegion);
+        const { data } = await api.resume.update(2, { 
+            r_id: 2,
             age: 23,
-            region: memberCareerRegion,
+            place: memberCareerRegion,
             education: memberAcademic,
             job: memberCareerType,
             payment_type: memberWageType,
@@ -56,7 +57,8 @@ const ResumeWrite = () => {
             title: resumeName,
         });
         console.log(data);
-        window.location.href = "/resume";
+        console.log(memberCareerRegion);
+        navigate("/resume");
     };
 
     const deleteMemberResume = async () => {
