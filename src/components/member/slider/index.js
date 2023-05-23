@@ -77,14 +77,14 @@ const CustomSlider = ({ isHeader }) => {
           {...headerSettings}
         >
           {[
-            "/images/001.png",
-            "/images/002.png",
-            "/images/003.png",
-            "/images/004.png",
-            "/images/005.png",
-            "/images/006.png",
-            "/images/007.png",
-            "/images/008.png",
+            "/images/slider-member-001.png",
+            "/images/slider-member-002.png",
+            "/images/slider-member-003.png",
+            "/images/slider-member-004.png",
+            "/images/slider-member-005.png",
+            "/images/slider-member-006.png",
+            "/images/slider-member-007.png",
+            "/images/slider-member-008.png",
           ].map((src, idx) => (
             <HeadItem key={idx} src={src} />
           ))}
