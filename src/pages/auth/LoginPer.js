@@ -19,7 +19,7 @@ const LoginPer = ({ setIsLogined }) => {
       <div className="absolute inset-0 z-0">
         <video
           className="w-full h-full object-cover"
-          src="/videos/backgroundVideo.mp4"
+          src="/videos/loginBackgroundVideo.mp4"
           autoPlay
           loop
           muted
