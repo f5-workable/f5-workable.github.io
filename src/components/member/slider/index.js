@@ -76,8 +76,17 @@ const CustomSlider = ({ isHeader }) => {
           className="!flex w-full h-[21rem] justify-center items-center my-5 relative"
           {...headerSettings}
         >
-          {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((_, idx) => (
-            <HeadItem key={idx} />
+          {[
+            "/images/slider-member-001.png",
+            "/images/slider-member-002.png",
+            "/images/slider-member-003.png",
+            "/images/slider-member-004.png",
+            "/images/slider-member-005.png",
+            "/images/slider-member-006.png",
+            "/images/slider-member-007.png",
+            "/images/slider-member-008.png",
+          ].map((src, idx) => (
+            <HeadItem key={idx} src={src} />
           ))}
         </Slider>
       ) : (

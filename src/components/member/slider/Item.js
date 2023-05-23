@@ -1,13 +1,26 @@
 import { useState } from "react";
 import { MdBookmark, MdBookmarkBorder } from "react-icons/md";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-const Item = ({ key, className }) => {
+const Item = ({ key }) => {
+  const [isDragging, setIsDragging] = useState(false);
   const [isBookmark, setIsBookmark] = useState(false);
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    if (!isDragging) {
+      navigate(`/jobs/${key}`);
+    }
+  };
 
   return (
-  <div className="w-full h-80 relative">
-      <Link to={`/jobs/${key}`} className="block w-full h-full">
+    <div className="w-full h-80 relative">
+      <Link
+        className="block w-full h-full"
+        onMouseMove={() => setIsDragging(true)}
+        onMouseDown={() => setIsDragging(false)}
+        onMouseUp={() => handleClick()}
+      >
         <div className="flex justify-center items-center w-full h-3/5 rounded-md overflow-hidden shadow-md">
           <img
             src="https://www.cvpartners.co.kr/Content/images/house/1/5.png"
@@ -29,7 +42,7 @@ const Item = ({ key, className }) => {
         {isBookmark ? (
           <MdBookmark fontSize={40} className="text-blue-500" stroke="white" />
         ) : (
-          <MdBookmarkBorder fontSize={40} className="text-white opacity-80"/>
+          <MdBookmarkBorder fontSize={40} className="text-white opacity-80" />
         )}
       </button>
     </div>

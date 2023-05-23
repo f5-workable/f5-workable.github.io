@@ -16,6 +16,7 @@ const LoginPer = ({ setIsLogined }) => {
 
   return (
     <>
+      <div className="absolute top-0 left-0 w-screen h-screen bg-black opacity-10 z-10"></div>
       <div className="absolute inset-0 z-0">
         <video
           className="w-full h-full object-cover"
@@ -27,7 +28,7 @@ const LoginPer = ({ setIsLogined }) => {
       </div>
       <div className="relative my-16 z-10">
         <div
-          className=" bg-white relative w-3/5 mx-auto shadow-2xl flex content-center"
+          className="bg-white relative w-3/5 mx-auto shadow-2xl flex content-center rounded-xl"
           name="container"
         >
           <form className="w-1/2 p-10" onSubmit={handleLogin}>
@@ -41,13 +42,13 @@ const LoginPer = ({ setIsLogined }) => {
                   <input id="id" name="id" className="rounded w-full p-2 my-1.5 bg-gray-200" />
                 </div>
                 <div>
-                  <label htmlFor="password" className="block my-1.5 font-bold text-xl">
+                  <label htmlFor="pw" className="block my-1.5 font-bold text-xl">
                     비밀번호
                   </label>
                   <input
                     type="password"
-                    id="password"
-                    name="password"
+                    id="pw"
+                    name="pw"
                     className="rounded w-full p-2 my-1.5 bg-gray-200"
                   />
                 </div>
