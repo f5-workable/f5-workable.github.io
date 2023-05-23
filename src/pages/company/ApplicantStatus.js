@@ -13,7 +13,7 @@ const ApplicantStatus = () => {
   console.log(countByStatus);
 
   const getBoardsByCompanyId = async (companyId) => {
-    const { data } = await api.applicant.retrieveByCompanyId(companyId);
+    const { data } = await api.companyBoard.retrieveByCompanyId(companyId);
     setClickedBoardId(data[0].j_id);
     setBoards(data);
   };
