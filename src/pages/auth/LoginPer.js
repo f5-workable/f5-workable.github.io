@@ -66,14 +66,14 @@ const LoginPer = ({ setIsLogined }) => {
               </button>
             </div>
             <hr className="my-5"></hr>
-            <div className="w-4/5 px-5 mx-auto">
+            <div className="w-4/5 mx-auto">
               <span>Don't have an account?</span>
               <span className="float-right text-red-600">
                 <Link to="/signup/member">Sign Up</Link>
               </span>
             </div>
           </form>
-          <div className="w-1/2 p-10">
+          <div className="w-1/2 p-10 flex items-center">
             <img src="/images/loginMemberRight.PNG" alt="loginRight" loading="lazy" />
           </div>
         </div>
