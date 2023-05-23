@@ -31,7 +31,7 @@ const CompanyHeader = ({ toggleIsCompany, isLogined, setIsLogined }) => {
                 id="keyword-search"
                 name="keyword"
                 disabled
-                className="w-full m-3 p-2 pl-10 bg-transparent border-2 border-neutral-300 hover:border-orange-500 rounded-3xl transition-colors cursor-pointer"
+                className="w-full m-3 p-2 pl-10 bg-transparent bg-white border-2 border-neutral-300 hover:border-indigo-300 rounded-3xl transition-colors cursor-pointer"
               />
             </Link>
             <aside className="flex flex-row items-center before:content-['|'] before:mr-6 text-neutral-300">
