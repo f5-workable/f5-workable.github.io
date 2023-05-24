@@ -59,7 +59,7 @@ const Resume = () => {
     return (
       <div className="p-10 flex flex-col h-auto">
         <h1 className="text-center text-3xl font-bold py-10">이력서 목록</h1>
-        <div className=" px-48 pb-5 flex justify-end">
+        <div className=" px-48 pb-2 flex justify-end">
           <label className="px-2 font-semibold hover:cursor-pointer my-auto">대표 이력서</label>
           <div className=" flex justify-end">
             {/* {privateChecked ? 
@@ -101,6 +101,9 @@ const Resume = () => {
               </div>
             )}
           </div>
+        </div>
+        <div className="px-48 pb-5 flex justify-end text-xs">
+          <p>대표 이력서를 선택하면 모든 기업에게 이력서가 공개됩니다</p>
         </div>
 
         {/* <div className="px-10 py-5 flex justify-end">
