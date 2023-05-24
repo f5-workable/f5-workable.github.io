@@ -6,6 +6,8 @@ import { Link, useNavigate } from "react-router-dom";
 const SignUpPer = () => {
   const navigate = useNavigate();
   const [gender, setGender] = useState("남자");
+  const [password, setPassword] = useState("");
+  const [passwordCheck, setPasswordCheck] = useState(false);
 
   const handleSignUp = async (e) => {
     e.preventDefault();
@@ -36,6 +38,15 @@ const SignUpPer = () => {
       });
     } else {
       alert("비밀번호가 서로 다릅니다.");
+    }
+  };
+
+  const checkedPassword = (checkPw, pw) => {
+    if (checkPw === pw) {
+      setPasswordCheck(true);
+    }
+    else {
+      setPasswordCheck(false);
     }
   };
 
@@ -78,6 +89,7 @@ const SignUpPer = () => {
                   name="pw"
                   className=" w-64 h-8 p-2 border-2"
                   required
+                  onChange={(e) => setPassword(e.target.value)}
                 />
                 <p className="py-3">8~24자 이내로 입력하세요.</p>
               </div>
@@ -91,13 +103,20 @@ const SignUpPer = () => {
                 </label>
               </div>
               <div className="flex flex-col">
-                <input
-                  type="password"
-                  id="pwCheck"
-                  name="pwCheck"
-                  className=" w-64 h-8 p-2 border-2"
-                  required
-                />
+                <div className="flex flex-row items-center">
+                  <input
+                    type="password"
+                    id="pwCheck"
+                    name="pwCheck"
+                    className=" w-64 h-8 p-2 border-2"
+                    required
+                    onChange={(e) => checkedPassword(e.target.value, password)}
+                  />
+                  {passwordCheck 
+                    ? (<p className=" px-3 text-blue-600">일치</p>) 
+                    : (<p className=" px-3 text-red-600">불일치</p>)
+                  }
+                </div>
                 <p className="py-3">비밀번호를 다시 한번 입력해주세요.</p>
               </div>
             </div>

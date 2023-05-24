@@ -72,6 +72,8 @@ const resume = {
     request.get(
       `/resume/search?payment_type=${payment_type}&disease=${disease}&ob_type=${ob_type}&place=${place}&education=${education}&keyword=${keyword}&sort=${sort}`
     ),
+  
+  retrieveByMember: (memberId) => request.get("/resume", { params: {memberId}}),
 };
 
 export default resume;
