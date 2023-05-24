@@ -1,12 +1,29 @@
 import { useState } from "react";
 import { MdBookmark, MdBookmarkBorder } from "react-icons/md";
 import { Link } from "react-router-dom";
+import api from "../../../api";
+import { useEffect } from "react";
 
 const Item = ({ board }) => {
   const [isBookmark, setIsBookmark] = useState(false);
+
+  const addBookmark = async () => {
+    setIsBookmark((prev) => !prev);
+    await api.bookmark.add(1, board.j_id);
+  };
+
+  const deleteBookmark = async () => {
+    setIsBookmark((prev) => !prev);
+    await api.bookmark.delete(1, board.j_id);
+  };
+
   const regex = /(^[가-힣]+시 [가-힣]+구)|(^[가-힣]+도 [가-힣]+[시|군|구])/g;
   const shortAddress = board.address?.match(regex).join("");
-  
+
+  useEffect(() => {
+    setIsBookmark(board.state);
+  }, [board.state]);
+
   return (
     <div className="w-full h-80 relative">
       <Link to={`/jobs/${board.j_id}`} className="block w-full h-full">
@@ -18,24 +35,23 @@ const Item = ({ board }) => {
           />
         </div>
         <div className="w-full h-2/5 relative">
-          <p className="py-2 text-lg font-bold">{board.job_type}</p>
-          <p className="text-neutral-500">{board.c_name}</p>
-          <p className="py-2 text-neutral-500">{shortAddress}</p>
-          <p className="mt-5 text-neutral-600 font-semibold absolute bottom-2">
-            {board.payment_type} {board.payment}원
+          <p className="pt-2 text-lg font-bold truncate break-all">{board.job_type}</p>
+          <p className="pt-1 text-neutral-500 font-medium truncate break-all">{board.c_name}</p>
+          <p className="py-2 text-neutral-400">{shortAddress}</p>
+          <p className="mt-5 text-lg text-neutral-600 font-semibold absolute bottom-2">
+            {board.payment_type} {board.payment.toLocaleString()}원
           </p>
         </div>
       </Link>
-      <button
-        onClick={() => setIsBookmark((prev) => !prev)}
-        className="absolute top-0 right-0 z-20"
-      >
-        {isBookmark ? (
+      {isBookmark ? (
+        <button onClick={deleteBookmark} className="absolute top-0 right-0 z-20">
           <MdBookmark fontSize={40} className="text-blue-500" stroke="white" />
-        ) : (
+        </button>
+      ) : (
+        <button onClick={addBookmark} className="absolute top-0 right-0 z-20">
           <MdBookmarkBorder fontSize={40} className="text-white opacity-80" />
-        )}
-      </button>
+        </button>
+      )}
     </div>
   );
 };

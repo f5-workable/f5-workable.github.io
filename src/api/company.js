@@ -35,7 +35,12 @@ const company = {
    * @param {loginDTO} dto
    * @returns
    */
-  login: (dto) => request.post("/company/login", dto),
+  login: (dto) =>
+    request.post("/company/login", dto, {
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+    }),
 
   /**
    *
@@ -58,9 +63,9 @@ const company = {
   retrieve: (id) => request.get(`/company/info/${id}`),
 
   /**
-   * 
+   *
    * @param {number} id 기업 시퀀스 아이디
-   * @returns 
+   * @returns
    */
   delete: (id) => request.get(`/company/delete/${id}`),
 };

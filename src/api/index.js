@@ -5,6 +5,7 @@ import companyBoard from "./companyBoard";
 import resume from "./resume";
 import company from "./company";
 import member from "./member";
+import bookmark from "./bookmark";
 import applicantStatistics from "./applicantStatistics";
 
 const baseURL = process.env.REACT_APP_API_BASE_URL;
@@ -26,7 +27,7 @@ request.interceptors.response.use(
   },
   (error) => {
     console.log(error);
-    if (error?.response?.status === 403) {
+    if (error?.response?.status === 302) {
       window.location.href = "/login";
     }
     return Promise.reject(error);
@@ -41,6 +42,8 @@ const api = {
   applicantStatistics,
   company,
   member,
+  bookmark,
 };
 
 export default api;
+  

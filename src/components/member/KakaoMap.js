@@ -1,6 +1,6 @@
 import { useCallback, useEffect } from "react";
 
-const KakaoMap = () => {
+const KakaoMap = ({ address, companyName }) => {
   const { kakao } = window;
 
   const configMap = useCallback(
@@ -29,10 +29,10 @@ const KakaoMap = () => {
 
         const iwContent = `
         <div class="p-4 w-52">
-          <p class="mb-4 text-neutral-800">래브라도랩스</p>
+          <p class="mb-4 text-neutral-800">${companyName}</p>
           <p class="flex justify-between">
-            <a href="https://map.kakao.com/link/map/래브라도랩스,${result[0].y},${result[0].x}" class="text-blue-500 px-3.5 py-1.5 border border-solid rounded-2xl text-sm" target="_blank">큰 지도보기</a>
-            <a href="https://map.kakao.com/link/to/래브라도랩스,${result[0].y},${result[0].x}" class="text-white px-3.5 py-1.5 bg-blue-500 rounded-2xl text-sm" target="_blank">길 찾기</a>
+            <a href="https://map.kakao.com/link/map/${companyName},${result[0].y},${result[0].x}" class="text-blue-500 px-3.5 py-1.5 border border-solid rounded-2xl text-sm" target="_blank">큰 지도보기</a>
+            <a href="https://map.kakao.com/link/to/=${companyName},${result[0].y},${result[0].x}" class="text-white px-3.5 py-1.5 bg-blue-500 rounded-2xl text-sm" target="_blank">길 찾기</a>
           </p>
         </div>`;
         const iwPosition = targetPosition; //인포윈도우 표시 위치
@@ -63,13 +63,13 @@ const KakaoMap = () => {
         });
       }
     },
-    [kakao]
+    [kakao, companyName]
   );
 
   useEffect(() => {
     const gc = new kakao.maps.services.Geocoder();
-    gc.addressSearch("서울특별시 서초구 반포대로 20", configMap);
-  }, [kakao.maps.services.Geocoder, configMap]);
+    gc.addressSearch(address, configMap);
+  }, [kakao.maps.services.Geocoder, configMap, address]);
 
   return <div id="map" className="w-full h-96"></div>;
 };

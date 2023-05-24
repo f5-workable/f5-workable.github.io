@@ -10,18 +10,20 @@ const LoginPer = ({ setIsLogined }) => {
 
   const handleLogin = async () => {
     const { data } = await api.member.login({ id, password });
-    console.log(data);
-    sessionStorage.setItem("memberId", data.memberSequenceNumber);
-    setIsLogined(true);
-    navigate("/");
-
-    if (rememberCheck) {
-      localStorage.setItem("id", id);
-      localStorage.setItem("pw", password);
-    }
-    else {
-      localStorage.setItem("id", "");
-      localStorage.setItem("pw", "");
+    if (data.message === "로그인에 실패하였습니다.") {
+      alert("아이디나 패스워드가 다릅니다.");
+    } else {
+      sessionStorage.setItem("memberId", data.memberSequenceNumber);
+      setIsLogined(true);
+      navigate("/");
+      
+      if (rememberCheck) {
+        localStorage.setItem("id", id);
+        localStorage.setItem("pw", password);
+      } else {
+        localStorage.setItem("id", "");
+        localStorage.setItem("pw", "");
+      }
     }
   };
 
@@ -29,7 +31,7 @@ const LoginPer = ({ setIsLogined }) => {
     setId(localStorage.getItem("id"));
     setPassword(localStorage.getItem("pw"));
     setRememberCheck(localStorage.getItem("id") !== "" && localStorage.getItem("pw") !== "");
-  }
+  };
 
   useEffect(() => {
     getLoginData();
@@ -60,7 +62,14 @@ const LoginPer = ({ setIsLogined }) => {
                   <label htmlFor="id" className=" block my-1.5 mt-8 font-bold text-xl ">
                     아이디
                   </label>
-                  <input id="id" name="id" className="rounded w-full p-2 my-1.5 bg-gray-200" value={id} onChange={(e) => setId(e.target.value)} />
+                  <input
+                    id="id"
+                    name="id"
+                    className="rounded w-full p-2 my-1.5 bg-gray-200"
+                    value={id}
+                    onChange={(e) => setId(e.target.value)}
+                    autoFocus
+                  />
                 </div>
                 <div>
                   <label htmlFor="pw" className="block my-1.5 font-bold text-xl">
@@ -79,16 +88,20 @@ const LoginPer = ({ setIsLogined }) => {
             </div>
             <div className="my-5 w-4/5 flex justify-between mx-auto">
               <span className="text-sm">
-                <input type="checkbox" 
-                  onClick={() => setRememberCheck((prevCheck) => !prevCheck)} 
+                <input
+                  type="checkbox"
+                  onClick={() => setRememberCheck((prevCheck) => !prevCheck)}
                   checked={rememberCheck}
                 />
-                  로그인 정보 기억하기
+                로그인 정보 기억하기
               </span>
               <span className="underline text-sm">Fotgot your password?</span>
             </div>
             <div className="flex justify-center">
-              <button className=" bg-orange-200 hover:bg-orange-400 rounded-md py-2 px-5" onClick={handleLogin}>
+              <button
+                className=" bg-orange-200 hover:bg-orange-400 rounded-md py-2 px-5"
+                onClick={handleLogin}
+              >
                 로그인
               </button>
             </div>

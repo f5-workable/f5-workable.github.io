@@ -7,15 +7,25 @@ import SeverityType from "./severityType";
 import EducationType from "./educationType";
 import CareerType from "./careerType";
 
-const SearchDetail = () => {
-  const [isArrowBtnClicked, setIsArrowBtnClicked] = useState(false);
-
-  const [careerType, setCareerType] = useState([]);
-  const [disabilityType, setDisabilityType] = useState([]);
-  const [location, setLocation] = useState([]);
-  const [paymentType, setPaymentType] = useState([]);
-  const [severityType, setSeverityType] = useState([]);
-  const [educationType, setEducationType] = useState([]);
+const SearchDetail = ({ state, setState }) => {
+  const {
+    careerType,
+    disabilityType,
+    educationType,
+    severityType,
+    location,
+    paymentType,
+    isArrowBtnClicked,
+  } = state;
+  const {
+    setCareerType,
+    setDisabilityType,
+    setEducationType,
+    setSeverityType,
+    setLocation,
+    setPaymentType,
+    setIsArrowBtnClicked,
+  } = setState;
 
   const initSearchCondition = () => {
     setCareerType([]);
@@ -36,37 +46,19 @@ const SearchDetail = () => {
   };
 
   return (
-    <form className="mb-20 w-5/6 max-w-4xl mx-auto bg-neutral-100 p-10 rounded-2xl border-2 border-solid border-neutral-200">
-      <div className="relative mb-4 overflow-hidden">
-        <select
-          name="keyword-type"
-          className="absolute top-1/2 -translate-y-1/2 left-3 p-3 bg-transparent outline-none text-lg"
-        >
-          <option value="업종">업종</option>
-        </select>
-        <input
-          id="keyword"
-          className="w-full pl-28 px-4 py-4 rounded-3xl border-2 focus:outline-orange-500 text-lg"
-          placeholder="검색어를 입력해주세요."
-        />
-        <button className="w-1/12 py-1 bg-transparent text-neutral-500 absolute top-3 right-2 flex justify-center">
-          <MdSearch fontSize={28} />
-        </button>
-      </div>
-      <div className="flex justify-between">
-        <button
-          type="button"
-          className="flex justify-between w-full border-b-white border-solid"
-          onClick={toggleDropdown}
-        >
-          <p className="my-2 text-xl font-bold">상세 조건</p>
-          {isArrowBtnClicked ? (
-            <MdArrowDropUp fontSize={35} />
-          ) : (
-            <MdArrowDropDown fontSize={35} />
-          )}
-        </button>
-      </div>
+    <div className="w-full">
+      <button
+        type="button"
+        className="flex justify-between w-full border-b-white border-solid"
+        onClick={toggleDropdown}
+      >
+        <p className="my-2 text-xl font-bold">상세 조건</p>
+        {isArrowBtnClicked ? (
+          <MdArrowDropUp fontSize={35} />
+        ) : (
+          <MdArrowDropDown fontSize={35} />
+        )}
+      </button>
       <div id="detail-search-dropdown" className="px-5 hidden">
         <PaymentType state={paymentType} setState={setPaymentType} />
         <DisabilityType state={disabilityType} setState={setDisabilityType} />
@@ -88,7 +80,7 @@ const SearchDetail = () => {
           검색
         </button>
       </div>
-    </form>
+    </div>
   );
 };
 

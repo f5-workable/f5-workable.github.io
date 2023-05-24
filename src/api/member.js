@@ -35,11 +35,12 @@ const member = {
    * @param {loginDTO} dto id + password
    * @returns
    */
-  login: (dto) => request.post("/member/login", dto, {
-    headers: {
-      "Content-Type": "application/x-www-form-urlencoded",
-    },
-  }),
+  login: (dto) =>
+    request.post("/member/login", dto, {
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+    }),
 
   /**
    *

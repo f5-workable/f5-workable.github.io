@@ -68,9 +68,9 @@ const resume = {
    * @param {string} job 희망직종
    * @returns {{data: SearchedResumes}}
    */
-  search: (payment_type, disease, ob_type, place, job) =>
+  search: (payment_type, disease, ob_type, place, education, keyword, sort) =>
     request.get(
-      `/resume/search?payment_type=${payment_type}&disease=${disease}&ob_type=${ob_type}&place=${place}&job=${job}`
+      `/resume/search?payment_type=${payment_type}&disease=${disease}&ob_type=${ob_type}&place=${place}&education=${education}&keyword=${keyword}&sort=${sort}`
     ),
   
   retrieveByMember: (memberId) => request.get("/resume", { params: {memberId}}),
