@@ -6,10 +6,12 @@ import PieChart from "../../components/member/charts/PieChart";
 import HorizontalBarChart from "../../components/member/charts/HorizontalBarChart";
 import VerticalBarChart from "../../components/member/charts/VerticalBarChart";
 import api from "../../api";
-import { useLocation } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
+import { useCallback } from "react";
 
 const CompanyDetail = () => {
   const { pathname } = useLocation();
+  const { jobId } = useParams();
 
   const [isBookmark, setIsBookmark] = useState(false);
   const [showModal, setShowModal] = useState(false);
@@ -21,20 +23,29 @@ const CompanyDetail = () => {
     /** @type {import("../../api/applicantStatistics").Statistics} */ ([])
   );
 
-  const toggleIsBookmark = () => {
+  const regex = /(^[가-힣]+시 [가-힣]+구)|(^[가-힣]+도 [가-힣]+[시|군|구])/g;
+  const shortAddress = board.address?.match(regex).join("");
+
+  const addBookmark = async () => {
     setIsBookmark((prev) => !prev);
+    await api.bookmark.add(1, board.j_id);
   };
 
-  const getCompanyInfo = async () => {
-    const { data } = await api.companyBoard.retrieve(1);
+  const deleteBookmark = async () => {
+    setIsBookmark((prev) => !prev);
+    await api.bookmark.delete(1, board.j_id);
+  };
+
+  const getCompanyInfo = useCallback(async () => {
+    const { data } = await api.companyBoard.retrieve(jobId);
     setBoard(data);
-    console.log(data);
-  };
+    setIsBookmark(data.state);
+  }, [jobId]);
 
-  const getApplicantStatistics = async () => {
-    const { data } = await api.applicantStatistics.retrieve(1);
+  const getApplicantStatistics = useCallback(async () => {
+    const { data } = await api.applicantStatistics.retrieve(jobId);
     setStatistics(data);
-  };
+  }, [jobId]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -43,7 +54,7 @@ const CompanyDetail = () => {
   useEffect(() => {
     getCompanyInfo();
     getApplicantStatistics();
-  }, []);
+  }, [getCompanyInfo, getApplicantStatistics]);
 
   return (
     <>
@@ -60,14 +71,14 @@ const CompanyDetail = () => {
               </section>
               <section className="w-full h-full mt-14">
                 <h2 className="text-2xl font-semibold">{board.job_type}</h2>
-                <p className="mt-4 mb-4">기업 형태</p>
-                <div className="flex">
+                <div className="flex mt-2">
                   <p className="text-neutral-500">{board.c_name}</p>
                   <p className="before:content-['|'] before:mx-3 before:text-neutral-200 text-neutral-500">
-                    주소
+                    {shortAddress}
                   </p>
                 </div>
-                <p className="mt-4 mb-4">학력: {board.edu}</p>
+                <p className="mt-4 text-neutral-600">기업 형태: {board.c_type}</p>
+                <p className="mt-2 text-neutral-600">학력: {board.edu}</p>
               </section>
               <section className="w-full h-32 flex flex-col justify-evenly bg-indigo-50 mt-7 pl-10 rounded-md xl:hidden">
                 <div className="text-xl font-medium text-neutral-500">임금</div>
@@ -77,20 +88,9 @@ const CompanyDetail = () => {
               </section>
               <section>
                 <p className="w-full border-neutral-300 my-12 break-words leading-6 whitespace-pre-wrap text-lg text-neutral-600">
-                  Lorem ipsum dolor sit, amet consectetur adipisicing elit. Saepe, repellat
-                  architecto magni minima doloribus non rem id sapiente. Veniam sequi amet quos
-                  repudiandae, repellat consequuntur minima sapiente ducimus esse numquam!
+                  회사소개
                   <br />
-                  <br />
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero quis a
-                  voluptate dolor nemo officiis facere eligendi sit? Omnis ipsum et porro dicta
-                  modi quas deleniti iure autem rerum nam.
-                  <br />
-                  <br />
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos ducimus
-                  id, voluptatem nemo laboriosam fugit quidem, debitis nulla veritatis,
-                  suscipit quo rem libero perspiciatis quaerat numquam totam repudiandae!
-                  Dignissimos, esse?
+                  {board.detail}
                 </p>
               </section>
               <hr className="border-neutral-500" />
@@ -106,10 +106,10 @@ const CompanyDetail = () => {
                   </div>
                   <div>
                     <h3 className="text-lg font-semibold text-neutral-500 mb-1">근무지역</h3>
-                    <p className="text-lg font-bold">서울특별시 서초구 반포대로 20, 3,4층</p>
+                    <p className="text-lg font-bold">{board.address}</p>
                   </div>
                 </div>
-                <KakaoMap />
+                <KakaoMap address={board.address} companyName={board.c_name} />
               </section>
               <hr className="border-neutral-500" />
               <section className="mt-8 mb-10">
@@ -211,26 +211,28 @@ const CompanyDetail = () => {
                 <div className="w-full hidden xl:block">
                   <p className="text-xl font-bold text-neutral-500">임금</p>
                   <p className="text-3xl font-semibold my-2">
-                    {board.payment_type} {board.payment}원
+                    {board.payment_type} {board.payment?.toLocaleString()}원
                   </p>
                 </div>
                 <div className="w-full flex items-center justify-evenly flex-row xl:flex-col xl:items-center xl:mt-10">
-                  <button
-                    onClick={toggleIsBookmark}
-                    className="w-[45%] xl:w-full h-14 xl:mb-3 border-2 border-solid border-blue-500 text-blue-500 rounded-[2rem] text-lg font-semibold flex justify-center items-center"
-                  >
-                    {isBookmark ? (
-                      <>
-                        <MdBookmark fontSize={26} className="align-middle mr-1" />
-                        북마크 완료
-                      </>
-                    ) : (
-                      <>
-                        <MdBookmarkBorder fontSize={26} className="align-middle mr-1" />
-                        북마크하기
-                      </>
-                    )}
-                  </button>
+                  {isBookmark ? (
+                    <button
+                      onClick={deleteBookmark}
+                      className="w-[45%] xl:w-full h-14 xl:mb-3 border-2 border-solid border-blue-500 text-blue-500 rounded-[2rem] text-lg font-semibold flex justify-center items-center"
+                    >
+                      <MdBookmark fontSize={26} className="align-middle mr-1" />
+                      북마크 완료
+                    </button>
+                  ) : (
+                    <button
+                      onClick={addBookmark}
+                      className="w-[45%] xl:w-full h-14 xl:mb-3 border-2 border-solid border-blue-500 text-blue-500 rounded-[2rem] text-lg font-semibold flex justify-center items-center"
+                    >
+                      <MdBookmarkBorder fontSize={26} className="align-middle mr-1" />
+                      북마크하기
+                    </button>
+                  )}
+
                   <button
                     onClick={() => setShowModal(true)}
                     className="w-[45%] xl:w-full h-14 bg-blue-500 text-white rounded-[2rem] text-lg font-semibold"
