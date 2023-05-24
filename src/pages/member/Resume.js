@@ -90,18 +90,12 @@ const Resume = () => {
                     </div>
                   ))}
                   <div className="flex justify-center">
-                    {/* {selectedResumeIndex === null ? (<button className="mt-5 bg-gray-200 hover:bg-gray-300 px-5 py-2 rounded-md cursor-not-allowed" disabled onClick={() => setModalOpen(false)}>
-                      취소
-                    </button>) : 
-                    (<button className="mt-5 bg-gray-200 hover:bg-gray-300 px-5 py-2 rounded-md" onClick={() => setModalOpen(false)}>
-                      취소
-                    </button>)
-                    } */}
-
-                    <button className="mt-5 bg-gray-200 hover:bg-gray-300 px-5 py-2 rounded-md" onClick={() => setModalOpen(false)}>
-                      취소
+                    <button className="mt-5 mr-2 bg-red-100 hover:bg-red-300 px-5 py-2 rounded-md" onClick={() => setSelectedResumeIndex(null)}>
+                      선택 해제
                     </button>
-
+                    <button className="mt-5 ml-2 bg-blue-100 hover:bg-blue-300 px-5 py-2 rounded-md" onClick={() => setModalOpen(false)}>
+                      선택 완료
+                    </button>
                   </div>
                 </div>
               </div>
