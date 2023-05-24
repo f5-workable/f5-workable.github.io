@@ -3,17 +3,10 @@
 @tailwind utilities;
 
 
-/* Noto Sans KR Font */
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap');
-
 * {
 	font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif !important;
 }
-
-/* http://meyerweb.com/eric/tools/css/reset/ 
-   v2.0 | 20110126
-   License: none (public domain)
-*/
 
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -34,7 +27,6 @@ time, mark, audio, video {
 	font: inherit;
 	vertical-align: baseline;
 }
-/* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, 
 footer, header, hgroup, menu, nav, section {
 	display: block;
@@ -65,26 +57,21 @@ table {
 	bottom: -35px !important;
 }
 
-// 스크롤 바 숨김
-/* ( 크롬, 사파리, 오페라, 엣지 ) 동작 */
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
 }
 
 .scrollbar-hide {
-  -ms-overflow-style: none; /* 인터넷 익스플로러 */
-  scrollbar-width: none; /* 파이어폭스 */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
-// input[type=number]으로 설정했을 때 박스를 차지하는 화살표 컴포넌트 삭제
-/* ( 크롬, 사파리, 오페라, 엣지 ) 동작 */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
 
-/* 파이어폭스 */
 input[type=number] {
   -moz-appearance: textfield;
 }
