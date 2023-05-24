@@ -15,8 +15,18 @@ const LoginCom = ({ setIsLogined, toggleIsCompany }) => {
     await api.member.login({ id, password });
   };
   return (
-    <div className=" my-24">
-      <div className=" w-3/5 mx-auto shadow-2xl flex content-center">
+    <>
+      <div className="absolute inset-0 z-0">
+        <video
+          className="w-full h-full object-cover"
+          src="/videos/signupBackgroundVideo.mp4"
+          autoPlay
+          loop
+          muted
+        ></video>
+      </div>
+    <div className="relative my-16 z-10">
+      <div className="bg-white relative w-3/5 mx-auto shadow-2xl flex content-center">
         <form className="w-1/2 p-10" onSubmit={handleLogin}>
           <div className="text-center text-3xl font-bold">로그인</div>
           <div className="flex justify-center">
@@ -28,13 +38,13 @@ const LoginCom = ({ setIsLogined, toggleIsCompany }) => {
                 <input id="id" name="id" className="rounded w-full p-2 my-1.5 bg-gray-200" />
               </div>
               <div>
-                <label htmlFor="pw" className="block my-1.5 font-bold text-xl">
+                <label htmlFor="password" className="block my-1.5 font-bold text-xl">
                   비밀번호
                 </label>
                 <input
                   type="password"
-                  id="pw"
-                  name="pw"
+                  id="password"
+                  name="password"
                   className="rounded w-full p-2 my-1.5 bg-gray-200"
                 />
               </div>
@@ -65,6 +75,7 @@ const LoginCom = ({ setIsLogined, toggleIsCompany }) => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

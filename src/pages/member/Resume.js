@@ -6,7 +6,7 @@ import { BsFileEarmarkPlus, BsChevronRight } from "react-icons/bs";
 import api from "../../api";
 
 const Resume = () => {
-    const [resumeList, setResumeList] = useState([{}]);
+    const [resumeList, setResumeList] = useState([]);
     const [modalOpen, setModalOpen] = useState(false);
     const [selectedResumeIndex, setSelectedResumeIndex] = useState(null);
 
@@ -57,7 +57,7 @@ const Resume = () => {
     }, []);
 
     return (
-      <div className="p-10 flex flex-col bg-gray-50 h-auto">
+      <div className="p-10 flex flex-col h-auto">
         <h1 className="text-center text-3xl font-bold py-10">이력서 목록</h1>
         <div className=" px-48 pb-5 flex justify-end">
           <label className="px-2 font-semibold hover:cursor-pointer my-auto">대표 이력서</label>
@@ -114,10 +114,10 @@ const Resume = () => {
         </div> */}
 
         <div className=" px-40 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {resumeList.map((_, index) => (
+          {(resumeList.length > 0) && resumeList.map((_, index) => (
             <Link to={`/resume/${index}`} key={index}>
               <div className="bg-white rounded-lg shadow-md hover:shadow-2xl transition duration-300">
-                <div className="p-6">
+                <div className="p-6 h-[18rem]">
                   {selectedResumeIndex === index ? (<FaCrown className="absolute text-yellow-400 text-[3.25rem]" />) : null}
                   <img src="/images/interview.PNG" alt="interview" loading="lazy" />
                   <div className="mt-6 flex justify-between items-center">
@@ -128,10 +128,10 @@ const Resume = () => {
               </div>
             </Link>
           ))}
-          {resumeList.length < 3 ? (
+          { resumeList.length < 3 ? (
             <div className="bg-white rounded-lg shadow-lg hover:shadow-xl transition duration-300 flex items-center justify-center">
               <button
-                className="w-full h-full font-bold rounded-md flex items-center justify-center"
+                className="w-full h-[18rem] font-bold rounded-md flex items-center justify-center"
                 onClick={handleCreateClick}
               >
                 <BsFileEarmarkPlus className="pr-1 text-xl" />

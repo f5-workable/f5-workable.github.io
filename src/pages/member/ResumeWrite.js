@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Disorder from "../../components/member/resumeDetail/Disorder";
 import Location from "../../components/member/searchDetail/location";
 import api from "../../api";
 
 const ResumeWrite = () => {
+    const navigate = useNavigate();
     const [resumeName, setResumeName] = useState("");
     const [memberName, setMemberName] = useState("");
     const [memberPhone, setMemberPhone] = useState("");
@@ -14,7 +15,7 @@ const ResumeWrite = () => {
     const [memberAcademic, serMemberAcademic] = useState("");
     const [memberCareer, setMemberCareer] = useState("신입");
     const [memberCareerDetail, setMemberCareerDetail] = useState("");
-    const [memberCareerPlace, setMemberCareerPlace] = useState([]);
+    const [memberCareerRegion, setMemberCareerRegion] = useState([]);
     const [memberCareerType, setMemberCareerType] = useState("");
     const [memberWageType, setMemberWageType] = useState("");
     const [memberWage, setMemberWage] = useState("");
@@ -23,13 +24,13 @@ const ResumeWrite = () => {
     const [memberSelf, setMemberSelf] = useState("");
 
     const getMemberResume = async () => {
-        const { data } = await api.resume.retrieve(1);
+        const { data } = await api.resume.retrieve(2);
         console.log(data);
         setResumeName(data.title);
+        serMemberAcademic(data.education);
         setMemberCareer(data.career === null ? "신입" : "경력");
         setMemberCareerDetail(data.career === null ? null : data.career);
-        // setMemberCareerPlace("경기도 수원시");
-        // setMemberCareerPlace(data.place);
+        setMemberCareerRegion(data.region.map(item => item.region));
         setMemberCareerType(data.job);
         setMemberWageType(data.payment_type);
         setMemberWage(data.payment);
@@ -40,23 +41,24 @@ const ResumeWrite = () => {
     };
 
     const updateMemberResume = async () => {
-        const { data } = await api.resume.update(1, { 
-            r_id: 1,
+        console.log(memberCareerRegion);
+        const { data } = await api.resume.update(2, { 
+            r_id: 2,
             age: 23,
-            place: "경기 수원시",
-            // place: memberCareerPlace.length === 0 ? null : memberCareerPlace,
-            // education: memberAcademic.length === 0 ? null : memberAcademic,
-            job: memberCareerType.length === 0 ? null : memberCareerType,
-            payment_type: memberWageType.length === 0 ? null : memberWageType,
-            payment: memberWage.length === 0 ? null : memberWage,
-            ob_type: disabilityType.length === 0 ? null : disabilityType,
-            disease: severeCondition === 0 ? null : severeCondition,
-            career: memberCareer.length === "신입" ? null : memberCareerDetail,
-            pr: memberSelf.length === 0 ? null : memberSelf,
-            title: resumeName.length === 0 ? null : resumeName,
+            place: memberCareerRegion,
+            education: memberAcademic,
+            job: memberCareerType,
+            payment_type: memberWageType,
+            payment: memberWage,
+            ob_type: disabilityType,
+            disease: severeCondition,
+            career: memberCareerDetail,
+            pr: memberSelf,
+            title: resumeName,
         });
         console.log(data);
-        window.location.href = "/resume";
+        console.log(memberCareerRegion);
+        navigate("/resume");
     };
 
     const deleteMemberResume = async () => {
@@ -171,7 +173,7 @@ const ResumeWrite = () => {
 
                     <div className="pt-5 flex items-start w-full">
                         <label className="w-32 py-2 text-center font-bold text-md">희망근무지</label>
-                        <Location state={memberCareerPlace} setState={setMemberCareerPlace} />
+                        <Location state={memberCareerRegion} setState={setMemberCareerRegion} />
                     </div>
                     <hr className="mt-5 border border-gray-100"></hr>
 
