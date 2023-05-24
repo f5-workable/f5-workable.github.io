@@ -11,23 +11,43 @@ import ResumeRead from "../pages/company/ResumeRead";
 const CompanyRouter = ({ toggleIsCompany, isLogined, setIsLogined }) => {
   return (
     <Routes>
+      <Route path="*" element={<Navigate to="/" replace />} />
       <Route
         element={
           <>
-            <CompanyHeader toggleIsCompany={toggleIsCompany} isLogined={isLogined} setIsLogined={setIsLogined} />
+            <CompanyHeader
+              toggleIsCompany={toggleIsCompany}
+              isLogined={isLogined}
+              setIsLogined={setIsLogined}
+            />
             <Outlet />
-            <Footer />
           </>
         }
       >
-        <Route path="*" element={<Navigate to="/" replace />} />
-        <Route path="/" element={<Home />} />
+        <Route
+          path="/"
+          element={
+            <>
+              <Home />
+              <Footer />
+            </>
+          }
+        />
+        <Route
+          path="/resume/:resumeId"
+          element={
+            <>
+              <ResumeRead />
+              <div className="hidden xl:block">
+                <Footer />
+              </div>
+            </>
+          }
+        />
         <Route path="/status/applicant" element={<ApplicantStatus />} />
         <Route path="/search" element={<Search />} />
-        <Route path="/jobs/:jobId" element={<span>상세페이지</span>} />
         <Route path="/userdetail" element={<UserDetail />} />
         <Route path="/userdetailmodify" element={<UserDetailModify />} />
-        <Route path="/resume/:resumeId" element={<ResumeRead />} />
       </Route>
     </Routes>
   );
