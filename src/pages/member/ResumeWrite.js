@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import Disorder from "../../components/member/resumeDetail/Disorder";
 import Location from "../../components/member/searchDetail/location";
 import api from "../../api";
+import resume from "../../api/resume";
 
 const ResumeWrite = () => {
     const navigate = useNavigate();
@@ -23,8 +24,10 @@ const ResumeWrite = () => {
     const [severeCondition, setSevereCondition] = useState("중증");
     const [memberSelf, setMemberSelf] = useState("");
 
+    const { resumeId } = useParams();
+
     const getMemberResume = async () => {
-        const { data } = await api.resume.retrieve(2);
+        const { data } = await api.resume.retrieve(resumeId);
         console.log(data);
         setResumeName(data.title);
         serMemberAcademic(data.education);
@@ -42,8 +45,8 @@ const ResumeWrite = () => {
 
     const updateMemberResume = async () => {
         console.log(memberCareerRegion);
-        const { data } = await api.resume.update(2, { 
-            r_id: 2,
+        const { data } = await api.resume.update(resumeId, { 
+            r_id: resumeId,
             age: 23,
             place: memberCareerRegion,
             education: memberAcademic,
@@ -57,15 +60,15 @@ const ResumeWrite = () => {
             title: resumeName,
         });
         console.log(data);
-        console.log(memberCareerRegion);
         navigate("/resume");
     };
 
     const deleteMemberResume = async () => {
         const confirmed = window.confirm("정말로 삭제하시겠습니까?");
         if (confirmed) {
-          const { data } = await api.resume.delete(1);
+          const { data } = await api.resume.delete(resumeId);
           console.log(data);
+          navigate("/resume");
         }
       };      
 
