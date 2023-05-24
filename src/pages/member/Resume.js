@@ -52,8 +52,15 @@ const Resume = () => {
       });
     };
 
+    const getMemberResumeList = async () => {
+      const memberId = sessionStorage.getItem("id");
+      const { data } = await api.resume.retrieveByMember(memberId);
+      setResumeList(data);
+    };
+
     useEffect(() => {
       getResumeNameByStatus();
+      getMemberResumeList();
     }, []);
 
     return (
