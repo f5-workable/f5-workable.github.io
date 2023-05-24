@@ -31,6 +31,13 @@ jobs:
 
       - name: Install dependencies
         run: npm install
+        
+      - name: Setting .env
+        run: |
+          echo "REACT_APP_API_BASE_URL=${{ secrets.REACT_APP_API_BASE_URL }}" >> .env
+          echo "REACT_APP_KAKAO_JAVASCRIPT_KEY=${{ secrets.REACT_APP_KAKAO_JAVASCRIPT_KEY }}" >> .env
+          echo "REACT_APP_KAKAO_REST_KEY=${{ secrets.REACT_APP_KAKAO_REST_KEY }}" >> .env
+          cat .env
 
       - name: Build
         run: npm run build
