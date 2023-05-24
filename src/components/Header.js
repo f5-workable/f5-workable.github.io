@@ -1,7 +1,9 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { MdSearch } from "react-icons/md";
 
 const Header = ({ toggleIsCompany, isLogined, setIsLogined }) => {
+  const navigate = useNavigate();
+
   const handleProfileClick = () => {
     const dropdownMenu = document.querySelector("#dropdown-menu");
     dropdownMenu.classList.toggle("hidden");
@@ -108,27 +110,36 @@ const Header = ({ toggleIsCompany, isLogined, setIsLogined }) => {
                   </li>
                 ) : (
                   <li className="inline-block">
-                    <Link to="/login" className="flex items-center p-2 mr-3 h-10 text-neutral-500">
+                    <Link
+                      to="/login"
+                      className="flex items-center p-2 mr-3 h-10 text-neutral-500"
+                    >
                       로그인/회원가입
                     </Link>
                   </li>
                 )}
 
                 <li className="inline-block before:content-['|'] before:mr-5 text-neutral-300">
-                  <Link
-                    to="/"
-                    className="px-3 py-2 mr-3 h-10 border-2 border-solid border-neutral-200 rounded-3xl text-neutral-500"
+                  <button
+                    className="px-3 py-2 mr-3 h-10 border-2 border-solid border-neutral-200 rounded-3xl text-neutral-500 text-base"
+                    onClick={() => {
+                      // 기업 로그인 가능하게되면 주석 해제, 이전 코드는 삭제
+
+                      // const confirm = window.confirm(
+                      //   "로그아웃하고 기업으로 로그인하시겠습니까?"
+                      // );
+                      // if (confirm) {
+                      //   setIsLogined(false);
+                      //   sessionStorage.removeItem("memberId")
+                      //   localStorage.removeItem("memberId")
+                      //   navigate("/login/company");
+                      // }
+                      toggleIsCompany();
+                      setIsLogined(true);
+                    }}
                   >
-                    <button
-                      className="text-sm"
-                      onClick={() => {
-                        toggleIsCompany();
-                        setIsLogined(true);
-                      }}
-                    >
-                      기업 서비스
-                    </button>
-                  </Link>
+                    기업 서비스
+                  </button>
                 </li>
               </ul>
             </aside>
