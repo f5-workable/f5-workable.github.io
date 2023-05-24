@@ -5,17 +5,19 @@ import { useEffect, useState } from "react";
 const LoginPer = ({ setIsLogined }) => {
   const navigate = useNavigate();
   const [id, setId] = useState("");
-  const [pw, setPw] = useState("");
+  const [password, setPassword] = useState("");
   const [rememberCheck, setRememberCheck] = useState(false);
 
   const handleLogin = async () => {
+    const { data } = await api.member.login({ id, password });
+    console.log(data);
+    sessionStorage.setItem("memberId", data.memberSequenceNumber);
     setIsLogined(true);
     navigate("/");
-    await api.member.login({ id, pw });
 
     if (rememberCheck) {
       localStorage.setItem("id", id);
-      localStorage.setItem("pw", pw);
+      localStorage.setItem("pw", password);
     }
     else {
       localStorage.setItem("id", "");
@@ -25,7 +27,7 @@ const LoginPer = ({ setIsLogined }) => {
 
   const getLoginData = () => {
     setId(localStorage.getItem("id"));
-    setPw(localStorage.getItem("pw"));
+    setPassword(localStorage.getItem("pw"));
     setRememberCheck(localStorage.getItem("id") !== "" && localStorage.getItem("pw") !== "");
   }
 
@@ -69,8 +71,8 @@ const LoginPer = ({ setIsLogined }) => {
                     id="pw"
                     name="pw"
                     className="rounded w-full p-2 my-1.5 bg-gray-200"
-                    value={pw}
-                    onChange={(e) => setPw(e.target.value)}
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                   />
                 </div>
               </div>
