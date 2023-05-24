@@ -2,9 +2,9 @@ import SearchedItems from "../../components/member/searchedItems";
 import SearchDetail from "../../components/member/searchDetail";
 import { useState } from "react";
 import api from "../../api";
+import { IoMdArrowRoundUp } from "react-icons/io";
 import { MdSearch } from "react-icons/md";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useEffect } from "react";
 
 const Search = () => {
   const history = useLocation();
@@ -30,7 +30,7 @@ const Search = () => {
     setIsArrowBtnClicked(false);
   };
 
-  const searchCompanyBoard = async (e) => {
+  const searchCompanyBoard = async (e, changedSortBy) => {
     e.preventDefault();
     const {
       data: { list, total },
@@ -41,21 +41,23 @@ const Search = () => {
       companyType,
       keywordType,
       keyword,
-      sortBy
+      changedSortBy || sortBy
     );
     hiddenDropdown();
     setSearchedTotal(total);
     setBoards(list);
     navigate("/search", {
-      state: { boards: list, searchedTotal: total, scrollY: window.scrollY },
+      state: { boards: list, searchedTotal: total, sortBy: changedSortBy || sortBy },
+      replace: true,
     });
   };
 
-  useEffect(() => {
+  const changeSortByAndSearch = (e) => {
+    setSortBy(e.target.value);
     if (history.state) {
-      window.scrollTo({ top: history.state.scrollY, behavior: "smooth" });
+      searchCompanyBoard(e, e.target.value);
     }
-  }, [history.state]);
+  };
 
   return (
     <main className="w-full h-full py-10">
@@ -77,6 +79,7 @@ const Search = () => {
               onChange={(e) => setKeyword(e.target.value)}
               className="w-full pl-28 px-4 py-4 rounded-3xl border-2 outline-2 focus:outline-indigo-300 text-lg"
               placeholder="검색어를 입력해주세요."
+              autoFocus
             />
             <button className="w-1/12 py-1 bg-transparent text-neutral-500 absolute top-3 right-2 flex justify-center">
               <MdSearch fontSize={28} />
@@ -109,7 +112,8 @@ const Search = () => {
           </h2>
           <select
             className="px-3 py-2 border border-solid border-neutral-300 rounded-lg text-lg text-neutral-600"
-            onChange={(e) => setSortBy(e.target.value)}
+            value={history.state?.sortBy || sortBy}
+            onChange={changeSortByAndSearch}
           >
             <option value="최신순">최신순</option>
             <option value="임금순">임금순</option>
@@ -120,6 +124,12 @@ const Search = () => {
       <div className="w-11/12 lg:w-3/4 h-auto mx-auto">
         <SearchedItems boards={history.state?.boards || boards} />
       </div>
+      <button
+        className="fixed bottom-28 right-16 border border-neutral-500 rounded-full p-3"
+        onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+      >
+        <IoMdArrowRoundUp fontSize={34} className="text-neutral-600" />
+      </button>
     </main>
   );
 };
