@@ -9,10 +9,16 @@ const LoginCom = ({ setIsLogined, toggleIsCompany }) => {
     const data = new FormData(e.target);
     const id = data.get("id");
     const password = data.get("pw");
-    setIsLogined(true);
-    toggleIsCompany();
-    navigate("/");
-    await api.member.login({ id, password });
+    const {
+      data: { message },
+    } = await api.company.login({ id, password });
+    if (message === "로그인에 실패하였습니다.") {
+      alert("아이디나 패스워드가 다릅니다.");
+    } else {
+      setIsLogined(true);
+      toggleIsCompany();
+      navigate("/");
+    }
   };
   return (
     <div className=" my-24">
@@ -25,7 +31,12 @@ const LoginCom = ({ setIsLogined, toggleIsCompany }) => {
                 <label htmlFor="id" className=" block my-1.5 mt-8 font-bold text-xl ">
                   아이디
                 </label>
-                <input id="id" name="id" className="rounded w-full p-2 my-1.5 bg-gray-200" />
+                <input
+                  id="id"
+                  name="id"
+                  className="rounded w-full p-2 my-1.5 bg-gray-200"
+                  autoFocus
+                />
               </div>
               <div>
                 <label htmlFor="pw" className="block my-1.5 font-bold text-xl">
