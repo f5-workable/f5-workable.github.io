@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { MdArrowDropDown, MdArrowDropUp } from "react-icons/md";
 import Location from "./location";
 import CompanyType from "./companyType";
@@ -8,9 +7,15 @@ import CareerType from "./careerType";
 import EducationType from "./educationType";
 
 const SearchDetail = ({ state, setState }) => {
-  const [isArrowBtnClicked, setIsArrowBtnClicked] = useState(false);
-  const { careerType, companyType, educationType, employmentType, location, paymentType } =
-    state;
+  const {
+    careerType,
+    companyType,
+    educationType,
+    employmentType,
+    location,
+    paymentType,
+    isArrowBtnClicked,
+  } = state;
   const {
     setCareerType,
     setCompanyType,
@@ -18,6 +23,7 @@ const SearchDetail = ({ state, setState }) => {
     setEmploymentType,
     setLocation,
     setPaymentType,
+    setIsArrowBtnClicked,
   } = setState;
 
   const initSearchCondition = () => {

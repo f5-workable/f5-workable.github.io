@@ -5,7 +5,7 @@ import CustomSlider from "../../components/member/slider";
 function Home() {
   return (
     <main className="w-full mx-auto">
-      <section className="w-full mt-7 mb-20">
+      <section className="w-full mt-7 mb-20 bg-violet-50">
         <CompanyCustomSlider isHeader />
       </section>
       <section className="w-5/6 lg:w-3/4 mb-20 mx-auto">

@@ -6,22 +6,42 @@ import PieChart from "../../components/member/charts/PieChart";
 import HorizontalBarChart from "../../components/member/charts/HorizontalBarChart";
 import VerticalBarChart from "../../components/member/charts/VerticalBarChart";
 import api from "../../api";
+import { useLocation } from "react-router-dom";
 
 const CompanyDetail = () => {
+  const { pathname } = useLocation();
+
   const [isBookmark, setIsBookmark] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [selectedResumeId, setSelectedResumeId] = useState("");
+  const [board, setBoard] = useState(
+    /** @type {import("../../api/companyBoard").BoardInfo} */ ({})
+  );
+  const [statistics, setStatistics] = useState(
+    /** @type {import("../../api/applicantStatistics").Statistics} */ ([])
+  );
 
   const toggleIsBookmark = () => {
     setIsBookmark((prev) => !prev);
   };
 
-  const getApplicantStatistics = async () => {
-    const { data } = api.applicantStatistics.retrieve(1);
+  const getCompanyInfo = async () => {
+    const { data } = await api.companyBoard.retrieve(1);
+    setBoard(data);
     console.log(data);
   };
 
+  const getApplicantStatistics = async () => {
+    const { data } = await api.applicantStatistics.retrieve(1);
+    setStatistics(data);
+  };
+
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  useEffect(() => {
+    getCompanyInfo();
     getApplicantStatistics();
   }, []);
 
@@ -39,15 +59,21 @@ const CompanyDetail = () => {
                 />
               </section>
               <section className="w-full h-full mt-14">
-                <h2 className="text-2xl font-semibold">업종</h2>
+                <h2 className="text-2xl font-semibold">{board.job_type}</h2>
                 <p className="mt-4 mb-4">기업 형태</p>
                 <div className="flex">
-                  <p className="">회사명</p>
-                  <p className="before:content-['|'] before:mx-3 before:text-neutral-200 text-neutral-400">
+                  <p className="text-neutral-500">{board.c_name}</p>
+                  <p className="before:content-['|'] before:mx-3 before:text-neutral-200 text-neutral-500">
                     주소
                   </p>
                 </div>
-                <p className="mt-4 mb-4">요구 학력</p>
+                <p className="mt-4 mb-4">학력: {board.edu}</p>
+              </section>
+              <section className="w-full h-32 flex flex-col justify-evenly bg-indigo-50 mt-7 pl-10 rounded-md xl:hidden">
+                <div className="text-xl font-medium text-neutral-500">임금</div>
+                <div className="text-2xl font-semibold text-neutral-700">
+                  {board.payment_type} {board.payment}원
+                </div>
               </section>
               <section>
                 <p className="w-full border-neutral-300 my-12 break-words leading-6 whitespace-pre-wrap text-lg text-neutral-600">
@@ -71,8 +97,12 @@ const CompanyDetail = () => {
               <section className="mb-10">
                 <div className="my-8">
                   <div className="mb-5">
+                    <h3 className="text-lg font-semibold text-neutral-500 mb-1">등록일</h3>
+                    <p className="text-lg font-bold">{board.r_date}</p>
+                  </div>
+                  <div className="mb-5">
                     <h3 className="text-lg font-semibold text-neutral-500 mb-1">마감일</h3>
-                    <p className="text-lg font-bold">2023.06.20</p>
+                    <p className="text-lg font-bold">{board.d_date}</p>
                   </div>
                   <div>
                     <h3 className="text-lg font-semibold text-neutral-500 mb-1">근무지역</h3>
@@ -93,7 +123,9 @@ const CompanyDetail = () => {
                         총 지원자 수
                       </h4>
                       <p>
-                        <span className="font-semibold text-6xl text-blue-400">31</span>
+                        <span className="font-semibold text-6xl text-blue-400">
+                          {statistics.total_cnt}
+                        </span>
                         <span className="text-2xl text-neutral-600 align-text-bottom">명</span>
                       </p>
                     </div>
@@ -107,14 +139,16 @@ const CompanyDetail = () => {
                           "56세~65세",
                           "66세 이상",
                         ]}
-                        datasets={[1, 14, 10, 3, 2, 1]}
+                        datasets={statistics["age"]?.map((applicant) => applicant.cnt)}
                         title="연령"
                       />
                     </div>
                     <div className="w-full h-full border border-neutral-300">
                       <VerticalBarChart
                         labels={["남자", "여자"]}
-                        datasets={[12, 19]}
+                        datasets={statistics["gender"]
+                          ?.map((applicant) => applicant.cnt)
+                          .slice(0, -1)}
                         backgroundColor={[
                           "rgba(105, 175, 254, 0.7)",
                           "rgba(253, 127, 142, 0.7)",
@@ -130,31 +164,24 @@ const CompanyDetail = () => {
                     <div className="w-full h-full border border-neutral-300">
                       <HorizontalBarChart
                         labels={["고졸", "대졸", "초대졸", "석사"]}
-                        datasets={[7, 17, 5, 2]}
+                        datasets={statistics["education"]
+                          ?.map((applicant) => applicant.cnt)
+                          .slice(0, -1)}
                         title="학력"
                       />
                     </div>
                     <div className="w-full h-full border border-neutral-300">
                       <PieChart
-                        labels={[
-                          "간장애",
-                          "뇌병변장애",
-                          "뇌전증장애",
-                          "시각장애",
-                          "신장장애",
-                          "심장장애",
-                          "안면장애",
-                          "언어장애",
-                          "자폐성장애",
-                          "장루요루장애",
-                          "정신장애",
-                          "지적장애",
-                          "지체장애",
-                          "호흡기장애",
-                          "특수교육법상장애인",
-                          "국가유공",
-                        ]}
-                        datasets={[0, 0, 0, 1, 2, 1, 5, 0, 4, 5, 0, 5, 2, 1, 1, 2]}
+                        labels={
+                          statistics["ob_type"]
+                            ?.map((applicant) => applicant.type)
+                            .slice(0, -1) || []
+                        }
+                        datasets={
+                          statistics["ob_type"]
+                            ?.map((applicant) => applicant.type !== "total" && applicant.cnt)
+                            .slice(0, -1) || []
+                        }
                         title="장애유형"
                         setLegend={true}
                         setDataLabel={false}
@@ -163,7 +190,9 @@ const CompanyDetail = () => {
                     <div className="w-full h-full border border-neutral-300">
                       <VerticalBarChart
                         labels={["경증", "중증"]}
-                        datasets={[21, 10]}
+                        datasets={statistics["disease"]
+                          ?.map((applicant) => applicant.cnt)
+                          .slice(0, -1)}
                         backgroundColor={["rgba(88, 182, 74, 0.8)", "rgba(252, 177, 92, 0.8)"]}
                         hoverBackgroundColor={[
                           "rgba(88, 182, 74, 1)",
@@ -181,7 +210,9 @@ const CompanyDetail = () => {
               <div className="w-full flex items-center xl:block h-24 xl:h-[18rem] rounded-md xl:p-8">
                 <div className="w-full hidden xl:block">
                   <p className="text-xl font-bold text-neutral-500">임금</p>
-                  <p className="text-3xl font-semibold my-2">월 300만원</p>
+                  <p className="text-3xl font-semibold my-2">
+                    {board.payment_type} {board.payment}원
+                  </p>
                 </div>
                 <div className="w-full flex items-center justify-evenly flex-row xl:flex-col xl:items-center xl:mt-10">
                   <button

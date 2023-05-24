@@ -8,12 +8,12 @@ const ApplicationStatus = () => {
   const [countByStatus, setCountByStatus] = useState([]);
 
   const getCountByStatus = async () => {
-    const { data } = await api.application.count(1);
+    const { data } = await api.apply.count(1);
     setCountByStatus(data);
   };
 
   const getBoardsByState = async (state) => {
-    const { data } = await api.application.retrieveByState(1, state);
+    const { data } = await api.apply.retrieveByState(1, state);
     setStatus(state);
     setBoards(data);
   };
