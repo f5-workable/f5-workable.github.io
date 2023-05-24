@@ -15,7 +15,7 @@ const ApplicationStatus = () => {
   const getBoardsByState = async (state) => {
     const { data } = await api.apply.retrieveByState(1, state);
     setStatus(state);
-    setBoards(data);
+    setBoards(data.list);
   };
 
   useEffect(() => {
@@ -26,7 +26,7 @@ const ApplicationStatus = () => {
     <main className="w-full h-full pt-14 pb-10 ">
       <div className="w-11/12 lg:w-3/4 h-auto mx-auto">
         <div>
-          <h2 className="text-3xl font-semibold text-neutral-800">지원 현황</h2>
+          <h2 className="text-2xl font-semibold text-neutral-800">지원 현황</h2>
         </div>
         <section>
           <div className="w-4/5 mx-auto py-16">
