@@ -4,9 +4,20 @@ on:
   pull_request:
     branches:
       - main
-  push:
-    branches:
-      - main
+
+permissions:
+  actions: write
+  checks: write
+  contents: write
+  deployments: write
+  discussions: write
+  issues: write
+  pages: read
+  packages: write
+  pull-requests: write
+  repository-projects: write
+  security-events: write
+  statuses: write
 
 jobs:
   deploy:
@@ -17,6 +28,13 @@ jobs:
 
       - name: Install dependencies
         run: npm install
+        
+      - name: Setting .env
+        run: |
+          echo "REACT_APP_API_BASE_URL=${{ secrets.REACT_APP_API_BASE_URL }}" >> .env
+          echo "REACT_APP_KAKAO_JAVASCRIPT_KEY=${{ secrets.REACT_APP_KAKAO_JAVASCRIPT_KEY }}" >> .env
+          echo "REACT_APP_KAKAO_REST_KEY=${{ secrets.REACT_APP_KAKAO_REST_KEY }}" >> .env
+          cat .env
 
       - name: Build
         run: npm run build
