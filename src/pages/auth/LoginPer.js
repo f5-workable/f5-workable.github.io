@@ -8,21 +8,23 @@ const LoginPer = ({ setIsLogined }) => {
   const [password, setPassword] = useState("");
   const [rememberCheck, setRememberCheck] = useState(false);
 
-  const handleLogin = async () => {
+  const handleLogin = async (e) => {
+    e.preventDefault();
     const { data } = await api.member.login({ id, password });
     if (data.message === "로그인에 실패하였습니다.") {
       alert("아이디나 패스워드가 다릅니다.");
     } else {
-      sessionStorage.setItem("memberId", data.memberSequenceNumber);
       setIsLogined(true);
       navigate("/");
-      
+
       if (rememberCheck) {
         localStorage.setItem("id", id);
         localStorage.setItem("pw", password);
+        localStorage.setItem("memberId", data.memberSequenceNumber);
       } else {
-        localStorage.setItem("id", "");
-        localStorage.setItem("pw", "");
+        sessionStorage.setItem("id", "");
+        sessionStorage.setItem("pw", "");
+        sessionStorage.setItem("memberId", data.memberSequenceNumber);
       }
     }
   };
@@ -30,7 +32,7 @@ const LoginPer = ({ setIsLogined }) => {
   const getLoginData = () => {
     setId(localStorage.getItem("id"));
     setPassword(localStorage.getItem("pw"));
-    setRememberCheck(localStorage.getItem("id") !== "" && localStorage.getItem("pw") !== "");
+    setRememberCheck(localStorage.getItem("id") && localStorage.getItem("pw"));
   };
 
   useEffect(() => {
@@ -39,7 +41,7 @@ const LoginPer = ({ setIsLogined }) => {
 
   return (
     <>
-      <div className="absolute top-0 left-0 w-screen h-screen bg-black opacity-10 z-10"></div>
+      <div className="absolute w-full h-full bg-black opacity-30 z-10"></div>
       <div className="absolute inset-0 z-0">
         <video
           className="w-full h-full object-cover"
@@ -49,12 +51,12 @@ const LoginPer = ({ setIsLogined }) => {
           muted
         ></video>
       </div>
-      <div className="relative my-16 z-10">
+      <form onSubmit={handleLogin} className="relative my-16 z-10">
         <div
           className="bg-white relative w-3/5 mx-auto shadow-2xl flex content-center rounded-xl"
           name="container"
         >
-          <div className="w-1/2 p-10">
+          <div className="w-1/2 p-10 border-r-4 border-neutral-100">
             <div className="text-center text-3xl font-bold">로그인</div>
             <div className="flex justify-center">
               <div>
@@ -90,18 +92,16 @@ const LoginPer = ({ setIsLogined }) => {
               <span className="text-sm">
                 <input
                   type="checkbox"
+                  id="rememberCheck"
                   onClick={() => setRememberCheck((prevCheck) => !prevCheck)}
                   checked={rememberCheck}
                 />
-                로그인 정보 기억하기
+                <label htmlFor="rememberCheck" className="ml-1">로그인 정보 기억하기</label>
               </span>
               <span className="underline text-sm">Fotgot your password?</span>
             </div>
             <div className="flex justify-center">
-              <button
-                className=" bg-orange-200 hover:bg-orange-400 rounded-md py-2 px-5"
-                onClick={handleLogin}
-              >
+              <button className=" bg-orange-200 hover:bg-orange-400 rounded-md py-2 px-5">
                 로그인
               </button>
             </div>
@@ -117,7 +117,7 @@ const LoginPer = ({ setIsLogined }) => {
             <img src="/images/loginMemberRight.PNG" alt="loginRight" loading="lazy" />
           </div>
         </div>
-      </div>
+      </form>
     </>
   );
 };

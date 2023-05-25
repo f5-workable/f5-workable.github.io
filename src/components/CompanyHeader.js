@@ -10,8 +10,11 @@ const CompanyHeader = ({ toggleIsCompany, isLogined, setIsLogined }) => {
   };
 
   const handleLogout = () => {
-    handleProfileClick();
     setIsLogined(false);
+    localStorage.removeItem("id");
+    localStorage.removeItem("pw");
+    sessionStorage.removeItem("id");
+    sessionStorage.removeItem("pw");
   };
 
   return (
