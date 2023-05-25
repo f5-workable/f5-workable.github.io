@@ -10,8 +10,6 @@ const Resume = () => {
   const [selectedResumeIndex, setSelectedResumeIndex] = useState(null);
   const navigate = useNavigate();
 
-  console.log(resumeList);
-
   const handleCreateClick = () => {
     if (resumeList.length < 3) {
       addMemberResume();

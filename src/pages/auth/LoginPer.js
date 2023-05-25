@@ -98,7 +98,7 @@ const LoginPer = ({ setIsLogined }) => {
                 />
                 <label htmlFor="rememberCheck" className="ml-1">로그인 정보 기억하기</label>
               </span>
-              <span className="underline text-sm">Fotgot your password?</span>
+              <span className="underline text-sm"><Link to="/FindPwPer">Fotgot your password?</Link></span>
             </div>
             <div className="flex justify-center">
               <button className=" bg-orange-200 hover:bg-orange-400 rounded-md py-2 px-5">
