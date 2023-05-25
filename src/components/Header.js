@@ -10,8 +10,13 @@ const Header = ({ toggleIsCompany, isLogined, setIsLogined }) => {
   };
 
   const handleLogout = () => {
-    handleProfileClick();
     setIsLogined(false);
+    localStorage.removeItem("id");
+    localStorage.removeItem("pw");
+    localStorage.removeItem("memberId");
+    sessionStorage.removeItem("id");
+    sessionStorage.removeItem("pw");
+    sessionStorage.removeItem("memberId");
   };
   return (
     <>

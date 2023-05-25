@@ -12,7 +12,7 @@ const LoginCom = ({ setIsLogined, toggleIsCompany }) => {
     e.preventDefault();
     const {
       data: { message },
-    } = await api.company.login({ id, password });
+    } = await api.company.login({ c_id:id, c_password:password });
     if (message === "로그인에 실패하였습니다.") {
       alert("아이디나 패스워드가 다릅니다.");
     } else {
@@ -33,7 +33,7 @@ const LoginCom = ({ setIsLogined, toggleIsCompany }) => {
   const getLoginData = () => {
     setId(localStorage.getItem("id"));
     setPassword(localStorage.getItem("pw"));
-    setRememberCheck(localStorage.getItem("id") !== "" && localStorage.getItem("pw") !== "");
+    setRememberCheck(localStorage.getItem("id") && localStorage.getItem("pw"));
   };
 
   useEffect(() => {
@@ -42,6 +42,7 @@ const LoginCom = ({ setIsLogined, toggleIsCompany }) => {
 
   return (
     <>
+      <div className="absolute w-full h-full bg-black opacity-30 z-10"></div>
       <div className="absolute inset-0 z-0">
         <video
           className="w-full h-full object-cover"
@@ -51,9 +52,9 @@ const LoginCom = ({ setIsLogined, toggleIsCompany }) => {
           muted
         ></video>
       </div>
-      <div className="relative my-16 z-10">
-        <div className="bg-white relative w-3/5 mx-auto shadow-2xl flex content-center">
-          <div className="w-1/2 p-10">
+      <form onSubmit={handleLogin} className="relative my-16 z-10">
+        <div className="bg-white relative w-3/5 mx-auto shadow-2xl flex content-center rounded-xl">
+          <div className="w-1/2 p-10 border-r-4 border-neutral-100">
             <div className="text-center text-3xl font-bold">로그인</div>
             <div className="flex justify-center">
               <div>
@@ -88,18 +89,16 @@ const LoginCom = ({ setIsLogined, toggleIsCompany }) => {
               <span className="text-sm">
                 <input
                   type="checkbox"
+                  id="rememberCheck"
                   onClick={() => setRememberCheck((prevCheck) => !prevCheck)}
                   checked={rememberCheck}
                 />
-                로그인 정보 기억하기
+                <label htmlFor="rememberCheck">로그인 정보 기억하기</label>
               </span>
               <span className="underline text-sm">Fotgot your password?</span>
             </div>
             <div className="flex justify-center">
-              <button
-                className=" bg-blue-200 hover:bg-blue-400 rounded-md py-2 px-5"
-                onClick={handleLogin}
-              >
+              <button className=" bg-blue-200 hover:bg-blue-400 rounded-md py-2 px-5">
                 로그인
               </button>
             </div>
@@ -115,7 +114,7 @@ const LoginCom = ({ setIsLogined, toggleIsCompany }) => {
             <img src="/images/loginCompanyRight.PNG" alt="loginRight" loading="lazy" />
           </div>
         </div>
-      </div>
+      </form>
     </>
   );
 };
