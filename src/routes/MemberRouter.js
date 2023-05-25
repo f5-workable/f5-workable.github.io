@@ -8,6 +8,8 @@ import LoginPer from "../pages/auth/LoginPer";
 import SignUpPer from "../pages/auth/SignUpPer";
 import LoginCom from "../pages/auth/LoginCom";
 import SignUpCom from "../pages/auth/SignUpCom";
+import FindPwPer from "../pages/auth/FindPwPer";
+import SetNewPwPer from "../pages/auth/SetNewPwPer";
 import UserDetail from "../pages/member/UserDetail";
 import UserDetailModify from "../pages/member/UserDetailModify";
 import Search from "../pages/member/Search";
@@ -70,6 +72,8 @@ const MemberRouter = ({ toggleIsCompany, isLogined, setIsLogined }) => {
         <Route path="/status/application" element={<ApplicationStatus />} />
         <Route path="/userdetail" element={<UserDetail />} />
         <Route path="/userdetailmodify" element={<UserDetailModify />} />
+        <Route path="/findpwper" element={<FindPwPer />} />
+        <Route path="/setnewpwper" element={<SetNewPwPer />} />
       </Route>
     </Routes>
   );
