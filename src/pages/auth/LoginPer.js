@@ -95,7 +95,7 @@ const LoginPer = ({ setIsLogined }) => {
                 />
                 로그인 정보 기억하기
               </span>
-              <span className="underline text-sm">Fotgot your password?</span>
+              <span className="underline text-sm"><Link to="/FindPwPer">Fotgot your password?</Link></span>
             </div>
             <div className="flex justify-center">
               <button
