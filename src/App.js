@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CompanyRouter from "./routes/CompanyRouter";
 import MemberRouter from "./routes/MemberRouter";
 
@@ -10,17 +10,22 @@ function App() {
     setIsCompany((prev) => !prev);
   };
 
+  useEffect(() => {
+    const memberId = localStorage.getItem("memberId");
+    memberId ? setIsLogined(true) : setIsLogined(false);
+  }, []);
+
   return (
     <>
       {isLogined && isCompany ? (
         <CompanyRouter
-        toggleIsCompany={toggleIsCompany}
+          toggleIsCompany={toggleIsCompany}
           isLogined={isLogined}
           setIsLogined={setIsLogined}
         />
       ) : (
         <MemberRouter
-        toggleIsCompany={toggleIsCompany}
+          toggleIsCompany={toggleIsCompany}
           isLogined={isLogined}
           setIsLogined={setIsLogined}
         />
