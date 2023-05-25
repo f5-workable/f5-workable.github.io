@@ -15,7 +15,6 @@ const CompanyDetail = () => {
 
   const [isBookmark, setIsBookmark] = useState(false);
   const [showModal, setShowModal] = useState(false);
-  const [selectedResumeId, setSelectedResumeId] = useState("");
   const [board, setBoard] = useState(
     /** @type {import("../../api/companyBoard").BoardInfo} */ ({})
   );
@@ -247,8 +246,8 @@ const CompanyDetail = () => {
       </main>
       <div className="block xl:hidden w-full h-24"></div>
       <ResumeSelectModal
-        state={{ showModal, selectedResumeId }}
-        setState={{ setShowModal, setSelectedResumeId }}
+        state={{ showModal }}
+        setState={{ setShowModal }}
       />
     </>
   );
