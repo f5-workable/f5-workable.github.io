@@ -11,7 +11,6 @@ const Resume = () => {
 
     const handleCreateClick = () => {
       if (resumeList.length < 3) {
-        setResumeList([...resumeList, {}]);
         addMemberResume();
       }
     };
@@ -38,12 +37,13 @@ const Resume = () => {
         pr: null,
         title: null,
       });
+      getMemberResumeList();
     };
 
     const getMemberResumeList = async () => {
       const memberId = sessionStorage.getItem("memberId");
       const { data } = await api.resume.retrieveByMember(memberId);
-      setResumeList(data);
+      setResumeList(data.list);
     };
 
     useEffect(() => {
