@@ -6,6 +6,7 @@ import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
+document.body.style.zoom = "90%";
 root.render(
   <React.StrictMode>
     <BrowserRouter basename={process.env.PUBLIC_URL}>
