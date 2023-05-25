@@ -63,5 +63,7 @@ const member = {
    * @returns
    */
   delete: (id) => request.get(`/member/delete/${id}`),
+
+  findPassword: (id, name, phone) => request.post(`/member/${id}/password?id=${id}&name=${name}&phone=${phone}`),
 };
 export default member;

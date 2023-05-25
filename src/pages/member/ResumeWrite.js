@@ -4,6 +4,7 @@ import Disorder from "../../components/member/resumeDetail/Disorder";
 import Location from "../../components/member/searchDetail/location";
 import api from "../../api";
 import resume from "../../api/resume";
+import { async } from "q";
 
 const ResumeWrite = () => {
     const navigate = useNavigate();
@@ -25,6 +26,7 @@ const ResumeWrite = () => {
     const [memberSelf, setMemberSelf] = useState("");
 
     const { resumeId } = useParams();
+    const { memberId } = localStorage.getItem("memberId") || sessionStorage.getItem("memberId");
 
     const getMemberResume = async () => {
         const { data } = await api.resume.retrieve(resumeId);
@@ -42,6 +44,16 @@ const ResumeWrite = () => {
         setMemberSelf(data.pr === null ? "" : data.pr);
         console.log(data);
     };
+
+    const getMemberData = async () => {
+        const { data } = await api.member.retrieve(memberId);
+        console.log(data);
+        setMemberName(data.name);
+        setMemberPhone(data.phone);
+        setMemberAge(data.birth);
+        setMemberEmail(data.email);
+        setMemberGender(data.gender);
+    }
 
     const updateMemberResume = async () => {
         console.log(memberCareerRegion);
@@ -74,6 +86,7 @@ const ResumeWrite = () => {
 
     useEffect(() => {
         getMemberResume();
+        getMemberData();
     }, []);
 
     return (
@@ -88,24 +101,24 @@ const ResumeWrite = () => {
                     <div className="py-10 flex flex-raw">
                         <div className="bg-gray-300 w-48 h-64"></div>
                         <div className="px-5 flex flex-col justify-center">
-                            <input className="pb-10 text-3xl font-bold bg-white" value={"이예림"} disabled />
+                            <input className="pb-10 text-3xl font-bold bg-white" value={memberName} disabled />
                             <div className="flex flex-raw">
                                 <label className=" w-20 text-xl font-bold">성별</label>
-                                <input className=" text-xl font-bold italic bg-white" type="phone" value={"여자"} disabled />
+                                <input className=" text-xl font-bold italic bg-white" type="phone" value={memberGender} disabled />
                             </div>
                             <div className="flex flex-raw">
                                 <label className=" w-20 text-xl font-bold">나이</label>
                                 <p className="pr-5 text-xl font-bold italic">만</p>
-                                <input className=" w-8 text-xl font-bold italic bg-white" type="phone" value={"23"} disabled />
+                                <input className=" w-8 text-xl font-bold italic bg-white" type="phone" value={memberAge} disabled />
                                 <p className="text-xl font-bold italic">세</p>
                             </div>
                             <div className="flex flex-raw">
                                 <label className=" w-20 text-xl font-bold">연락처</label>
-                                <input className=" text-xl font-bold italic bg-white" type="phone" value={"010-3047-5988"} disabled />
+                                <input className=" text-xl font-bold italic bg-white" type="phone" value={memberPhone} disabled />
                             </div>
                             <div className="flex flex-raw">
                                 <label className=" w-20 text-xl font-bold">이메일</label>
-                                <input className="text-xl font-bold italic bg-white" type="email" value={"yerim1215jg@naver.com"} disabled />
+                                <input className="text-xl font-bold italic bg-white" type="email" value={memberEmail} disabled />
                             </div>
                         </div>
                     </div>
