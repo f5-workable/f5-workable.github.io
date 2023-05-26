@@ -32,6 +32,7 @@ const Search = () => {
 
   const searchCompanyBoard = async (e, changedSortBy) => {
     e.preventDefault();
+    const memberId = localStorage.getItem("memberId") || sessionStorage.getItem("memberId");
     const {
       data: { list, total },
     } = await api.companyBoard.search(
@@ -41,7 +42,8 @@ const Search = () => {
       companyType,
       keywordType,
       keyword,
-      changedSortBy || sortBy
+      changedSortBy || sortBy,
+      memberId
     );
     hiddenDropdown();
     setSearchedTotal(total);
