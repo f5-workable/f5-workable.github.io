@@ -52,9 +52,10 @@ const companyBoard = {
   /**
    *
    * @param {number} id 구직공고 시퀀스 아이디
+   * @param {number} memberId 구직공고 시퀀스 아이디
    * @returns {{data: BoardInfo}}
    */
-  retrieve: (id) => request.get(`/jobinfo/${id}`),
+  retrieve: (id, memberId) => request.get(`/jobinfo/select?id=${id}&memberId=${memberId}`),
 
   /**
    *
