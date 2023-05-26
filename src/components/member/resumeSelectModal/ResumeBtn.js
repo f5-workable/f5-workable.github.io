@@ -4,6 +4,7 @@ const ResumeBtn = ({ state, setState, resume }) => {
   const handleBtnClick = () => {
     setState(resume.r_id);
   };
+  console.log(resume.r_default, resume.r_id);
   return (
     <button
       type="radio"
@@ -15,9 +16,7 @@ const ResumeBtn = ({ state, setState, resume }) => {
       }`}
       onClick={handleBtnClick}
     >
-      {resume.r_default === resume.r_id && (
-        <MdStar fontSize={30} className="text-yellow-500" />
-      )}
+      {resume.r_default && <MdStar fontSize={30} className="text-yellow-500" />}
       {resume.title}
     </button>
   );
