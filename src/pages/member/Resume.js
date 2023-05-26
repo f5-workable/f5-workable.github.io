@@ -58,7 +58,13 @@ const Resume = () => {
     const { data } = await api.resume.retrieveByMember(memberId);
     console.log(data);
     setResumeList(data.list);
+    data.list.forEach((memberResume, index) => {
+      if (memberResume.r_default) {
+        setSelectedResumeIndex(index);
+      }
+    });
   };
+  
 
   useEffect(() => {
     const memberId = localStorage.getItem("memberId") || sessionStorage.getItem("memberId");
