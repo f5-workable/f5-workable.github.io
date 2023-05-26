@@ -5,9 +5,11 @@ import { useState } from "react";
 
 const Bookmark = () => {
   const [boards, setBoards] = useState([]);
+  
   const getBookmarks = async () => {
-    const { data } = await api.bookmark.retrieveByMemberId(1);
-    setBoards(data.list)
+    const memberId = localStorage.getItem("memberId") || sessionStorage.getItem("memberId");
+    const { data } = await api.bookmark.retrieveByMemberId(memberId);
+    setBoards(data.list);
   };
 
   useEffect(() => {

@@ -39,7 +39,7 @@ const Resume = () => {
     const memberId = localStorage.getItem("memberId") || sessionStorage.getItem("memberId");
     await api.resume.add({
       age: "",
-      place: "null",
+      place: [],
       education: "",
       job: "",
       payment_type: "",

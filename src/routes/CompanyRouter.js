@@ -7,6 +7,7 @@ import ApplicantStatus from "../pages/company/ApplicantStatus";
 import UserDetail from "../pages/company/UserDetail";
 import UserDetailModify from "../pages/company/UserDetailModify";
 import ResumeRead from "../pages/company/ResumeRead";
+import CompanyDetail from "../pages/company/CompanyDetail";
 
 const CompanyRouter = ({ toggleIsCompany, isLogined, setIsLogined }) => {
   return (
@@ -38,6 +39,17 @@ const CompanyRouter = ({ toggleIsCompany, isLogined, setIsLogined }) => {
           element={
             <>
               <ResumeRead />
+              <div className="hidden xl:block">
+                <Footer />
+              </div>
+            </>
+          }
+        />
+        <Route
+          path="/jobs/:jobId"
+          element={
+            <>
+              <CompanyDetail />
               <div className="hidden xl:block">
                 <Footer />
               </div>

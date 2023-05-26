@@ -15,7 +15,9 @@ const ResumeBtn = ({ state, setState, resume }) => {
       }`}
       onClick={handleBtnClick}
     >
-      <MdStar fontSize={30} className="text-yellow-500" />
+      {resume.r_default === resume.r_id && (
+        <MdStar fontSize={30} className="text-yellow-500" />
+      )}
       {resume.title}
     </button>
   );

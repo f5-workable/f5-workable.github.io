@@ -73,9 +73,18 @@ const companyBoard = {
    * @param {string[]} keyword 검색어
    * @returns {{data: BoardInfo[]}}
    */
-  search: (employment_type, payment_type, address, c_type, job_type, keyword, sort) =>
+  search: (
+    employment_type,
+    payment_type,
+    address,
+    c_type,
+    job_type,
+    keyword,
+    sort,
+    memberId
+  ) =>
     request.get(
-      `/jobinfo/search?employment_type=${employment_type}&payment_type=${payment_type}&address=${address}&c_type=${c_type}&job_type=${job_type}&keyword=${keyword}&sort=${sort}`
+      `/jobinfo/search?employment_type=${employment_type}&payment_type=${payment_type}&address=${address}&c_type=${c_type}&job_type=${job_type}&keyword=${keyword}&sort=${sort}&memberId=${memberId}`
     ),
 
   /**

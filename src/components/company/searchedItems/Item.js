@@ -11,10 +11,14 @@ const Item = ({ resume }) => {
         />
       </div>
       <div className="w-full h-2/5 relative">
-        <p className="pt-2 text-lg font-bold">이름</p>
-        <p className="pt-1 text-neutral-500 font-medium truncate break-all">장애유형 | 중증여부</p>
-        <p className="py-2 text-neutral-500 truncate break-all">희망직종</p>
-        <p className="mt-5 font-semibold absolute bottom-2">희망 임금 (원)</p>
+        <p className="pt-2 text-lg font-bold">{resume.name || "이름없음"}</p>
+        <p className="pt-1 text-neutral-400 font-medium truncate break-all">
+          {resume.ob_type} | {resume.disease}
+        </p>
+        <p className="py-2 text-neutral-500 truncate break-all">희망업종: {resume.job}</p>
+        <p className="mt-5 font-semibold absolute bottom-2">
+          {resume.payment_type} {resume.payment.toLocaleString()}원
+        </p>
       </div>
     </Link>
   );

@@ -1,20 +1,17 @@
 import { useEffect, useState } from "react";
-import { MdBookmark, MdBookmarkBorder } from "react-icons/md";
-import ResumeSelectModal from "../../components/member/resumeSelectModal";
 import KakaoMap from "../../components/KakaoMap";
 import PieChart from "../../components/charts/PieChart";
 import HorizontalBarChart from "../../components/charts/HorizontalBarChart";
 import VerticalBarChart from "../../components/charts/VerticalBarChart";
 import api from "../../api";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useCallback } from "react";
 
 const CompanyDetail = () => {
   const { pathname } = useLocation();
   const { jobId } = useParams();
+  const navigate = useNavigate();
 
-  const [isBookmark, setIsBookmark] = useState(false);
-  const [showModal, setShowModal] = useState(false);
   const [board, setBoard] = useState(
     /** @type {import("../../api/companyBoard").BoardInfo} */ ({})
   );
@@ -25,33 +22,9 @@ const CompanyDetail = () => {
   const regex = /(^[가-힣]+시 [가-힣]+구)|(^[가-힣]+도 [가-힣]+[시|군|구])/g;
   const shortAddress = board.address?.match(regex).join("");
 
-  const addBookmark = async () => {
-    setIsBookmark((prev) => !prev);
-    await api.bookmark.add(1, board.j_id);
-  };
-
-  const deleteBookmark = async () => {
-    setIsBookmark((prev) => !prev);
-    await api.bookmark.delete(1, board.j_id);
-  };
-
   const getCompanyInfo = useCallback(async () => {
     const { data } = await api.companyBoard.retrieve(jobId);
     setBoard(data);
-    setIsBookmark(data.state);
-    // 로컬스토리지 최근 본 공고 배열에 추가
-    const prevRecentViewedBoard = JSON.parse(localStorage.getItem("recentViewedBoard"));
-    if (prevRecentViewedBoard) {
-      // 중복 제거
-      const filteredRecentViewedBoard = [...prevRecentViewedBoard].filter(
-        (board) => board.j_id !== data.j_id
-      );
-      filteredRecentViewedBoard.push(data);
-
-      localStorage.setItem("recentViewedBoard", JSON.stringify(filteredRecentViewedBoard));
-    } else {
-      localStorage.setItem("recentViewedBoard", JSON.stringify([data]));
-    }
   }, [jobId]);
 
   const getApplicantStatistics = useCallback(async () => {
@@ -226,30 +199,14 @@ const CompanyDetail = () => {
                     {board.payment_type} {board.payment?.toLocaleString()}원
                   </p>
                 </div>
-                <div className="w-full flex items-center justify-evenly flex-row xl:flex-col xl:items-center xl:mt-10">
-                  {isBookmark ? (
-                    <button
-                      onClick={deleteBookmark}
-                      className="w-[45%] xl:w-full h-14 xl:mb-3 border-2 border-solid border-blue-500 text-blue-500 rounded-[2rem] text-lg font-semibold flex justify-center items-center"
-                    >
-                      <MdBookmark fontSize={26} className="align-middle mr-1" />
-                      북마크 완료
-                    </button>
-                  ) : (
-                    <button
-                      onClick={addBookmark}
-                      className="w-[45%] xl:w-full h-14 xl:mb-3 border-2 border-solid border-blue-500 text-blue-500 rounded-[2rem] text-lg font-semibold flex justify-center items-center"
-                    >
-                      <MdBookmarkBorder fontSize={26} className="align-middle mr-1" />
-                      북마크하기
-                    </button>
-                  )}
-
+                <div className="w-full flex items-center justify-evenly flex-row xl:flex-col xl:items-center xl:mt-24">
                   <button
-                    onClick={() => setShowModal(true)}
+                    onClick={() =>
+                      navigate("/status/applicant", { state: { clickedBoardId: board.j_id } })
+                    }
                     className="w-[45%] xl:w-full h-14 bg-blue-500 text-white rounded-[2rem] text-lg font-semibold"
                   >
-                    지원하기
+                    지원자 보기
                   </button>
                 </div>
               </div>
@@ -258,7 +215,6 @@ const CompanyDetail = () => {
         </div>
       </main>
       <div className="block xl:hidden w-full h-24"></div>
-      <ResumeSelectModal state={{ showModal }} setState={{ setShowModal }} />
     </>
   );
 };

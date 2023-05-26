@@ -12,7 +12,7 @@ const Item = ({ board }) => {
     const memberId = localStorage.getItem("memberId") || sessionStorage.getItem("memberId");
     if (memberId) {
       setIsBookmark((prev) => !prev);
-      await api.bookmark.add(1, board.j_id);
+      await api.bookmark.add(memberId, board.j_id);
     } else {
       const confirm = window.confirm("로그인이 필요한 서비스입니다. 로그인하시겠습니까?");
       confirm && navigate("/login");
@@ -20,8 +20,9 @@ const Item = ({ board }) => {
   };
 
   const deleteBookmark = async () => {
+    const memberId = localStorage.getItem("memberId") || sessionStorage.getItem("memberId");
     setIsBookmark((prev) => !prev);
-    await api.bookmark.delete(1, board.j_id);
+    await api.bookmark.delete(memberId, board.j_id);
   };
 
   const regex = /(^[가-힣]+시 [가-힣]+구)|(^[가-힣]+도 [가-힣]+[시|군|구])/g;

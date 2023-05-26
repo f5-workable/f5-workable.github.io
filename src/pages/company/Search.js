@@ -30,18 +30,8 @@ const Search = () => {
     setIsArrowBtnClicked(false);
   };
 
-  const searchResumes = async (e, changedSortBy) => {
+  const searchResumes = async (e) => {
     e.preventDefault();
-    console.log(
-      paymentType,
-      severityType,
-      disabilityType,
-      location,
-      educationType,
-      keyword,
-      keywordType,
-      changedSortBy || sortBy
-    );
     const {
       data: { list, total },
     } = await api.resume.search(
@@ -54,6 +44,7 @@ const Search = () => {
       keywordType,
       sortBy
     );
+    console.log(list);
     hiddenDropdown();
     setSearchedTotal(total);
     setResumes(list);
@@ -65,6 +56,7 @@ const Search = () => {
 
   const changeSortByAndSearch = (e) => {
     setSortBy(e.target.value);
+    // 검색된 결과가 있다면 정렬 기준과 함께 바로 재검색
     if (history.state) {
       searchResumes(e, e.target.value);
     }
