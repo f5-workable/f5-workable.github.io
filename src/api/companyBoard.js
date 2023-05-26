@@ -51,11 +51,11 @@ const companyBoard = {
 
   /**
    *
-   * @param {number} id 구직공고 시퀀스 아이디
-   * @param {number} memberId 구직공고 시퀀스 아이디
+   * @param {number} j_id 구직공고 시퀀스 아이디
+   * @param {number} memberId 멤버 시퀀스 아이디
    * @returns {{data: BoardInfo}}
    */
-  retrieve: (id, memberId) => request.get(`/jobinfo/select?id=${id}&memberId=${memberId}`),
+  retrieve: (j_id, memberId) => request.get(`/jobinfo/select?j_id=${j_id}&memberId=${memberId}`),
 
   /**
    *
@@ -72,6 +72,10 @@ const companyBoard = {
    * @param {string[]} tempcompany_type 기업형태
    * @param {string[]} tempjob_type 검색형태
    * @param {string[]} keyword 검색어
+   * @param {string} sort 정렬기준
+   * @param {string} memberId 멤버 시퀀스 아이디
+   * @param {number} pageNum 불러올 페이지 인덱스
+   * @param {number} pageSize 한 페이지에 불러올 데이터 수
    * @returns {{data: BoardInfo[]}}
    */
   search: (
@@ -82,10 +86,12 @@ const companyBoard = {
     job_type,
     keyword,
     sort,
-    memberId
+    memberId,
+    pageNum = 1,
+    pageSize = 12
   ) =>
     request.get(
-      `/jobinfo/search?employment_type=${employment_type}&payment_type=${payment_type}&address=${address}&c_type=${c_type}&job_type=${job_type}&keyword=${keyword}&sort=${sort}&memberId=${memberId}`
+      `/jobinfo/search?employment_type=${employment_type}&payment_type=${payment_type}&address=${address}&c_type=${c_type}&job_type=${job_type}&keyword=${keyword}&sort=${sort}&pageNum=${pageNum}&pageSize=${pageSize}&memberId=${memberId}`
     ),
 
   /**
