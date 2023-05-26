@@ -10,7 +10,8 @@ function Home() {
   recentViewedBoards?.reverse();
 
   const getRecentRegisteredBoards = async () => {
-    const { data } = await api.companyBoard.search([], [], [], [], [], [], "최신순");
+    const memberId = localStorage.getItem("memberId") || sessionStorage.getItem("memberId");
+    const { data } = await api.companyBoard.search([], [], [], [], [], [], "최신순", memberId);
     setRecentRegisteredBoards(data.list);
   };
 
