@@ -82,7 +82,7 @@ const ResumeWrite = () => {
           console.log(data);
           navigate("/resume");
         }
-      };      
+      };
 
     useEffect(() => {
         getMemberResume();
