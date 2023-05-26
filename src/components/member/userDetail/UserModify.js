@@ -55,14 +55,14 @@ const UserModify = () => {
                 <div className=" h-60">
                     <label className=" text-xl font-bold px-10">비밀번호</label>
                     <hr className=" bg-black h-0.5"></hr>
-                    {/* <div>
+                    <div>
                         <label className=" text-xl font-bold px-10">새로운 비밀번호 입력</label>
                         <input type="password" className=" w-80 text-lg font-bold italic bg-white my-5 border-2" />
                     </div>
                     <div>
                         <label className=" text-xl font-bold px-10">새로운 비밀번호 확인</label>
                         <input type="password" className=" w-80 text-lg font-bold italic bg-white my-5 border-2" />
-                    </div> */}
+                    </div>
                     <hr></hr>
                 </div>
                 <div className=" h-32">
