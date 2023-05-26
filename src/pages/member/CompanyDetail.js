@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { MdBookmark, MdBookmarkBorder } from "react-icons/md";
 import ResumeSelectModal from "../../components/member/resumeSelectModal";
-import KakaoMap from "../../components/member/KakaoMap";
-import PieChart from "../../components/member/charts/PieChart";
-import HorizontalBarChart from "../../components/member/charts/HorizontalBarChart";
-import VerticalBarChart from "../../components/member/charts/VerticalBarChart";
+import KakaoMap from "../../components/KakaoMap";
+import PieChart from "../../components/charts/PieChart";
+import HorizontalBarChart from "../../components/charts/HorizontalBarChart";
+import VerticalBarChart from "../../components/charts/VerticalBarChart";
 import api from "../../api";
 import { useLocation, useParams } from "react-router-dom";
 import { useCallback } from "react";
@@ -39,6 +39,19 @@ const CompanyDetail = () => {
     const { data } = await api.companyBoard.retrieve(jobId);
     setBoard(data);
     setIsBookmark(data.state);
+    // 로컬스토리지 최근 본 공고 배열에 추가
+    const prevRecentViewedBoard = JSON.parse(localStorage.getItem("recentViewedBoard"));
+    if (prevRecentViewedBoard) {
+      // 중복 제거
+      const filteredRecentViewedBoard = [...prevRecentViewedBoard].filter(
+        (board) => board.j_id !== data.j_id
+      );
+      filteredRecentViewedBoard.push(data);
+
+      localStorage.setItem("recentViewedBoard", JSON.stringify(filteredRecentViewedBoard));
+    } else {
+      localStorage.setItem("recentViewedBoard", JSON.stringify([data]));
+    }
   }, [jobId]);
 
   const getApplicantStatistics = useCallback(async () => {
@@ -245,10 +258,7 @@ const CompanyDetail = () => {
         </div>
       </main>
       <div className="block xl:hidden w-full h-24"></div>
-      <ResumeSelectModal
-        state={{ showModal }}
-        setState={{ setShowModal }}
-      />
+      <ResumeSelectModal state={{ showModal }} setState={{ setShowModal }} />
     </>
   );
 };
