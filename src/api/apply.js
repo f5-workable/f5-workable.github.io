@@ -41,7 +41,7 @@ const apply = {
    * @param {number} r_id 선택된 이력서 아이디
    * @returns
    */
-  add: (j_id, r_id) => request.post("/apply", {}, { params: { j_id, r_id } }),
+  add: (j_id, r_id) => request.post("/apply", {}, { params: { jobinfo: j_id, resume: r_id } }),
 
   /**
    *
