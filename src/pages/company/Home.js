@@ -1,12 +1,26 @@
 import { MdAdd } from "react-icons/md";
-import CompanyCustomSlider from "../../components/company/slider";
-import CustomSlider from "../../components/member/slider";
+import HeaderSlider from "../../components/company/slider/header";
+import CustomCompanySlider from "../../components/company/slider/company";
+import CustomMemberSlider from "../../components/company/slider/member";
+import { useEffect, useState } from "react";
+import api from "../../api";
 
 function Home() {
+  const [companyBoards, setCompanyBoards] = useState();
+
+  const getBoardsByCompanyId = async (companyId) => {
+    const { data } = await api.companyBoard.retrieveByCompanyId(companyId);
+    setCompanyBoards(data);
+  };
+
+  useEffect(() => {
+    getBoardsByCompanyId(1);
+  }, []);
+
   return (
     <main className="w-full mx-auto">
       <section className="w-full mt-7 mb-20 bg-violet-50">
-        <CompanyCustomSlider isHeader />
+        <HeaderSlider />
       </section>
       <section className="w-5/6 lg:w-3/4 mb-20 mx-auto">
         <div className="flex items-center border-b border-solid pb-3 border-neutral-500">
@@ -16,7 +30,7 @@ function Home() {
             fontSize={30}
           />
         </div>
-        <CustomSlider />
+        <CustomCompanySlider boards={companyBoards} />
       </section>
       <section className="w-5/6 lg:w-3/4 mb-20 mx-auto">
         <div className="flex items-center border-b border-solid pb-3 border-neutral-500">
@@ -26,7 +40,7 @@ function Home() {
             fontSize={30}
           />
         </div>
-        <CompanyCustomSlider />
+        <CustomMemberSlider />
       </section>
       <section className="w-5/6 lg:w-3/4 mb-20 mx-auto">
         <div className="flex items-center border-b border-solid pb-3 border-neutral-500">
@@ -36,7 +50,7 @@ function Home() {
             fontSize={30}
           />
         </div>
-        <CompanyCustomSlider />
+        <CustomMemberSlider />
       </section>
     </main>
   );
