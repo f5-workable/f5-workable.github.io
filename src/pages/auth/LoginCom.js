@@ -10,10 +10,9 @@ const LoginCom = ({ setIsLogined, toggleIsCompany }) => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    const {
-      data: { message },
-    } = await api.company.login({ c_id:id, c_password:password });
-    if (message === "로그인에 실패하였습니다.") {
+    const { data } = await api.company.login({ c_id: id, c_password: password });
+    console.log(data);
+    if (data.message === "로그인에 실패하였습니다.") {
       alert("아이디나 패스워드가 다릅니다.");
     } else {
       setIsLogined(true);
