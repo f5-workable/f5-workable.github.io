@@ -1,20 +1,27 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import SearchedItems from "../../components/company/searchedItems";
 import CompanyBoardAside from "../../components/company/companyBoardAside";
 import api from "../../api";
+import { useLocation } from "react-router-dom";
 
 const ApplicantStatus = () => {
+  const location = useLocation();
+
   const [status, setStatus] = useState("전체");
-  const [clickedBoardId, setClickedBoardId] = useState(null);
+  const [clickedBoardId, setClickedBoardId] = useState(location.state?.clickedBoardId);
   const [countByStatus, setCountByStatus] = useState([]);
   const [boards, setBoards] = useState([]);
   const [applicants, setApplicants] = useState([]);
 
-  const getBoardsByCompanyId = async (companyId) => {
+  const getBoardsByCompanyId = useCallback(async () => {
+    const companyId =
+      localStorage.getItem("companyId") || sessionStorage.getItem("companyId") || 1;
     const { data } = await api.companyBoard.retrieveByCompanyId(companyId);
-    setClickedBoardId(data[0].j_id);
+    if (!location.state?.clickedBoardId) {
+      setClickedBoardId(data[0].j_id);
+    }
     setBoards(data);
-  };
+  }, [location.state]);
 
   const getCountByBoardId = async (boardId) => {
     const { data } = await api.applicant.count(boardId);
@@ -27,11 +34,11 @@ const ApplicantStatus = () => {
   };
 
   useEffect(() => {
-    getBoardsByCompanyId(1);
-  }, []);
+    getBoardsByCompanyId();
+  }, [getBoardsByCompanyId]);
 
   useEffect(() => {
-    if (clickedBoardId !== null) {
+    if (clickedBoardId) {
       getCountByBoardId(clickedBoardId);
       getApplicantByBoardIdAndState(clickedBoardId, status);
     }
