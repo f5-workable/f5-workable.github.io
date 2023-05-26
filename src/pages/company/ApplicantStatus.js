@@ -14,8 +14,7 @@ const ApplicantStatus = () => {
   const [applicants, setApplicants] = useState([]);
 
   const getBoardsByCompanyId = useCallback(async () => {
-    const companyId =
-      localStorage.getItem("companyId") || sessionStorage.getItem("companyId") || 1;
+    const companyId = localStorage.getItem("companyId") || sessionStorage.getItem("companyId");
     const { data } = await api.companyBoard.retrieveByCompanyId(companyId);
     if (!location.state?.clickedBoardId) {
       setClickedBoardId(data[0].j_id);
