@@ -53,6 +53,9 @@ table {
 	padding-left: 1rem;
 	padding-right: 1rem;
 }
+.slick-track {
+	margin: 0 !important;
+}
 .slick-dots {
 	bottom: -35px !important;
 }
