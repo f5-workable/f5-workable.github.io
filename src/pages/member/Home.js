@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 function Home() {
   const [recentRegisteredBoards, setRecentRegisteredBoards] = useState([]);
   const recentViewedBoards = JSON.parse(localStorage.getItem("recentViewedBoard"));
-  recentViewedBoards.reverse();
+  recentViewedBoards?.reverse();
 
   const getRecentRegisteredBoards = async () => {
     const { data } = await api.companyBoard.search([], [], [], [], [], [], "최신순");
@@ -45,7 +45,7 @@ function Home() {
             />
           </Link>
         </div>
-        <CustomSlider boards={recentViewedBoards.slice(0, 12)} />
+        <CustomSlider boards={recentViewedBoards?.slice(0, 12)} />
       </section>
     </main>
   );
