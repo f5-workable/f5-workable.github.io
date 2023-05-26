@@ -1,4 +1,4 @@
-const HeadItem = ({ src }) => {
+const Item = ({ src }) => {
   return (
     <div className="w-full h-full rounded-lg overflow-hidden">
       <img className="w-full h-80 object-contain" src={src} alt="slider img" />
@@ -6,4 +6,4 @@ const HeadItem = ({ src }) => {
   );
 };
 
-export default HeadItem;
+export default Item;

@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-const Item = ({ key, className }) => {
+const Item = ({ key }) => {
   return (
     <Link to={`/resume/${key}`} key={key} className="block w-full h-80">
       <div className="w-full h-full">
