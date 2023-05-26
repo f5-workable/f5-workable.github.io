@@ -5,7 +5,7 @@ import ArrowBtn from "../../ArrowBtn";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-const CustomSlider = ({ isHeader }) => {
+const CustomSlider = ({ isHeader, boards }) => {
   const headerSettings = {
     dots: true,
     className: "center",
@@ -91,11 +91,14 @@ const CustomSlider = ({ isHeader }) => {
         </Slider>
       ) : (
         <Slider
-          className="!flex w-full h-[21rem] justify-center items-center my-3 relative"
+          className={
+            (boards?.length > 4 ? "!flex " : "") +
+            `w-full h-[21rem] justify-center items-center my-3 relative`
+          }
           {...settings}
         >
-          {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((_, idx) => (
-            <Item key={idx} className="m-3" />
+          {boards?.map((board) => (
+            <Item key={board.j_id} board={board} className="m-3" />
           ))}
         </Slider>
       )}
