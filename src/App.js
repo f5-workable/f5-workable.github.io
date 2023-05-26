@@ -11,7 +11,7 @@ function App() {
   };
 
   useEffect(() => {
-    const memberId = localStorage.getItem("memberId");
+    const memberId = localStorage.getItem("memberId") || sessionStorage.getItem("memberId");
     memberId ? setIsLogined(true) : setIsLogined(false);
   }, []);
 
