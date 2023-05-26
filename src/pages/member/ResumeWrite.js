@@ -33,7 +33,11 @@ const ResumeWrite = () => {
     serMemberAcademic(data.education);
     setMemberCareer(data.career === null ? "신입" : "경력");
     setMemberCareerDetail(data.career === null ? null : data.career);
-    setMemberCareerRegion(data.region.map((item) => item.region));
+    if (data.region.region) {
+      setMemberCareerRegion(data.region.map((item) => item.region));
+    } else {
+      setMemberCareerRegion([]);
+    }
     setMemberCareerType(data.job);
     setMemberWageType(data.payment_type);
     setMemberWage(data.payment);
