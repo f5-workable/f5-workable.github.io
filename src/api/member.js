@@ -48,7 +48,7 @@ const member = {
    * @param {signUpDTO} dto id + password + birth + name + gender + email + phone + profil
    * @returns
    */
-    e: (id, dto) => request.post(`/member/update/${id}`, dto),
+    update: (id, dto) => request.post(`/member/update/${id}`, dto),
 
   /**
    *

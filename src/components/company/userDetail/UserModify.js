@@ -1,7 +1,7 @@
 const UserModify = () => {
     return (
         <div className="mx-16 py-16 w-3/5 h-auto">
-            <div className="block text-center text-3xl font-bold">회원정보 수정</div>
+            <div className="block text-center text-3xl font-bold">기업정보 수정</div>
 
             <div className="block w-full">
             <div className=" h-32 mt-10">
