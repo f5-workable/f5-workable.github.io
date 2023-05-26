@@ -9,11 +9,17 @@ const Resume = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedResumeIndex, setSelectedResumeIndex] = useState(null);
   const navigate = useNavigate();
+  const memberId = localStorage.getItem("memberId") || sessionStorage.getItem("memberId");
 
   const handleCreateClick = () => {
     if (resumeList.length < 3) {
       addMemberResume();
     }
+  };
+
+  const updateSelectedResume = async () => {
+    console.log(resumeList[selectedResumeIndex].r_id);
+    await api.member.defaultUpdate(memberId, resumeList[selectedResumeIndex].r_id,);
   };
 
   const handleClick = () => {
@@ -24,11 +30,16 @@ const Resume = () => {
     setSelectedResumeIndex(index);
   };
 
+  const sendSelectedResume = () => {
+    updateSelectedResume();
+    setModalOpen(false);
+  };
+
   const addMemberResume = async () => {
     const memberId = localStorage.getItem("memberId") || sessionStorage.getItem("memberId");
     await api.resume.add({
       age: "",
-      place: "",
+      place: "null",
       education: "",
       job: "",
       payment_type: "",
@@ -40,7 +51,7 @@ const Resume = () => {
       title: "",
       m_num: memberId,
     });
-    getMemberResumeList();
+    getMemberResumeList(memberId);
   };
 
   const getMemberResumeList = async (memberId) => {
@@ -96,7 +107,7 @@ const Resume = () => {
                   </button>
                   <button
                     className="mt-5 ml-2 bg-blue-100 hover:bg-blue-300 px-5 py-2 rounded-md"
-                    onClick={() => setModalOpen(false)}
+                    onClick={() => sendSelectedResume()}
                   >
                     선택 완료
                   </button>

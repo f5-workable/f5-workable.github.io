@@ -48,7 +48,7 @@ const member = {
    * @param {signUpDTO} dto id + password + birth + name + gender + email + phone + profil
    * @returns
    */
-  update: (id, dto) => request.post(`/member/update/${id}`, dto),
+    e: (id, dto) => request.post(`/member/update/${id}`, dto),
 
   /**
    *
@@ -65,5 +65,10 @@ const member = {
   delete: (id) => request.get(`/member/delete/${id}`),
 
   findPassword: (id, name, phone) => request.post(`/member/${id}/password?id=${id}&name=${name}&phone=${phone}`),
+
+  setPassword: (id, dto) => request.put(`/member/${id}/password`, dto),
+
+  defaultUpdate: (id, r_id) => request.get(`/resume/rdefault?memberId=${id}&r_id=${r_id}`)
 };
+
 export default member;
