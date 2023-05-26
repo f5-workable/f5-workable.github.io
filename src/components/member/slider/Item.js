@@ -10,7 +10,7 @@ const Item = ({ board }) => {
   const navigate = useNavigate();
 
   const regex = /(^[가-힣]+시 [가-힣]+구)|(^[가-힣]+도 [가-힣]+[시|군|구])/g;
-  const shortAddress = board.address?.match(regex).join("");
+  const shortAddress = board.address?.match(regex)?.join("");
 
   const handleClick = () => {
     if (!isDragging) {
