@@ -12,7 +12,15 @@ function App() {
 
   useEffect(() => {
     const memberId = localStorage.getItem("memberId") || sessionStorage.getItem("memberId");
+    const companyId = localStorage.getItem("companyId") || sessionStorage.getItem("companyId");
     memberId ? setIsLogined(true) : setIsLogined(false);
+    if (companyId) {
+      setIsLogined(true);
+      setIsCompany(true);
+    } else {
+      setIsLogined(true);
+      setIsCompany(false);
+    }
   }, []);
 
   return (

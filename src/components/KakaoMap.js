@@ -32,7 +32,7 @@ const KakaoMap = ({ address, companyName }) => {
           <p class="mb-4 text-neutral-800">${companyName}</p>
           <p class="flex justify-between">
             <a href="https://map.kakao.com/link/map/${companyName},${result[0].y},${result[0].x}" class="text-blue-500 px-3.5 py-1.5 border border-solid rounded-2xl text-sm" target="_blank">큰 지도보기</a>
-            <a href="https://map.kakao.com/link/to/=${companyName},${result[0].y},${result[0].x}" class="text-white px-3.5 py-1.5 bg-blue-500 rounded-2xl text-sm" target="_blank">길 찾기</a>
+            <a href="https://map.kakao.com/link/to/${companyName},${result[0].y},${result[0].x}" class="text-white px-3.5 py-1.5 bg-blue-500 rounded-2xl text-sm" target="_blank">길 찾기</a>
           </p>
         </div>`;
         const iwPosition = targetPosition; //인포윈도우 표시 위치

@@ -8,13 +8,14 @@ import api from "../../api";
 function Home() {
   const [companyBoards, setCompanyBoards] = useState();
 
-  const getBoardsByCompanyId = async (companyId) => {
+  const getBoardsByCompanyId = async () => {
+    const companyId = localStorage.getItem("companyId") || sessionStorage.getItem("companyId");
     const { data } = await api.companyBoard.retrieveByCompanyId(companyId);
     setCompanyBoards(data);
   };
 
   useEffect(() => {
-    getBoardsByCompanyId(1);
+    getBoardsByCompanyId();
   }, []);
 
   return (

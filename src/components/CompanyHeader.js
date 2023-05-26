@@ -13,8 +13,10 @@ const CompanyHeader = ({ toggleIsCompany, isLogined, setIsLogined }) => {
     setIsLogined(false);
     localStorage.removeItem("id");
     localStorage.removeItem("pw");
+    localStorage.removeItem("companyId");
     sessionStorage.removeItem("id");
     sessionStorage.removeItem("pw");
+    sessionStorage.removeItem("companyId");
   };
 
   return (

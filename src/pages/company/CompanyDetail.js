@@ -20,10 +20,11 @@ const CompanyDetail = () => {
   );
 
   const regex = /(^[가-힣]+시 [가-힣]+구)|(^[가-힣]+도 [가-힣]+[시|군|구])/g;
-  const shortAddress = board.address?.match(regex).join("");
+  const shortAddress = board.address?.match(regex)?.join("");
 
   const getCompanyInfo = useCallback(async () => {
-    const { data } = await api.companyBoard.retrieve(jobId);
+    const companyId = localStorage.getItem("companyId") || sessionStorage.getItem("companyId");
+    const { data } = await api.companyBoard.retrieve(jobId, companyId);
     setBoard(data);
   }, [jobId]);
 

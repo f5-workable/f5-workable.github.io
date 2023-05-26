@@ -22,9 +22,11 @@ const LoginCom = ({ setIsLogined, toggleIsCompany }) => {
       if (rememberCheck) {
         localStorage.setItem("id", id);
         localStorage.setItem("pw", password);
+        localStorage.setItem("companyId", data.companySequenceNumber);
       } else {
-        localStorage.setItem("id", "");
-        localStorage.setItem("pw", "");
+        sessionStorage.setItem("id", "");
+        sessionStorage.setItem("pw", "");
+        sessionStorage.setItem("companyId", data.companySequenceNumber);
       }
     }
   };

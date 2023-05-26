@@ -26,7 +26,7 @@ const Item = ({ board }) => {
   };
 
   const regex = /(^[가-힣]+시 [가-힣]+구)|(^[가-힣]+도 [가-힣]+[시|군|구])/g;
-  const shortAddress = board.address?.match(regex).join("");
+  const shortAddress = board.address?.match(regex)?.join("");
 
   useEffect(() => {
     setIsBookmark(board.state);

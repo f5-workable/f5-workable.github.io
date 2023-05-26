@@ -17,7 +17,7 @@ const Item = ({ resume }) => {
         </p>
         <p className="py-2 text-neutral-500 truncate break-all">희망업종: {resume.job}</p>
         <p className="mt-5 font-semibold absolute bottom-2">
-          {resume.payment_type} {resume.payment.toLocaleString()}원
+          희망{resume.payment_type} {resume.payment.toLocaleString()}원
         </p>
       </div>
     </Link>

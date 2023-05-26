@@ -1,6 +1,6 @@
 import Item from "./Item";
 
-const CompanyBoardAside = ({ boards, state, setState, count }) => {
+const CompanyBoardAside = ({ boards, state, setState }) => {
   return (
     <>
       {boards?.map((board) => (
