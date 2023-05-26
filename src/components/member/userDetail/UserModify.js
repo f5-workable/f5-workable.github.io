@@ -7,10 +7,10 @@ const UserModify = () => {
     const [phone, setPhone] = useState("");
     const [email, setEmail] = useState("");
 
-    const memberId = localStorage.getItem("memberId") || sessionStorage.getItem("memberId");
-
     const getMember = async () => {
+        const memberId = localStorage.getItem("memberId") || sessionStorage.getItem("memberId");
         const { data } = await api.member.retrieve(memberId);
+        console.log(memberId);
         console.log(data);
         setName(data.name);
         setId(data.id);
@@ -20,6 +20,8 @@ const UserModify = () => {
 
     const updateMember = async (e) => {
         e.preventDefault();
+
+        const memberId = localStorage.getItem("memberId") || sessionStorage.getItem("memberId");
         await api.member.update(memberId, {
             email: email,
             phone: phone,
