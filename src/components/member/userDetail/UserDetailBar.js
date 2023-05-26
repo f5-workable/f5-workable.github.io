@@ -1,13 +1,20 @@
 import { Link } from "react-router-dom";
+import api from "../../../api";
 
 const UserDetailBar = () => {  
     const handleMemberWithdrawal = () => {
         const confirmed = window.confirm("정말로 회원탈퇴를 하시겠습니까?");
         if (confirmed) {
           console.log("회원탈퇴");
+          deleteMember();
           window.location.href = "/signup";
         }
-      };
+    };
+
+    const deleteMember = async () => {
+        const memberId = localStorage.getItem("memberId") || sessionStorage.getItem("memberId");
+        await api.member.delete(memberId);
+    }
 
     return (
         <div className="w-1/4 h-auto px-12 py-20">
