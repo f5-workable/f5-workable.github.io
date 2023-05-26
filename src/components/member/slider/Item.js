@@ -60,7 +60,7 @@ const Item = ({ board }) => {
           </p>
           <p className="py-2 text-neutral-400">{shortAddress}</p>
           <p className="mt-5 text-lg text-neutral-600 font-semibold absolute bottom-2">
-            {board.payment_type} {board.payment.toLocaleString()}원
+            {board.payment_type} {board.payment?.toLocaleString()}원
           </p>
         </div>
       </Link>

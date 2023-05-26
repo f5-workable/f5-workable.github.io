@@ -1,7 +1,7 @@
 const UserDetailList = () => {
     return (
         <div className="mx-16 py-16 w-3/5 h-auto">
-            <div className="block text-center text-3xl font-bold">회원정보</div>
+            <div className="block text-center text-3xl font-bold">기업정보</div>
             <div className="block w-full">
                 <div className=" h-32 mt-10">
                     <label className=" text-xl font-bold px-10">기업명</label>

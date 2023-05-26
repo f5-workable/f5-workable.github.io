@@ -36,9 +36,11 @@ const CompanyDetail = () => {
   };
 
   const getCompanyInfo = useCallback(async () => {
-    const { data } = await api.companyBoard.retrieve(jobId);
+    const memberId = localStorage.getItem("memberId") || sessionStorage.getItem("memberId");
+    const { data } = await api.companyBoard.retrieve(jobId, memberId);
     setBoard(data);
     setIsBookmark(data.state);
+    
     // 로컬스토리지 최근 본 공고 배열에 추가
     const prevRecentViewedBoard = JSON.parse(localStorage.getItem("recentViewedBoard"));
     if (prevRecentViewedBoard) {
