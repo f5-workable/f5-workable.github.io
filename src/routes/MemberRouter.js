@@ -18,6 +18,7 @@ import ApplicationStatus from "../pages/member/ApplicationStatus";
 import CompanyDetail from "../pages/member/CompanyDetail";
 import UserTypeSelectionBeforeLogin from "../pages/auth/UserTypeSelectionBeforeLogin";
 import UserTypeSelectionBeforeSignUp from "../pages/auth/UserTypeSelectionBeforeSignUp";
+import RecentViewedBoards from "../pages/member/RecentViewedBoards";
 
 const MemberRouter = ({ toggleIsCompany, isLogined, setIsLogined }) => {
   return (
@@ -74,6 +75,7 @@ const MemberRouter = ({ toggleIsCompany, isLogined, setIsLogined }) => {
         <Route path="/userdetailmodify" element={<UserDetailModify />} />
         <Route path="/findpwper" element={<FindPwPer />} />
         <Route path="/setnewpwper" element={<SetNewPwPer />} />
+        <Route path="/recent/boards" element={<RecentViewedBoards />} />
       </Route>
     </Routes>
   );
