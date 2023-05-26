@@ -28,7 +28,7 @@ const Resume = () => {
     const memberId = localStorage.getItem("memberId") || sessionStorage.getItem("memberId");
     await api.resume.add({
       age: "",
-      place: "",
+      place: [],
       education: "",
       job: "",
       payment_type: "",
@@ -40,7 +40,7 @@ const Resume = () => {
       title: "",
       m_num: memberId,
     });
-    getMemberResumeList();
+    getMemberResumeList(memberId);
   };
 
   const getMemberResumeList = async (memberId) => {
