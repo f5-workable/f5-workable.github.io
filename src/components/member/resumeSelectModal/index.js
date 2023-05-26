@@ -14,7 +14,6 @@ const ResumeSelectModal = ({ state, setState }) => {
   const getResumes = async () => {
     const memberId = localStorage.getItem("memberId") || sessionStorage.getItem("memberId");
     const { data } = await api.resume.retrieveByMember(memberId);
-    console.log(data);
     setResumes(data.list);
   };
 
