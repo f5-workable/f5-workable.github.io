@@ -40,7 +40,7 @@ const Resume = () => {
       title: "",
       m_num: memberId,
     });
-    getMemberResumeList();
+    getMemberResumeList(memberId);
   };
 
   const getMemberResumeList = async (memberId) => {

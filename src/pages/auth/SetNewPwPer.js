@@ -1,22 +1,37 @@
 import { async } from "q";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import api from "../../api";
+import { useLocation } from "react-router";
 
 const SetNewPwPer = () => {
+    const location = useLocation();
     const [password, setPassword] = useState("");
     const [passwordCheck, setPasswordCheck] = useState(false);
 
     const checkedPassword = (checkPw, pw) => {
         if (checkPw === pw) {
             setPasswordCheck(true);
-        }
-        else {
+        } else {
             setPasswordCheck(false);
         }
     };
 
     const handleClick = async () => {
-        console.log("제출");
+        console.log("1");
+        console.log(location.state.id);
+        if (passwordCheck) {
+            console.log("2");
+            await api.member.setPassword(location.state.id, {
+                newPassword: password,
+            });
+        } else {
+            alert("비밀번호가 일치하지 않습니다.");
+        }
     };
+
+    useEffect(() => {
+        // console.log(location.state.id);
+      }, []);
 
     return(
         <div className="mx-auto py-16 w-3/5 h-auto">

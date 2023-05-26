@@ -65,5 +65,9 @@ const member = {
   delete: (id) => request.get(`/member/delete/${id}`),
 
   findPassword: (id, name, phone) => request.post(`/member/${id}/password?id=${id}&name=${name}&phone=${phone}`),
+
+  setPassword: (id, dto) => request.put(`/member/${id}/password`, dto),
+
 };
+
 export default member;

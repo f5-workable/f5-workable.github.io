@@ -26,7 +26,7 @@ const ResumeWrite = () => {
     const [memberSelf, setMemberSelf] = useState("");
 
     const { resumeId } = useParams();
-    const { memberId } = localStorage.getItem("memberId") || sessionStorage.getItem("memberId");
+    const memberId = localStorage.getItem("memberId") || sessionStorage.getItem("memberId");
 
     const getMemberResume = async () => {
         const { data } = await api.resume.retrieve(resumeId);

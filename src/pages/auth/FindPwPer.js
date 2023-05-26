@@ -13,18 +13,25 @@ const FindPwPer = () => {
 
     const handleClick = async (e) => {
         e.preventDefault();
-        const { data } = await api.member.findPassword(
-            id,
-            name,
-            phoneNumber1 + "-" + phoneNumber2 + "-" + phoneNumber3,
-        );
-        if (data === "회원 정보가 확인되었습니다. 새로운 비밀번호를 입력해주세요.") {
-            alert("회원 정보가 확인되었습니다. 비밀번호를 재설정해주세요.");
-            console.log(data);
-            navigate("/setnewpwper");
-        }
-        else {
-            alert("일치하는 회원정보가 없습니다. 입력하신 정보를 다시 확인해주세요.");
+        try {
+            const { data } = await api.member.findPassword(
+                id,
+                name,
+                phoneNumber1 + "-" + phoneNumber2 + "-" + phoneNumber3,
+            );
+            if (data === "회원 정보가 확인되었습니다. 새로운 비밀번호를 입력해주세요.") {
+                alert("회원 정보가 확인되었습니다. 비밀번호를 재설정해주세요.");
+                console.log(id);
+                navigate("/setnewpwper", { state: { id }});
+            } else {
+                alert("일치하는 회원정보가 없습니다. 입력하신 정보를 다시 확인해주세요.");
+            }
+        } catch (error) {
+            if (error.response && error.response.data === "잘못된 정보입니다. 다시 시도해주세요.") {
+                alert("잘못된 정보입니다. 다시 시도해주세요.");
+            } else {
+                alert("서버에서 오류가 발생했습니다. 다시 시도해주세요.");
+            }
         }
     };
 
