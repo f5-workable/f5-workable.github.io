@@ -131,7 +131,7 @@ const Resume = () => {
         {resumeList.length > 0 &&
           resumeList.map((memberResume, index) => (
             <Link to={`/resume/${memberResume.r_id}`} key={memberResume.r_id}>
-              <div className="bg-white rounded-lg shadow-md hover:shadow-2xl transition duration-300">
+              <div className=" h-[350px] bg-white rounded-lg shadow-md hover:shadow-2xl transition duration-300">
                 <div className="p-6 h-[18rem]">
                   {selectedResumeIndex === index ? (
                     <FaCrown className="absolute text-yellow-400 text-[3.25rem]" />
