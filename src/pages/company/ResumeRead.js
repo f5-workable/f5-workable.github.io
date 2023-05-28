@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import api from "../../api";
 
 const ResumeRead = () => {
@@ -18,16 +18,26 @@ const ResumeRead = () => {
   const [disabilityType, setDisabilityType] = useState("");
   const [severeCondition, setSevereCondition] = useState([]);
   const [memberSelf, setMemberSelf] = useState("");
+  const [applyId, setApplyId] = useState("");
 
   const { resumeId } = useParams();
+  const navigate = useNavigate();
 
   const getResumeNameByStatus = async () => {
-    const { data } = await api.resume.retrieve(resumeId);
-    console.log(data);
+    const { data } = await api.applicant.retrieve(resumeId);
     const memberInfo = await api.member.retrieve(data.m_num);
     const {
-      data: { name, phone, email, gender, age },
+      data: { name, phone, email, gender, birth },
     } = memberInfo;
+    // 만 나이 계산
+    const [year, month, day] = birth.split("-");
+    const birthDate = new Date(year, month - 1, day);
+    const today = new Date();
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+      age--;
+    }
     setMemberName(name);
     setMemberPhone(phone);
     setMemberEmail(email);
@@ -36,13 +46,18 @@ const ResumeRead = () => {
     serMemberAcademic(data.education);
     setMemberCareer(data.career === null ? "신입" : "경력");
     setMemberCareerDetail(data.career);
-    setMemberCareerPlace(data.place);
+    setMemberCareerPlace(data.region.map((region) => region.region));
     setMemberCareerType(data.job);
     setMemberWageType(data.payment_type);
     setMemberWage(data.payment);
     setDisabilityType(data.ob_type);
     setSevereCondition(data.disease);
     setMemberSelf(data.pr === null ? "작성한 내용이 없습니다." : data.pr);
+    setApplyId(data.a_id);
+  };
+
+  const updateApplicantStatus = async (state) => {
+    await api.applicant.update({ a_id: applyId, state });
   };
 
   useEffect(() => {
@@ -144,7 +159,7 @@ const ResumeRead = () => {
 
         <div className="pt-5 flex items-center w-full">
           <label className="w-32 py-2 text-center font-bold text-md">희망근무지</label>
-          <input className="w-1/2 bg-white" value={memberCareerPlace} disabled />
+          <input className="w-1/2 bg-white break-words" value={memberCareerPlace} disabled />
         </div>
         <hr className="mt-5 border border-gray-100"></hr>
 
@@ -158,14 +173,8 @@ const ResumeRead = () => {
           <label for="wage" class="w-32 py-2 text-center font-bold text-md">
             희망임금
           </label>
-          <input className="bg-white w-20" value={memberWageType} disabled />
-          <input
-            type="number"
-            className=" w-1/2  bg-white text-right"
-            value={memberWage}
-            disabled
-          />
-          원
+          <input className="bg-white w-10" value={memberWageType} disabled />
+          <input className="bg-white w-20" value={memberWage.toLocaleString()} disabled />원
         </div>
         <hr className="mt-5 border border-gray-100"></hr>
       </div>
@@ -201,13 +210,24 @@ const ResumeRead = () => {
           />
         </div>
         <hr className="mt-5 border border-gray-100"></hr>
+        <div className="flex justify-center">
+          <button
+            onClick={() => navigate(-1)}
+            className=" w-1/6 h-10 mx-5 mt-10 text-lg font-bold bg-gray-200 hover:bg-gray-500 hover:text-white"
+          >
+            이전
+          </button>
+        </div>
       </div>
-
-      <div className="flex justify-center">
-        <button className=" w-1/6 h-10 mx-5 text-lg font-bold bg-gray-200 hover:bg-gray-500 hover:text-white">
-          <Link to={"/"}>이전</Link>
+      <div className="w-full h-32 flex justify-evenly items-center fixed bottom-0 left-0 z-50 bg-white">
+        <button onClick={()=>updateApplicantStatus("합격")} className="w-[30%] h-16 bg-blue-400 rounded-xl text-white text-lg">
+          합격
+        </button>
+        <button onClick={()=>updateApplicantStatus("불합격")} className="w-[30%] h-16 bg-red-400 rounded-xl text-white text-lg">
+          불합격
         </button>
       </div>
+      <div className="block w-full h-24"></div>
     </div>
   );
 };
