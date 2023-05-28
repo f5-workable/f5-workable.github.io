@@ -44,24 +44,33 @@ const ResumeWrite = () => {
     setDisabilityType(data.ob_type);
     setSevereCondition(data.disease);
     setMemberSelf(data.pr === null ? "" : data.pr);
-    console.log(data);
   };
 
   const getMemberData = async () => {
-    const { data } = await api.member.retrieve(memberId);
-    console.log(data);
-    setMemberName(data.name);
-    setMemberPhone(data.phone);
-    setMemberAge(data.birth);
-    setMemberEmail(data.email);
-    setMemberGender(data.gender);
+    const {
+      data: { name, phone, birth, email, gender },
+    } = await api.member.retrieve(memberId);
+    console.log(name, phone, birth, email, gender);
+    // 만 나이 계산
+    const [year, month, day] = birth.split("-");
+    const birthDate = new Date(year, month - 1, day);
+    const today = new Date();
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+      age--;
+    }
+    console.log(age);
+    setMemberName(name);
+    setMemberPhone(phone);
+    setMemberAge(age);
+    setMemberEmail(email);
+    setMemberGender(gender);
   };
 
   const updateMemberResume = async () => {
     console.log(memberCareerRegion);
     const { data } = await api.resume.update(resumeId, {
-      r_id: resumeId,
-      age: 23,
       place: memberCareerRegion,
       education: memberAcademic,
       job: memberCareerType,
@@ -73,7 +82,6 @@ const ResumeWrite = () => {
       pr: memberSelf,
       title: resumeName,
     });
-    console.log(data);
     navigate("/resume");
   };
 
