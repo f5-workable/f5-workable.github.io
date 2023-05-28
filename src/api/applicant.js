@@ -96,7 +96,7 @@ const applicant = {
    * @param {*} j_num 채용 공고 시퀀스 아이디
    * @returns {{data: CountByState[]}}
    */
-  count: (j_num) => request.get(`/apply/list/count/${j_num}`, {}, { type: "company" }),
+  count: (j_num) => request.get(`/apply/list/count/${j_num}`, { params: { type: "company" } }),
 };
 
 export default applicant;
