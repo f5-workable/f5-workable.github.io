@@ -8,12 +8,14 @@ const ApplicationStatus = () => {
   const [countByStatus, setCountByStatus] = useState([]);
 
   const getCountByStatus = async () => {
-    const { data } = await api.apply.count(1);
+    const memberId = localStorage.getItem("memberId") || sessionStorage.getItem("memberId");
+    const { data } = await api.apply.count(memberId);
     setCountByStatus(data);
   };
 
   const getBoardsByState = async (state) => {
-    const { data } = await api.apply.retrieveByState(1, state);
+    const memberId = localStorage.getItem("memberId") || sessionStorage.getItem("memberId");
+    const { data } = await api.apply.retrieveByState(memberId, state);
     setStatus(state);
     setBoards(data.list);
   };
