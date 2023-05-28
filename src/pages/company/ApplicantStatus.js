@@ -29,7 +29,8 @@ const ApplicantStatus = () => {
 
   const getApplicantByBoardIdAndState = async (boardId, state) => {
     const { data } = await api.applicant.retrieveByBoardIdAndState(boardId, state);
-    setApplicants(data);
+    setApplicants(data.list);
+    console.log(data.list);
   };
 
   useEffect(() => {
