@@ -19,7 +19,7 @@ const Resume = () => {
 
   const updateSelectedResume = async () => {
     console.log(resumeList[selectedResumeIndex].r_id);
-    await api.member.defaultUpdate(memberId, resumeList[selectedResumeIndex].r_id,);
+    await api.member.defaultUpdate(memberId, resumeList[selectedResumeIndex].r_id);
   };
 
   const handleClick = () => {
@@ -36,7 +36,6 @@ const Resume = () => {
   };
 
   const addMemberResume = async () => {
-    const memberId = localStorage.getItem("memberId") || sessionStorage.getItem("memberId");
     await api.resume.add({
       age: "",
       place: [],
@@ -51,12 +50,10 @@ const Resume = () => {
       title: "",
       m_num: memberId,
     });
-    getMemberResumeList(memberId);
   };
 
   const getMemberResumeList = async (memberId) => {
     const { data } = await api.resume.retrieveByMember(memberId);
-    console.log(data);
     setResumeList(data.list);
     data.list.forEach((memberResume, index) => {
       if (memberResume.r_default) {
@@ -64,17 +61,15 @@ const Resume = () => {
       }
     });
   };
-  
 
   useEffect(() => {
-    const memberId = localStorage.getItem("memberId") || sessionStorage.getItem("memberId");
     if (memberId) {
       getMemberResumeList(memberId);
     } else {
       alert("로그인이 필요한 서비스입니다.");
       navigate(-1);
     }
-  }, []);
+  }, [memberId, navigate]);
 
   return (
     <div className="p-10 flex flex-col h-auto">
@@ -133,9 +128,9 @@ const Resume = () => {
             <Link to={`/resume/${memberResume.r_id}`} key={memberResume.r_id}>
               <div className=" h-[350px] bg-white rounded-lg shadow-md hover:shadow-2xl transition duration-300">
                 <div className="p-6 h-[18rem]">
-                  {selectedResumeIndex === index ? (
+                  {selectedResumeIndex === index && (
                     <FaCrown className="absolute text-yellow-400 text-[3.25rem]" />
-                  ) : null}
+                  )}
                   <img src="/images/interview.PNG" alt="interview" loading="lazy" />
                   <div className="mt-6 flex justify-between items-center">
                     <div className="truncate font-bold text-lg">{memberResume.title}</div>
@@ -145,7 +140,7 @@ const Resume = () => {
               </div>
             </Link>
           ))}
-        {resumeList.length < 3 ? (
+        {resumeList.length !== 0 && resumeList.length < 3 ? (
           <div className="bg-white rounded-lg shadow-lg hover:shadow-xl transition duration-300 flex items-center justify-center">
             <button
               className="w-full h-[18rem] font-bold rounded-md flex items-center justify-center"
