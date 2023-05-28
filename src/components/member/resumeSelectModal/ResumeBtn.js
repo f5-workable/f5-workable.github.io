@@ -1,10 +1,17 @@
+import { useEffect } from "react";
 import { MdStar } from "react-icons/md";
 
 const ResumeBtn = ({ state, setState, resume }) => {
   const handleBtnClick = () => {
     setState(resume.r_id);
   };
-  console.log(resume.r_default, resume.r_id);
+
+  useEffect(() => {
+    if (resume.r_default) {
+      setState(resume.r_id);
+    }
+  }, [resume.r_id, resume.r_default, setState]);
+
   return (
     <button
       type="radio"
@@ -16,7 +23,7 @@ const ResumeBtn = ({ state, setState, resume }) => {
       }`}
       onClick={handleBtnClick}
     >
-      {resume.r_default && <MdStar fontSize={30} className="text-yellow-500" />}
+      {resume.r_default && <MdStar fontSize={30} className="text-yellow-500 mr-2" />}
       {resume.title}
     </button>
   );
