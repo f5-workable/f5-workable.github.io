@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const Item = ({ resume }) => {
   return (
-    <Link to={`/resume/${resume.r_id}`} className="block w-full h-80">
+    <Link to={`/resume/${resume.cr_num}`} className="block w-full h-80">
       <div className="flex justify-center items-center w-full h-3/5 rounded-md overflow-hidden shadow-md">
         <img
           src="https://www.cvpartners.co.kr/Content/images/house/1/5.png"
@@ -17,7 +17,7 @@ const Item = ({ resume }) => {
         </p>
         <p className="py-2 text-neutral-500 truncate break-all">희망업종: {resume.job}</p>
         <p className="mt-5 font-semibold absolute bottom-2">
-          희망{resume.payment_type} {resume.payment.toLocaleString()}원
+          희망{resume.payment_type} {resume.payment?.toLocaleString()}원
         </p>
       </div>
     </Link>
