@@ -11,6 +11,7 @@ const CompanyHeader = ({ toggleIsCompany, isLogined, setIsLogined }) => {
 
   const handleLogout = () => {
     setIsLogined(false);
+    toggleIsCompany();
     localStorage.removeItem("id");
     localStorage.removeItem("pw");
     localStorage.removeItem("companyId");
@@ -109,19 +110,16 @@ const CompanyHeader = ({ toggleIsCompany, isLogined, setIsLogined }) => {
                   <button
                     className="px-3 py-2 mr-3 h-10 border-2 border-solid border-neutral-200 rounded-3xl text-neutral-500 text-base"
                     onClick={() => {
-                      // 기업 로그인 가능하게되면 주석 해제, 이전 코드는 삭제
-
-                      // const confirm = window.confirm(
-                      //   "로그아웃하고 이용자로 로그인하시겠습니까?"
-                      // );
-                      // if (confirm) {
-                      //   setIsLogined(false);
-                      //   sessionStorage.removeItem("memberId")
-                      //   localStorage.removeItem("memberId")
-                      //   navigate("/login/member");
-                      // }
-                      setIsLogined(false);
-                      toggleIsCompany();
+                      const confirm = window.confirm(
+                        "로그아웃하고 이용자로 로그인하시겠습니까?"
+                      );
+                      if (confirm) {
+                        setIsLogined(false);
+                        toggleIsCompany();
+                        sessionStorage.removeItem("companyId");
+                        localStorage.removeItem("companyId");
+                        navigate("/login/member");
+                      }
                     }}
                   >
                     구직 서비스
