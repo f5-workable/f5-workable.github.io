@@ -23,12 +23,7 @@ const member = {
    * @param {signUpDTO} dto id + password + birth + name + gender + email + phone + profil
    * @returns
    */
-  signUp: (dto) =>
-    request.post("/member/signup", dto, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    }),
+  signUp: (dto) => request.post("/member/signup", dto),
 
   /**
    *
@@ -48,7 +43,7 @@ const member = {
    * @param {signUpDTO} dto id + password + birth + name + gender + email + phone + profil
    * @returns
    */
-    update: (id, dto) => request.post(`/member/update/${id}`, dto),
+  update: (id, dto) => request.put(`/member/update/${id}`, dto),
 
   /**
    *
@@ -62,13 +57,16 @@ const member = {
    * @param {number} id 멤버 시퀀스 아이디
    * @returns
    */
-  delete: (id) => request.get(`/member/delete/${id}`),
+  delete: (id) => request.post(`/member/delete/${id}`),
 
-  findPassword: (id, name, phone) => request.post(`/member/${id}/password?id=${id}&name=${name}&phone=${phone}`),
+  findPassword: (id, name, phone) =>
+    request.post(`/member/${id}/password?id=${id}&name=${name}&phone=${phone}`),
 
   setPassword: (id, dto) => request.put(`/member/${id}/password`, dto),
 
-  defaultUpdate: (id, r_id) => request.get(`/resume/rdefault?memberId=${id}&r_id=${r_id}`)
+  defaultUpdate: (id, r_id) => request.get(`/resume/rdefault?memberId=${id}&r_id=${r_id}`),
+
+  checkDuplicateId: (id) => request.get(`/member/checkId/${id}`),
 };
 
 export default member;

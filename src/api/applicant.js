@@ -77,19 +77,17 @@ const applicant = {
    * @param {*} pageSize 페이지 내 개수 (default: 20개)
    * @returns {{data: ApplicantList}}
    */
-  retrieveByBoardIdAndState: (j_num, state, pageNum, pageSize) =>
-    request.get(
-      `/company/apply/list/${j_num}`,
-      {},
-      { state: state === "전체" ? null : state, pageNum, pageSize }
-    ),
+  retrieveByBoardIdAndState: (j_num, state, pageNum = 1, pageSize = 12) =>
+    request.get(`/company/apply/list/${j_num}`, {
+      params: { state: state === "전체" ? null : state, pageNum, pageSize },
+    }),
 
   /**
    *
    * @param {ApplyState} dto 지원자 시퀀스 아이디 + 지원상태
    * @returns
    */
-  update: (dto) => request.put("/company/apply/update", dto),
+  update: (cr_num, state) => request.put(`/company/apply/update/${cr_num}?state=${state}`),
 
   /**
    *

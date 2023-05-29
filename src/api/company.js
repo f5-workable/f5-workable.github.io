@@ -23,12 +23,7 @@ const company = {
    * @param {signUpDTO} dto
    * @returns
    */
-  signUp: (dto) =>
-    request.post("/company/signup", dto, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    }),
+  signUp: (dto) => request.post("/company/signup", dto),
 
   /**
    *
@@ -48,12 +43,7 @@ const company = {
    * @param {signUpDTO} dto
    * @returns
    */
-  update: (id, dto) =>
-    request.post(`/company/update/${id}`, dto, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    }),
+  update: (id, dto) => request.put(`/company/update/${id}`, dto),
 
   /**
    *
@@ -67,7 +57,9 @@ const company = {
    * @param {number} id 기업 시퀀스 아이디
    * @returns
    */
-  delete: (id) => request.get(`/company/delete/${id}`),
+  delete: (id) => request.post(`/company/delete/${id}`),
+
+  checkDuplicateId: (c_id) => request.get(`/company/checkId/${c_id}`),
 };
 
 export default company;
