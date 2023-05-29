@@ -18,7 +18,6 @@ const ResumeRead = () => {
   const [disabilityType, setDisabilityType] = useState("");
   const [severeCondition, setSevereCondition] = useState([]);
   const [memberSelf, setMemberSelf] = useState("");
-  const [applyId, setApplyId] = useState("");
 
   const { resumeId } = useParams();
   const navigate = useNavigate();
@@ -53,11 +52,10 @@ const ResumeRead = () => {
     setDisabilityType(data.ob_type);
     setSevereCondition(data.disease);
     setMemberSelf(data.pr === null ? "작성한 내용이 없습니다." : data.pr);
-    setApplyId(data.a_id);
   };
 
   const updateApplicantStatus = async (state) => {
-    await api.applicant.update({ a_id: applyId, state });
+    await api.applicant.update(resumeId, state);
   };
 
   useEffect(() => {
@@ -220,10 +218,16 @@ const ResumeRead = () => {
         </div>
       </div>
       <div className="w-full h-32 flex justify-evenly items-center fixed bottom-0 left-0 z-50 bg-white">
-        <button onClick={()=>updateApplicantStatus("합격")} className="w-[30%] h-16 bg-blue-400 rounded-xl text-white text-lg">
+        <button
+          onClick={() => updateApplicantStatus("최종합격")}
+          className="w-[30%] h-16 bg-blue-400 rounded-xl text-white text-lg"
+        >
           합격
         </button>
-        <button onClick={()=>updateApplicantStatus("불합격")} className="w-[30%] h-16 bg-red-400 rounded-xl text-white text-lg">
+        <button
+          onClick={() => updateApplicantStatus("불합격")}
+          className="w-[30%] h-16 bg-red-400 rounded-xl text-white text-lg"
+        >
           불합격
         </button>
       </div>
