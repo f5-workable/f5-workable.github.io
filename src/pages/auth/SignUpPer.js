@@ -5,48 +5,60 @@ import { Link, useNavigate } from "react-router-dom";
 
 const SignUpPer = () => {
   const navigate = useNavigate();
+  const [id, setId] = useState("");
   const [gender, setGender] = useState("남자");
   const [password, setPassword] = useState("");
-  const [passwordCheck, setPasswordCheck] = useState(false);
+  const [passwordCheck, setPasswordCheck] = useState(null);
+  const [isDuplicateId, setIsDuplicateId] = useState(null);
 
   const handleSignUp = async (e) => {
     e.preventDefault();
-    const data = new FormData(e.target);
-    const id = data.get("id");
-    const password = data.get("pw");
-    const pwCheck = data.get("pwCheck");
-    const name = data.get("name");
-    const year = data.get("year");
-    const month = data.get("month");
-    const day = data.get("day");
-    const phoneNumber1 = data.get("phoneNumber1");
-    const phoneNumber2 = data.get("phoneNumber2");
-    const phoneNumber3 = data.get("phoneNumber3");
-    const email = data.get("email");
-    const profil = data.get("chooseFile");
-    if (password === pwCheck) {
-      navigate("/login/member");
-      await api.member.signUp({
-        id,
-        password,
-        birth: year + "-" + month + "-" + day,
-        gender,
-        name,
-        email,
-        phone: phoneNumber1 + "-" + phoneNumber2 + "-" + phoneNumber3,
-        profil,
-      });
-    } else {
-      alert("비밀번호가 서로 다릅니다.");
+    if (isDuplicateId === false && passwordCheck) {
+      const data = new FormData(e.target);
+      const id = data.get("id");
+      const password = data.get("pw");
+      const pwCheck = data.get("pwCheck");
+      const name = data.get("name");
+      const year = data.get("year");
+      const month = data.get("month");
+      const day = data.get("day");
+      const phoneNumber1 = data.get("phoneNumber1");
+      const phoneNumber2 = data.get("phoneNumber2");
+      const phoneNumber3 = data.get("phoneNumber3");
+      const email = data.get("email");
+      const profil = data.get("chooseFile");
+      if (password === pwCheck) {
+        navigate("/login/member");
+        await api.member.signUp({
+          id,
+          password,
+          birth: year + "-" + month + "-" + day,
+          gender,
+          name,
+          email,
+          phone: phoneNumber1 + "-" + phoneNumber2 + "-" + phoneNumber3,
+        });
+      } else {
+        alert("비밀번호가 서로 다릅니다.");
+      }
     }
   };
 
   const checkedPassword = (checkPw, pw) => {
     if (checkPw === pw) {
       setPasswordCheck(true);
-    }
-    else {
+    } else {
       setPasswordCheck(false);
+    }
+  };
+
+  const checkDuplicateId = async () => {
+    const { data } = await api.member.checkDuplicateId(id);
+    if (data === true) {
+      alert("이미 사용중인 아이디입니다.");
+    } else {
+      alert("사용 가능한 아이디입니다.")
+      setIsDuplicateId(data);
     }
   };
 
@@ -66,8 +78,19 @@ const SignUpPer = () => {
               </div>
               <div className="flex flex-col">
                 <div className="flex flex-row">
-                  <input id="id" name="id" className=" w-64 h-8 p-2 border-2" required />
-                  <button type="button" className="w-24 h-8 mx-1.5 px-3 text-base border-2">
+                  <input
+                    id="id"
+                    name="id"
+                    value={id}
+                    onChange={(e) => setId(e.target.value)}
+                    className=" w-64 h-8 p-2 border-2"
+                    required
+                  />
+                  <button
+                    type="button"
+                    onClick={checkDuplicateId}
+                    className="w-24 h-8 mx-1.5 px-3 text-base border-2"
+                  >
                     중복확인
                   </button>
                 </div>
@@ -112,10 +135,11 @@ const SignUpPer = () => {
                     required
                     onChange={(e) => checkedPassword(e.target.value, password)}
                   />
-                  {passwordCheck 
-                    ? (<p className=" px-3 text-blue-600">일치</p>) 
-                    : (<p className=" px-3 text-red-600">불일치</p>)
-                  }
+                  {passwordCheck ? (
+                    <p className=" px-3 text-blue-600">일치</p>
+                  ) : (
+                    passwordCheck === false && <p className=" px-3 text-red-600">불일치</p>
+                  )}
                 </div>
                 <p className="py-3">비밀번호를 다시 한번 입력해주세요.</p>
               </div>

@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import api from "../../../api";
 
-const UserDetailBar = () => {  
+const UserDetailBar = () => {
     const handleMemberWithdrawal = () => {
         const confirmed = window.confirm("정말로 회원탈퇴를 하시겠습니까?");
         if (confirmed) {

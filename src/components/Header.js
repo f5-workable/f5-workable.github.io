@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { MdSearch } from "react-icons/md";
 
-const Header = ({ toggleIsCompany, isLogined, setIsLogined }) => {
+const Header = ({ isLogined, setIsLogined }) => {
   const navigate = useNavigate();
 
   const handleProfileClick = () => {
@@ -28,7 +28,7 @@ const Header = ({ toggleIsCompany, isLogined, setIsLogined }) => {
             </Link>
           </div>
           <div className="flex flex-row items-center">
-            <Link to="/search" className="relative mr-8">
+            <div onClick={() => navigate("/search")} className="relative mr-8">
               <label htmlFor="keyword-search">
                 <MdSearch className="absolute bottom-5 left-6" size={24} />
               </label>
@@ -39,7 +39,7 @@ const Header = ({ toggleIsCompany, isLogined, setIsLogined }) => {
                 disabled
                 className="w-full m-3 p-2 pl-10 bg-transparent bg-white border-2 border-neutral-300 hover:border-indigo-300 rounded-3xl transition-colors cursor-pointer"
               />
-            </Link>
+            </div>
             <aside className="flex flex-row items-center before:content-['|'] before:mr-6 text-neutral-300">
               <ul className="flex items-center text-neutral-800">
                 <li className="inline-block">
@@ -84,15 +84,6 @@ const Header = ({ toggleIsCompany, isLogined, setIsLogined }) => {
                           지원 현황
                         </Link>
                       </li>
-                      <li className="flex justify-center px-2">
-                        <Link
-                          to="/"
-                          onClick={handleProfileClick}
-                          className="w-36 hover:bg-neutral-200 rounded-xl px-4 py-4"
-                        >
-                          제안받기 현황
-                        </Link>
-                      </li>
                       <li className="flex justify-center px-2 pb-2 border-b border-solid border-neutral-400">
                         <Link
                           to="/bookmark"
@@ -128,19 +119,15 @@ const Header = ({ toggleIsCompany, isLogined, setIsLogined }) => {
                   <button
                     className="px-3 py-2 mr-3 h-10 border-2 border-solid border-neutral-200 rounded-3xl text-neutral-500 text-base"
                     onClick={() => {
-                      // 기업 로그인 가능하게되면 주석 해제, 이전 코드는 삭제
-
-                      // const confirm = window.confirm(
-                      //   "로그아웃하고 기업으로 로그인하시겠습니까?"
-                      // );
-                      // if (confirm) {
-                      //   setIsLogined(false);
-                      //   sessionStorage.removeItem("memberId")
-                      //   localStorage.removeItem("memberId")
-                      //   navigate("/login/company");
-                      // }
-                      toggleIsCompany();
-                      setIsLogined(true);
+                      const confirm = window.confirm(
+                        "로그아웃하고 기업으로 로그인하시겠습니까?"
+                      );
+                      if (confirm) {
+                        setIsLogined(false);
+                        sessionStorage.removeItem("memberId");
+                        localStorage.removeItem("memberId");
+                        navigate("/login/company");
+                      }
                     }}
                   >
                     기업 서비스

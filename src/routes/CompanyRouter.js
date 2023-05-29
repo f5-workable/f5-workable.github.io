@@ -39,9 +39,6 @@ const CompanyRouter = ({ toggleIsCompany, isLogined, setIsLogined }) => {
           element={
             <>
               <ResumeRead />
-              <div className="hidden xl:block">
-                <Footer />
-              </div>
             </>
           }
         />

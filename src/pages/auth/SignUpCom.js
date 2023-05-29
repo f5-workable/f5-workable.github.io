@@ -1,3 +1,4 @@
+import { useState } from "react";
 import api from "../../api";
 import Profile from "../../components/ProfileImg";
 import Kind from "../../components/company/signup";
@@ -5,37 +6,60 @@ import { Link, useNavigate } from "react-router-dom";
 
 const SignUpCom = () => {
   const navigate = useNavigate();
+  const [id, setId] = useState("");
+  const [password, setPassword] = useState("");
+  const [passwordCheck, setPasswordCheck] = useState(null);
+  const [isDuplicateId, setIsDuplicateId] = useState(null);
 
   const handleSignUp = async (e) => {
     e.preventDefault();
-    const data = new FormData(e.target);
-    const id = data.get("id");
-    const password = data.get("pw");
-    const pwCheck = data.get("pwCheck");
-    const c_name = data.get("companyName");
-    const c_type = data.get("companyType");
-    const phoneNumber1 = data.get("phoneNumber1");
-    const phoneNumber2 = data.get("phoneNumber2");
-    const phoneNumber3 = data.get("phoneNumber3");
-    const registerNumber1 = data.get("registerNumber1");
-    const registerNumber2 = data.get("registerNumber2");
-    const registerNumber3 = data.get("registerNumber3");
-    const address = data.get("address");
-    const profil = data.get("chooseFile");
-    if (password === pwCheck) {
-      navigate("/login/company");
-      await api.company.signUp({
-        id,
-        password,
-        address,
-        c_name,
-        c_type,
-        phone: phoneNumber1 + "-" + phoneNumber2 + "-" + phoneNumber3,
-        rnum: registerNumber1 + "-" + registerNumber2 + "-" + registerNumber3,
-        profil,
-      });
+    if (isDuplicateId === false && passwordCheck) {
+      const data = new FormData(e.target);
+      const c_id = data.get("id");
+      const c_password = data.get("pw");
+      const pwCheck = data.get("pwCheck");
+      const c_name = data.get("companyName");
+      const c_type = data.get("companyType");
+      const phoneNumber1 = data.get("phoneNumber1");
+      const phoneNumber2 = data.get("phoneNumber2");
+      const phoneNumber3 = data.get("phoneNumber3");
+      const registerNumber1 = data.get("registerNumber1");
+      const registerNumber2 = data.get("registerNumber2");
+      const registerNumber3 = data.get("registerNumber3");
+      const address = data.get("address");
+      const logo = data.get("chooseFile");
+      if (c_password === pwCheck) {
+        navigate("/login/company");
+        await api.company.signUp({
+          c_id,
+          c_password,
+          address,
+          c_name,
+          c_type,
+          phone: phoneNumber1 + "-" + phoneNumber2 + "-" + phoneNumber3,
+          rnum: registerNumber1 + "-" + registerNumber2 + "-" + registerNumber3,
+        });
+      } else {
+        alert("비밀번호가 서로 다릅니다.");
+      }
+    }
+  };
+
+  const checkedPassword = (checkPw, pw) => {
+    if (checkPw === pw) {
+      setPasswordCheck(true);
     } else {
-      alert("비밀번호가 서로 다릅니다.");
+      setPasswordCheck(false);
+    }
+  };
+
+  const checkDuplicateId = async () => {
+    const { data } = await api.company.checkDuplicateId(id);
+    if (data === true) {
+      alert("이미 사용중인 아이디입니다.");
+    } else {
+      alert("사용 가능한 아이디입니다.")
+      setIsDuplicateId(data);
     }
   };
   return (
@@ -54,8 +78,21 @@ const SignUpCom = () => {
               </div>
               <div className="flex flex-col">
                 <div className="flex flex-row">
-                  <input id="id" name="id" className=" w-64 h-8 p-2 border-2" required />
-                  <button className="w-24 h-8 mx-1.5 px-3 text-base border-2">중복확인</button>
+                  <input
+                    id="id"
+                    name="id"
+                    value={id}
+                    onChange={(e) => setId(e.target.value)}
+                    className=" w-64 h-8 p-2 border-2"
+                    required
+                  />
+                  <button
+                    type="button"
+                    onClick={checkDuplicateId}
+                    className="w-24 h-8 mx-1.5 px-3 text-base border-2"
+                  >
+                    중복확인
+                  </button>
                 </div>
                 <p className="py-3">5~24자 이내로 입력하세요.</p>
               </div>
@@ -73,6 +110,8 @@ const SignUpCom = () => {
                   type="password"
                   id="pw"
                   name="pw"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                   className=" w-64 h-8 p-2 border-2"
                   required
                 />
@@ -88,13 +127,21 @@ const SignUpCom = () => {
                 </label>
               </div>
               <div className="flex flex-col">
-                <input
-                  type="password"
-                  id="pwCheck"
-                  name="pwCheck"
-                  className=" w-64 h-8 p-2 border-2"
-                  required
-                />
+                <div className="flex flex-row items-center">
+                  <input
+                    type="password"
+                    id="pwCheck"
+                    name="pwCheck"
+                    onChange={(e) => checkedPassword(e.target.value, password)}
+                    className="w-64 h-8 p-2 border-2"
+                    required
+                  />
+                  {passwordCheck ? (
+                    <p className=" px-3 text-blue-600">일치</p>
+                  ) : (
+                    passwordCheck === false && <p className=" px-3 text-red-600">불일치</p>
+                  )}
+                </div>
                 <p className="py-3">비밀번호를 다시 한번 입력해주세요.</p>
               </div>
             </div>

@@ -25,7 +25,8 @@ const Item = ({ board }) => {
     await api.bookmark.delete(memberId, board.j_id);
   };
 
-  const regex = /(^[가-힣]+시 [가-힣]+구)|(^[가-힣]+도 [가-힣]+[시|군|구])/g;
+  const regex =
+    /(^[가-힣]+시 [가-힣]+구)|(^[가-힣]+도 [가-힣]+[시|군|구])|(^([가-힣]+시 [가-힣0-9]+[면|길|로])|^([가-힣]+시\s\s[가-힣0-9]+[길|로]))/g;
   const shortAddress = board.address?.match(regex)?.join("");
 
   useEffect(() => {
@@ -49,7 +50,7 @@ const Item = ({ board }) => {
           </p>
           <p className="py-2 text-neutral-400">{shortAddress}</p>
           <p className="mt-5 text-lg text-neutral-600 font-semibold absolute bottom-2">
-            {board.payment_type} {board.payment.toLocaleString()}원
+            {board.payment_type} {board.payment?.toLocaleString()}원
           </p>
         </div>
       </Link>

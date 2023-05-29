@@ -8,13 +8,16 @@ import VerticalBarChart from "../../components/charts/VerticalBarChart";
 import api from "../../api";
 import { useLocation, useParams } from "react-router-dom";
 import { useCallback } from "react";
+import DeleteConfirmModal from "../../components/member/DeleteConfirmModal";
 
 const CompanyDetail = () => {
   const { pathname } = useLocation();
   const { jobId } = useParams();
-
+  const memberId = localStorage.getItem("memberId") || sessionStorage.getItem("memberId");
   const [isBookmark, setIsBookmark] = useState(false);
-  const [showModal, setShowModal] = useState(false);
+  const [showResumeSelectModal, setShowResumeSelectModal] = useState(false);
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
+  const [applyId, setApplyId] = useState(false);
   const [board, setBoard] = useState(
     /** @type {import("../../api/companyBoard").BoardInfo} */ ({})
   );
@@ -22,23 +25,28 @@ const CompanyDetail = () => {
     /** @type {import("../../api/applicantStatistics").Statistics} */ ([])
   );
 
-  const regex = /(^[가-힣]+시 [가-힣]+구)|(^[가-힣]+도 [가-힣]+[시|군|구])/g;
+  const regex =
+    /(^[가-힣]+시 [가-힣]+구)|(^[가-힣]+도 [가-힣]+[시|군|구])|(^([가-힣]+시 [가-힣0-9]+[면|길|로])|^([가-힣]+시\s\s[가-힣0-9]+[길|로]))/g;
   const shortAddress = board.address?.match(regex)?.join("");
 
   const addBookmark = async () => {
-    const memberId = localStorage.getItem("memberId") || sessionStorage.getItem("memberId");
     setIsBookmark((prev) => !prev);
     await api.bookmark.add(memberId, board.j_id);
   };
 
   const deleteBookmark = async () => {
-    const memberId = localStorage.getItem("memberId") || sessionStorage.getItem("memberId");
     setIsBookmark((prev) => !prev);
     await api.bookmark.delete(memberId, board.j_id);
   };
 
+  const cancelApply = async () => {
+    await api.apply.delete(applyId);
+    localStorage.removeItem(JSON.stringify([memberId, jobId]));
+    setShowConfirmModal(false);
+    setApplyId(null);
+  };
+
   const getCompanyInfo = useCallback(async () => {
-    const memberId = localStorage.getItem("memberId") || sessionStorage.getItem("memberId");
     const { data } = await api.companyBoard.retrieve(jobId, memberId);
     setBoard(data);
     setIsBookmark(data.state);
@@ -56,7 +64,7 @@ const CompanyDetail = () => {
     } else {
       localStorage.setItem("recentViewedBoard", JSON.stringify([data]));
     }
-  }, [jobId]);
+  }, [jobId, memberId]);
 
   const getApplicantStatistics = useCallback(async () => {
     const { data } = await api.applicantStatistics.retrieve(jobId);
@@ -68,9 +76,11 @@ const CompanyDetail = () => {
   }, [pathname]);
 
   useEffect(() => {
+    const localApplyId = JSON.parse(localStorage.getItem(JSON.stringify([memberId, jobId])));
+    setApplyId(localApplyId);
     getCompanyInfo();
     getApplicantStatistics();
-  }, [getCompanyInfo, getApplicantStatistics]);
+  }, [getCompanyInfo, getApplicantStatistics, jobId, memberId]);
 
   return (
     <>
@@ -248,13 +258,21 @@ const CompanyDetail = () => {
                       북마크하기
                     </button>
                   )}
-
-                  <button
-                    onClick={() => setShowModal(true)}
-                    className="w-[45%] xl:w-full h-14 bg-blue-500 text-white rounded-[2rem] text-lg font-semibold"
-                  >
-                    지원하기
-                  </button>
+                  {applyId ? (
+                    <button
+                      onClick={() => setShowConfirmModal(true)}
+                      className="w-[45%] xl:w-full h-14 bg-red-400 text-white rounded-[2rem] text-lg font-semibold"
+                    >
+                      지원 취소
+                    </button>
+                  ) : (
+                    <button
+                      onClick={() => setShowResumeSelectModal(true)}
+                      className="w-[45%] xl:w-full h-14 bg-blue-500 text-white rounded-[2rem] text-lg font-semibold"
+                    >
+                      지원하기
+                    </button>
+                  )}
                 </div>
               </div>
             </aside>
@@ -262,7 +280,18 @@ const CompanyDetail = () => {
         </div>
       </main>
       <div className="block xl:hidden w-full h-24"></div>
-      <ResumeSelectModal state={{ showModal }} setState={{ setShowModal }} />
+      <DeleteConfirmModal
+        state={showConfirmModal}
+        setState={setShowConfirmModal}
+        title="정말 지원을 취소하시겠습니까?"
+        subtitle="지원 취소 시, 지원한 이력서를 기업에서 조회할 수 없습니다."
+        btnText="지원취소"
+        btnFunc={cancelApply}
+      />
+      <ResumeSelectModal
+        state={{ showResumeSelectModal }}
+        setState={{ setShowResumeSelectModal, setApplyId }}
+      />
     </>
   );
 };

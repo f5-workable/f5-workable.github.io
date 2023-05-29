@@ -11,6 +11,7 @@ const CompanyHeader = ({ toggleIsCompany, isLogined, setIsLogined }) => {
 
   const handleLogout = () => {
     setIsLogined(false);
+    toggleIsCompany();
     localStorage.removeItem("id");
     localStorage.removeItem("pw");
     localStorage.removeItem("companyId");
@@ -29,7 +30,7 @@ const CompanyHeader = ({ toggleIsCompany, isLogined, setIsLogined }) => {
             </Link>
           </div>
           <div className="flex flex-row items-center">
-            <Link to="/search" className="relative mr-8">
+            <div onClick={() => navigate("/search")} className="relative mr-8">
               <label htmlFor="keyword-search">
                 <MdSearch className="absolute bottom-5 left-6" size={24} />
               </label>
@@ -40,7 +41,7 @@ const CompanyHeader = ({ toggleIsCompany, isLogined, setIsLogined }) => {
                 disabled
                 className="w-full m-3 p-2 pl-10 bg-transparent bg-white border-2 border-neutral-300 hover:border-indigo-300 rounded-3xl transition-colors cursor-pointer"
               />
-            </Link>
+            </div>
             <aside className="flex flex-row items-center before:content-['|'] before:mr-6 text-neutral-300">
               <ul className="flex items-center text-neutral-800">
                 {isLogined ? (
@@ -77,15 +78,6 @@ const CompanyHeader = ({ toggleIsCompany, isLogined, setIsLogined }) => {
                           지원자 현황
                         </Link>
                       </li>
-                      <li className="flex justify-center px-2 pb-2 border-b border-solid border-neutral-400">
-                        <Link
-                          to="/"
-                          onClick={handleProfileClick}
-                          className="w-36 hover:bg-neutral-200 rounded-xl px-4 py-4"
-                        >
-                          제안 현황
-                        </Link>
-                      </li>
                       <li className="flex justify-center px-2 py-2">
                         <Link
                           to="/"
@@ -109,19 +101,16 @@ const CompanyHeader = ({ toggleIsCompany, isLogined, setIsLogined }) => {
                   <button
                     className="px-3 py-2 mr-3 h-10 border-2 border-solid border-neutral-200 rounded-3xl text-neutral-500 text-base"
                     onClick={() => {
-                      // 기업 로그인 가능하게되면 주석 해제, 이전 코드는 삭제
-
-                      // const confirm = window.confirm(
-                      //   "로그아웃하고 이용자로 로그인하시겠습니까?"
-                      // );
-                      // if (confirm) {
-                      //   setIsLogined(false);
-                      //   sessionStorage.removeItem("memberId")
-                      //   localStorage.removeItem("memberId")
-                      //   navigate("/login/member");
-                      // }
-                      setIsLogined(false);
-                      toggleIsCompany();
+                      const confirm = window.confirm(
+                        "로그아웃하고 이용자로 로그인하시겠습니까?"
+                      );
+                      if (confirm) {
+                        setIsLogined(false);
+                        toggleIsCompany();
+                        sessionStorage.removeItem("companyId");
+                        localStorage.removeItem("companyId");
+                        navigate("/login/member");
+                      }
                     }}
                   >
                     구직 서비스

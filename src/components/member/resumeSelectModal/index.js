@@ -5,21 +5,24 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
 const ResumeSelectModal = ({ state, setState }) => {
-  const { showModal } = state;
-  const { setShowModal } = setState;
+  const { showResumeSelectModal } = state;
+  const { setShowResumeSelectModal, setApplyId } = setState;
   const [selectedResumeId, setSelectedResumeId] = useState("");
   const [resumes, setResumes] = useState();
   const { jobId } = useParams();
+  const memberId = localStorage.getItem("memberId") || sessionStorage.getItem("memberId");
 
   const getResumes = async () => {
-    const memberId = localStorage.getItem("memberId") || sessionStorage.getItem("memberId");
     const { data } = await api.resume.retrieveByMember(memberId);
     setResumes(data.list);
   };
 
   const applyToCompany = async () => {
-    setShowModal(false);
-    await api.apply.add(jobId, selectedResumeId);
+    setShowResumeSelectModal(false);
+    const { data } = await api.apply.add(jobId, selectedResumeId);
+    // 이력서 지원 여부 판단을 위해 추가
+    localStorage.setItem(JSON.stringify([memberId, jobId]), data);
+    setApplyId(data);
   };
 
   useEffect(() => {
@@ -28,16 +31,20 @@ const ResumeSelectModal = ({ state, setState }) => {
 
   return (
     <>
-      {showModal ? (
+      {showResumeSelectModal ? (
         <>
           <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50">
-            <div className="relative w-screen my-6 mx-auto max-w-3xl">
+            <div
+              className="fixed inset-0 w-full h-full bg-black opacity-40"
+              onClick={() => setShowResumeSelectModal(false)}
+            ></div>
+            <div className="relative w-screen my-6 mx-auto max-w-3xl animate-appear">
               <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
                 <div className="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t">
                   <h3 className="text-3xl font-semibold">이력서 선택</h3>
                   <button
                     className="p-1 ml-auto bg-transparent border-0 text-black float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
-                    onClick={() => setShowModal(false)}
+                    onClick={() => setShowResumeSelectModal(false)}
                   >
                     <MdCancel
                       fontSize={30}
@@ -46,7 +53,7 @@ const ResumeSelectModal = ({ state, setState }) => {
                   </button>
                 </div>
                 <div className="p-6 flex flex-col gap-2 text-lg leading-relaxed">
-                  {resumes.length > 0 ? (
+                  {resumes?.length > 0 ? (
                     resumes?.map((resume) => (
                       <ResumeBtn
                         key={resume.r_id}
@@ -81,7 +88,6 @@ const ResumeSelectModal = ({ state, setState }) => {
               </div>
             </div>
           </div>
-          <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
         </>
       ) : null}
     </>

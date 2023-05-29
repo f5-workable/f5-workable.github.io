@@ -51,8 +51,8 @@ const apply = {
    * @param {number} pageSize
    * @returns {{data: CompaniesInfo}}
    */
-  retrieveByState: (m_num, state, pageNum, pageSize) =>
-    request.get(`/apply/list/${m_num}`, {}, { params: { state, pageNum, pageSize } }),
+  retrieveByState: (m_num, state, pageNum = 1, pageSize = 12) =>
+    request.get(`/apply/list/${m_num}`, { params: { state, pageNum, pageSize } }),
 
   /**
    *
