@@ -10,8 +10,6 @@ const UserDetailList = () => {
     const getMember = async () => {
         const memberId = localStorage.getItem("memberId") || sessionStorage.getItem("memberId");
         const { data } = await api.member.retrieve(memberId);
-        console.log(memberId);
-        console.log(data);
         setName(data.name);
         setId(data.id);
         setPhone(data.phone);
@@ -29,13 +27,13 @@ const UserDetailList = () => {
                 <div className=" h-32 mt-10">
                     <label className=" text-xl font-bold px-10">이름</label>
                     <hr className=" bg-black h-0.5"></hr>
-                    <input className=" text-lg font-bold italic bg-white my-5 px-10" value={id} disabled />
+                    <input className=" text-lg font-bold italic bg-white my-5 px-10" value={name} disabled />
                     <hr></hr>
                 </div>
                 <div className=" h-32">
                     <label className=" text-xl font-bold px-10">아이디</label>
                     <hr className=" bg-black h-0.5"></hr>
-                    <input className=" text-lg font-bold italic bg-white my-5 px-10" value={name} disabled />
+                    <input className=" text-lg font-bold italic bg-white my-5 px-10" value={id} disabled />
                     <hr></hr>
                 </div>
                 <div className=" h-32">
