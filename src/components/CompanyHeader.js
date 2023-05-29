@@ -30,7 +30,7 @@ const CompanyHeader = ({ toggleIsCompany, isLogined, setIsLogined }) => {
             </Link>
           </div>
           <div className="flex flex-row items-center">
-            <Link to="/search" className="relative mr-8">
+            <div onClick={() => navigate("/search")} className="relative mr-8">
               <label htmlFor="keyword-search">
                 <MdSearch className="absolute bottom-5 left-6" size={24} />
               </label>
@@ -41,7 +41,7 @@ const CompanyHeader = ({ toggleIsCompany, isLogined, setIsLogined }) => {
                 disabled
                 className="w-full m-3 p-2 pl-10 bg-transparent bg-white border-2 border-neutral-300 hover:border-indigo-300 rounded-3xl transition-colors cursor-pointer"
               />
-            </Link>
+            </div>
             <aside className="flex flex-row items-center before:content-['|'] before:mr-6 text-neutral-300">
               <ul className="flex items-center text-neutral-800">
                 {isLogined ? (
@@ -76,15 +76,6 @@ const CompanyHeader = ({ toggleIsCompany, isLogined, setIsLogined }) => {
                           className="w-36 hover:bg-neutral-200 rounded-xl px-4 py-4"
                         >
                           지원자 현황
-                        </Link>
-                      </li>
-                      <li className="flex justify-center px-2 pb-2 border-b border-solid border-neutral-400">
-                        <Link
-                          to="/"
-                          onClick={handleProfileClick}
-                          className="w-36 hover:bg-neutral-200 rounded-xl px-4 py-4"
-                        >
-                          제안 현황
                         </Link>
                       </li>
                       <li className="flex justify-center px-2 py-2">
