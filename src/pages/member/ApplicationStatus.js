@@ -48,9 +48,9 @@ const ApplicationStatus = () => {
               <li
                 className={
                   "w-1/4 border-r border-solid border-gray-300 cursor-pointer hover:text-blue-500" +
-                  (status === "지원 완료" ? " text-blue-500" : " text-black")
+                  (status === "지원완료" ? " text-blue-500" : " text-black")
                 }
-                onClick={() => getBoardsByState("지원 완료")}
+                onClick={() => getBoardsByState("지원완료")}
               >
                 <dl className="text-center">
                   <dt className="text-5xl">{countByStatus[1]?.count}</dt>
@@ -60,9 +60,9 @@ const ApplicationStatus = () => {
               <li
                 className={
                   "w-1/4 border-r border-solid border-gray-300 cursor-pointer hover:text-blue-500" +
-                  (status === "최종 합격" ? " text-blue-500" : " text-black")
+                  (status === "최종합격" ? " text-blue-500" : " text-black")
                 }
-                onClick={() => getBoardsByState("최종 합격")}
+                onClick={() => getBoardsByState("최종합격")}
               >
                 <dl className="text-center">
                   <dt className="text-5xl">{countByStatus[2]?.count}</dt>
