@@ -8,11 +8,9 @@ import App from "./App";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 document.body.style.zoom = "90%";
 root.render(
-  <React.StrictMode>
-    <BrowserRouter basename={process.env.PUBLIC_URL}>
-      <App />
-    </BrowserRouter>
-  </React.StrictMode>
+  <BrowserRouter basename={process.env.PUBLIC_URL}>
+    <App />
+  </BrowserRouter>
 );
 
 // If you want to start measuring performance in your app, pass a function
