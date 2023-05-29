@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
+import { useLayoutEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import Disorder from "../../components/member/resumeDetail/Disorder";
 import Location from "../../components/member/searchDetail/location";
 import api from "../../api";
+import DeleteConfirmModal from "../../components/member/DeleteConfirmModal";
 
 const ResumeWrite = () => {
   const navigate = useNavigate();
@@ -22,18 +23,18 @@ const ResumeWrite = () => {
   const [disabilityType, setDisabilityType] = useState([]);
   const [severeCondition, setSevereCondition] = useState("중증");
   const [memberSelf, setMemberSelf] = useState("");
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
 
   const { resumeId } = useParams();
   const memberId = localStorage.getItem("memberId") || sessionStorage.getItem("memberId");
 
   const getMemberResume = async () => {
     const { data } = await api.resume.retrieve(resumeId);
-    console.log(data);
     setResumeName(data.title);
     serMemberAcademic(data.education);
     setMemberCareer(data.career === null ? "신입" : "경력");
     setMemberCareerDetail(data.career === null ? null : data.career);
-    if (data.region.region) {
+    if (data.region[0].region !== null) {
       setMemberCareerRegion(data.region.map((item) => item.region));
     } else {
       setMemberCareerRegion([]);
@@ -50,7 +51,6 @@ const ResumeWrite = () => {
     const {
       data: { name, phone, birth, email, gender },
     } = await api.member.retrieve(memberId);
-    console.log(name, phone, birth, email, gender);
     // 만 나이 계산
     const [year, month, day] = birth.split("-");
     const birthDate = new Date(year, month - 1, day);
@@ -60,7 +60,6 @@ const ResumeWrite = () => {
     if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
       age--;
     }
-    console.log(age);
     setMemberName(name);
     setMemberPhone(phone);
     setMemberAge(age);
@@ -70,7 +69,7 @@ const ResumeWrite = () => {
 
   const updateMemberResume = async () => {
     console.log(memberCareerRegion);
-    const { data } = await api.resume.update(resumeId, {
+    await api.resume.update(resumeId, {
       place: memberCareerRegion,
       education: memberAcademic,
       job: memberCareerType,
@@ -86,17 +85,13 @@ const ResumeWrite = () => {
   };
 
   const deleteMemberResume = async () => {
-    const confirmed = window.confirm("정말로 삭제하시겠습니까?");
-    if (confirmed) {
-      const { data } = await api.resume.delete(resumeId);
-      console.log(data);
-      navigate("/resume");
-    }
+    const { data } = await api.resume.delete(resumeId);
+    console.log(data);
+    navigate("/resume");
   };
 
-  useEffect(() => {
-    getMemberResume();
-    getMemberData();
+  useLayoutEffect(() => {
+    Promise.all([getMemberResume(), getMemberData()]);
   }, []);
 
   return (
@@ -421,7 +416,7 @@ const ResumeWrite = () => {
 
       <div className="flex justify-center">
         <button className=" w-1/6 h-10 mx-5 text-lg font-bold bg-gray-200 hover:bg-gray-500 hover:text-white">
-          <Link to={"/resume"}>작성 취소</Link>
+          <Link to="/resume">작성 취소</Link>
         </button>
         <button
           className=" w-1/6 h-10 mx-5 text-lg font-bold bg-orange-200 hover:bg-orange-400 hover:text-white"
@@ -431,11 +426,19 @@ const ResumeWrite = () => {
         </button>
         <button
           className=" w-1/6 h-10 mx-5 text-lg font-bold bg-red-300 hover:bg-red-500 hover:text-white"
-          onClick={deleteMemberResume}
+          onClick={() => setShowConfirmModal(true)}
         >
           삭제
         </button>
       </div>
+      <DeleteConfirmModal
+        state={showConfirmModal}
+        setState={setShowConfirmModal}
+        title="정말 해당 이력서를 삭제하시겠습니까?"
+        subtitle="이력서 삭제 시, 다시 복구할 수 없습니다."
+        btnText="이력서 삭제"
+        btnFunc={deleteMemberResume}
+      />
     </div>
   );
 };
