@@ -33,6 +33,7 @@ const SearchDetail = ({ state, setState }) => {
     setEmploymentType([]);
     setLocation([]);
     setPaymentType([]);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const toggleIsArrowBtnClicked = () => {
