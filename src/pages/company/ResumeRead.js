@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useCallback, useEffect, useState } from "react";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import api from "../../api";
 
 const ResumeRead = () => {
@@ -21,46 +21,63 @@ const ResumeRead = () => {
 
   const { resumeId } = useParams();
   const navigate = useNavigate();
+  const location = useLocation;
 
-  const getResumeNameByStatus = async () => {
-    const { data } = await api.applicant.retrieve(resumeId);
+  const getResumeNameByStatus = useCallback(async () => {
+    const { data } = await api.resume.retrieve(resumeId);
     const memberInfo = await api.member.retrieve(data.m_num);
-    const {
-      data: { name, phone, email, gender, birth },
-    } = memberInfo;
+    console.log(memberInfo);
     // 만 나이 계산
-    const [year, month, day] = birth.split("-");
-    const birthDate = new Date(year, month - 1, day);
-    const today = new Date();
-    let age = today.getFullYear() - birthDate.getFullYear();
-    const m = today.getMonth() - birthDate.getMonth();
-    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
-      age--;
+    let age;
+    if (memberInfo.data?.birth) {
+      const [year, month, day] = memberInfo.data?.birth?.split("-");
+      const birthDate = new Date(year, month - 1, day);
+      const today = new Date();
+      age = today.getFullYear() - birthDate.getFullYear();
+      const m = today.getMonth() - birthDate.getMonth();
+      if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+      }
     }
-    setMemberName(name);
-    setMemberPhone(phone);
-    setMemberEmail(email);
-    setMemberGender(gender);
+    setMemberName(memberInfo.data?.name);
+    setMemberPhone(memberInfo.data?.phone);
+    setMemberEmail(memberInfo.data?.email);
+    setMemberGender(memberInfo.data?.gender);
     setMemberAge(age);
     serMemberAcademic(data.education);
     setMemberCareer(data.career === null ? "신입" : "경력");
     setMemberCareerDetail(data.career);
-    setMemberCareerPlace(data.region.map((region) => region.region));
+    setMemberCareerPlace(data.region?.map((item) => item.region));
     setMemberCareerType(data.job);
     setMemberWageType(data.payment_type);
     setMemberWage(data.payment);
     setDisabilityType(data.ob_type);
     setSevereCondition(data.disease);
     setMemberSelf(data.pr === null ? "작성한 내용이 없습니다." : data.pr);
-  };
+
+    // 로컬스토리지 최근 본 공고 배열에 추가
+    const prevRecentViewedResume = JSON.parse(localStorage.getItem("recentViewedResume"));
+    if (prevRecentViewedResume) {
+      // 중복 제거
+      const filteredRecentViewedResume = [...prevRecentViewedResume].filter(
+        (resume) => resume.r_id !== data.r_id
+      );
+      filteredRecentViewedResume.push(data);
+
+      localStorage.setItem("recentViewedResume", JSON.stringify(filteredRecentViewedResume));
+    } else {
+      localStorage.setItem("recentViewedResume", JSON.stringify([data]));
+    }
+  }, [resumeId]);
 
   const updateApplicantStatus = async (state) => {
     await api.applicant.update(resumeId, state);
   };
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     getResumeNameByStatus();
-  }, []);
+  }, [getResumeNameByStatus]);
 
   return (
     <div className=" p-12 h-auto">
@@ -172,7 +189,7 @@ const ResumeRead = () => {
             희망임금
           </label>
           <input className="bg-white w-10" value={memberWageType} disabled />
-          <input className="bg-white w-20" value={memberWage.toLocaleString()} disabled />원
+          <input className="bg-white w-20" value={memberWage?.toLocaleString()} disabled />원
         </div>
         <hr className="mt-5 border border-gray-100"></hr>
       </div>
@@ -216,20 +233,6 @@ const ResumeRead = () => {
             이전
           </button>
         </div>
-      </div>
-      <div className="w-full h-32 flex justify-evenly items-center fixed bottom-0 left-0 z-50 bg-white">
-        <button
-          onClick={() => updateApplicantStatus("최종합격")}
-          className="w-[30%] h-16 bg-blue-400 rounded-xl text-white text-lg"
-        >
-          합격
-        </button>
-        <button
-          onClick={() => updateApplicantStatus("불합격")}
-          className="w-[30%] h-16 bg-red-400 rounded-xl text-white text-lg"
-        >
-          불합격
-        </button>
       </div>
       <div className="block w-full h-24"></div>
     </div>
