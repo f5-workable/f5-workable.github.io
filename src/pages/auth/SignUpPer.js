@@ -17,7 +17,6 @@ const SignUpPer = () => {
       const data = new FormData(e.target);
       const id = data.get("id");
       const password = data.get("pw");
-      const pwCheck = data.get("pwCheck");
       const name = data.get("name");
       const year = data.get("year");
       const month = data.get("month");
@@ -26,21 +25,23 @@ const SignUpPer = () => {
       const phoneNumber2 = data.get("phoneNumber2");
       const phoneNumber3 = data.get("phoneNumber3");
       const email = data.get("email");
-      const profil = data.get("chooseFile");
-      if (password === pwCheck) {
-        navigate("/login/member");
-        await api.member.signUp({
-          id,
-          password,
-          birth: year + "-" + month + "-" + day,
-          gender,
-          name,
-          email,
-          phone: phoneNumber1 + "-" + phoneNumber2 + "-" + phoneNumber3,
-        });
-      } else {
-        alert("비밀번호가 서로 다릅니다.");
-      }
+      const logo = data.get("chooseFile");
+      await api.member.signUp({
+        id,
+        password,
+        birth: year + "-" + month + "-" + day,
+        gender,
+        name,
+        email,
+        phone: phoneNumber1 + "-" + phoneNumber2 + "-" + phoneNumber3,
+      });
+      navigate("/login/member");
+    } else if (isDuplicateId === null) {
+      alert("아이디 중복 체크를 먼저 해주세요.");
+    } else if (isDuplicateId === true) {
+      alert("이미 존재하는 아이디입니다.");
+    } else {
+      alert("비밀번호가 다릅니다.");
     }
   };
 
@@ -57,7 +58,7 @@ const SignUpPer = () => {
     if (data === true) {
       alert("이미 사용중인 아이디입니다.");
     } else {
-      alert("사용 가능한 아이디입니다.")
+      alert("사용 가능한 아이디입니다.");
       setIsDuplicateId(data);
     }
   };

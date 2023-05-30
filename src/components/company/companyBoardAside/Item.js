@@ -12,7 +12,7 @@ const Item = ({ board, state, setState, id }) => {
         <p>마감: {board.d_date}</p>
       </div>
       <div className="w-7 h-7 font-semibold text-lg text-blue-400 bg-blue-100 rounded-full flex justify-center items-center">
-        4
+        1
       </div>
     </button>
   );

@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import api from "../../api";
 
-const ResumeRead = () => {
+const ApplicantResumeRead = () => {
   const [memberName, setMemberName] = useState("");
   const [memberPhone, setMemberPhone] = useState("");
   const [memberEmail, setMemberEmail] = useState("");
@@ -19,12 +19,12 @@ const ResumeRead = () => {
   const [severeCondition, setSevereCondition] = useState([]);
   const [memberSelf, setMemberSelf] = useState("");
 
-  const { resumeId } = useParams();
+  const { cr_num } = useParams();
   const navigate = useNavigate();
   const location = useLocation;
 
   const getResumeNameByStatus = useCallback(async () => {
-    const { data } = await api.resume.retrieve(resumeId);
+    const { data } = await api.applicant.retrieve(cr_num);
     const memberInfo = await api.member.retrieve(data.m_num);
     console.log(memberInfo);
     // 만 나이 계산
@@ -68,10 +68,11 @@ const ResumeRead = () => {
     } else {
       localStorage.setItem("recentViewedResume", JSON.stringify([data]));
     }
-  }, [resumeId]);
+  }, [cr_num]);
 
   const updateApplicantStatus = async (state) => {
-    await api.applicant.update(resumeId, state);
+    await api.applicant.update(cr_num, state);
+    navigate("/status/applicant");
   };
 
   useEffect(() => {
@@ -234,9 +235,24 @@ const ResumeRead = () => {
           </button>
         </div>
       </div>
+      <div className="w-full h-32 flex justify-evenly items-center fixed bottom-0 left-0 z-50 bg-white">
+        <button
+          onClick={() => updateApplicantStatus("최종합격")}
+          className="w-[30%] h-16 bg-blue-400 rounded-xl text-white text-lg"
+        >
+          합격
+        </button>
+        <button
+          onClick={() => updateApplicantStatus("불합격")}
+          className="w-[30%] h-16 bg-red-400 rounded-xl text-white text-lg"
+        >
+          불합격
+        </button>
+      </div>
+
       <div className="block w-full h-24"></div>
     </div>
   );
 };
 
-export default ResumeRead;
+export default ApplicantResumeRead;

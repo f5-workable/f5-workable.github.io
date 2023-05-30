@@ -4,7 +4,7 @@ import ArrowBtn from "../../../ArrowBtn";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-const CustomMemberSlider = ({ isHeader }) => {
+const CustomMemberSlider = ({ resumes }) => {
   const settings = {
     dots: false,
     infinite: false,
@@ -35,14 +35,25 @@ const CustomMemberSlider = ({ isHeader }) => {
   };
 
   return (
-    <Slider
-      className="!flex w-full h-[21rem] justify-center items-center my-3 relative"
-      {...settings}
-    >
-      {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((_, idx) => (
-        <Item key={idx} className="m-3" />
-      ))}
-    </Slider>
+    <>
+      {resumes?.length > 0 ? (
+        <Slider
+          className={
+            (resumes.length > 4 ? "!flex " : "") +
+            `w-full h-[21rem] justify-center items-center my-3 relative`
+          }
+          {...settings}
+        >
+          {resumes?.map((resume) => (
+            <Item key={resume.r_id} resume={resume} className="m-3" />
+          ))}
+        </Slider>
+      ) : (
+        <p className="text-2xl text-center text-neutral-400 my-32">
+          이력서가 존재하지 않습니다.
+        </p>
+      )}
+    </>
   );
 };
 

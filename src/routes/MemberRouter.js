@@ -27,11 +27,7 @@ const MemberRouter = ({ toggleIsCompany, isLogined, setIsLogined }) => {
       <Route
         element={
           <>
-            <Header
-              toggleIsCompany={toggleIsCompany}
-              isLogined={isLogined}
-              setIsLogined={setIsLogined}
-            />
+            <Header isLogined={isLogined} setIsLogined={setIsLogined} />
             <Outlet />
           </>
         }
@@ -71,7 +67,7 @@ const MemberRouter = ({ toggleIsCompany, isLogined, setIsLogined }) => {
         <Route path="/resume" element={<Resume />} />
         <Route path="/resume/:resumeId" element={<ResumeWrite />} />
         <Route path="/status/application" element={<ApplicationStatus />} />
-        <Route path="/userdetail" element={<UserDetail />} />
+        <Route path="/userdetail" element={<UserDetail setIsLogined={setIsLogined} />} />
         <Route path="/userdetailmodify" element={<UserDetailModify />} />
         <Route path="/findpwper" element={<FindPwPer />} />
         <Route path="/setnewpwper" element={<SetNewPwPer />} />

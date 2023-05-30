@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { MdArrowDropDown, MdArrowDropUp, MdSearch } from "react-icons/md";
+import { MdArrowDropDown, MdArrowDropUp } from "react-icons/md";
 import Location from "./location";
 import PaymentType from "./paymentType";
 import DisabilityType from "./disabilityType";
@@ -33,6 +32,7 @@ const SearchDetail = ({ state, setState }) => {
     setLocation([]);
     setPaymentType([]);
     setSeverityType([]);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const toggleIsArrowBtnClicked = () => {

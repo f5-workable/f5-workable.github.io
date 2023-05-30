@@ -8,6 +8,9 @@ import UserDetail from "../pages/company/UserDetail";
 import UserDetailModify from "../pages/company/UserDetailModify";
 import ResumeRead from "../pages/company/ResumeRead";
 import CompanyDetail from "../pages/company/CompanyDetail";
+import CompanyBoards from "../pages/company/CompanyBoards";
+import RecentApplicants from "../pages/company/RecentApplicants";
+import ApplicantResumeRead from "../pages/company/ApplicantResumeRead";
 
 const CompanyRouter = ({ toggleIsCompany, isLogined, setIsLogined }) => {
   return (
@@ -43,6 +46,14 @@ const CompanyRouter = ({ toggleIsCompany, isLogined, setIsLogined }) => {
           }
         />
         <Route
+          path="/resume/applicant/:cr_num"
+          element={
+            <>
+              <ApplicantResumeRead />
+            </>
+          }
+        />
+        <Route
           path="/jobs/:jobId"
           element={
             <>
@@ -53,9 +64,16 @@ const CompanyRouter = ({ toggleIsCompany, isLogined, setIsLogined }) => {
             </>
           }
         />
+        <Route
+          path="/userdetail"
+          element={
+            <UserDetail setIsLogined={setIsLogined} toggleIsCompany={toggleIsCompany} />
+          }
+        />
+        <Route path="/company/boards" element={<CompanyBoards />} />
+        <Route path="/recent/applicants" element={<RecentApplicants />} />
         <Route path="/status/applicant" element={<ApplicantStatus />} />
         <Route path="/search" element={<Search />} />
-        <Route path="/userdetail" element={<UserDetail />} />
         <Route path="/userdetailmodify" element={<UserDetailModify />} />
       </Route>
     </Routes>

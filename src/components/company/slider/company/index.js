@@ -35,17 +35,25 @@ const CustomCompanySlider = ({ boards }) => {
   };
 
   return (
-    <Slider
-      className={
-        (boards?.length > 4 ? "!flex " : "") +
-        `w-full h-[21rem] justify-center items-center my-3 relative`
-      }
-      {...settings}
-    >
-      {boards?.map((board) => (
-        <Item key={board.j_id} board={board} className="m-3" />
-      ))}
-    </Slider>
+    <>
+      {boards?.length > 0 ? (
+        <Slider
+          className={
+            (boards?.length > 4 ? "!flex " : "") +
+            `w-full h-[21rem] justify-center items-center my-3 relative`
+          }
+          {...settings}
+        >
+          {boards?.map((board) => (
+            <Item key={board.j_id} board={board} className="m-3" />
+          ))}
+        </Slider>
+      ) : (
+        <p className="text-2xl text-center text-neutral-400 my-32">
+          공고가 존재하지 않습니다.
+        </p>
+      )}
+    </>
   );
 };
 

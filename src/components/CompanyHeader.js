@@ -60,7 +60,7 @@ const CompanyHeader = ({ toggleIsCompany, isLogined, setIsLogined }) => {
                       id="dropdown-menu"
                       className="hidden absolute top-14 -left-5 w-40 bg-neutral-50 rounded-lg border border-solid border-neutral-300 overflow-hidden shadow-lg"
                     >
-                      <li className="flex justify-center px-2 py-2 border-b border-solid border-neutral-400">
+                      <li className="flex justify-center px-2 py-2 border-b border-neutral-400">
                         <Link
                           to="/userdetail"
                           onClick={handleProfileClick}
@@ -71,11 +71,29 @@ const CompanyHeader = ({ toggleIsCompany, isLogined, setIsLogined }) => {
                       </li>
                       <li className="flex justify-center px-2 pt-2">
                         <Link
+                          to="/company/boards"
+                          onClick={handleProfileClick}
+                          className="w-36 hover:bg-neutral-200 rounded-xl px-4 py-4"
+                        >
+                          우리 기업 공고
+                        </Link>
+                      </li>
+                      <li className="flex justify-center px-2 border-b border-neutral-400 pb-2">
+                        <Link
                           to="/status/applicant"
                           onClick={handleProfileClick}
                           className="w-36 hover:bg-neutral-200 rounded-xl px-4 py-4"
                         >
                           지원자 현황
+                        </Link>
+                      </li>
+                      <li className="flex justify-center px-2 pt-2">
+                        <Link
+                          to="/recent/applicants"
+                          onClick={handleProfileClick}
+                          className="w-36 hover:bg-neutral-200 rounded-xl px-4 py-4"
+                        >
+                          최근 본 지원자
                         </Link>
                       </li>
                       <li className="flex justify-center px-2 py-2">
