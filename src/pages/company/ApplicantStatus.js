@@ -30,7 +30,6 @@ const ApplicantStatus = () => {
   const getApplicantByBoardIdAndState = async (boardId, state) => {
     const { data } = await api.applicant.retrieveByBoardIdAndState(boardId, state);
     setApplicants(data.list);
-    console.log(data.list);
   };
 
   useEffect(() => {
@@ -82,9 +81,9 @@ const ApplicantStatus = () => {
                 <li
                   className={
                     "w-1/4 border-r border-solid border-gray-300 cursor-pointer hover:text-blue-500" +
-                    (status === "지원완료" ? " text-blue-500" : " text-black")
+                    (status === "대기" ? " text-blue-500" : " text-black")
                   }
-                  onClick={() => setStatus("지원완료")}
+                  onClick={() => setStatus("대기")}
                 >
                   <dl className="text-center">
                     <dt className="text-5xl">{countByStatus[1]?.count}</dt>
