@@ -19,8 +19,7 @@ const Resume = () => {
   };
 
   const updateSelectedResume = async () => {
-    console.log(resumeList[selectedResumeIndex].r_id);
-    await api.member.defaultUpdate(memberId, resumeList[selectedResumeIndex].r_id);
+    await api.member.defaultUpdate(memberId, resumeList[selectedResumeIndex]?.r_id);
   };
 
   const handleClick = () => {
