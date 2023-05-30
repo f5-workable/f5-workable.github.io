@@ -17,7 +17,6 @@ const SignUpCom = () => {
       const data = new FormData(e.target);
       const c_id = data.get("id");
       const c_password = data.get("pw");
-      const pwCheck = data.get("pwCheck");
       const c_name = data.get("companyName");
       const c_type = data.get("companyType");
       const phoneNumber1 = data.get("phoneNumber1");
@@ -28,20 +27,22 @@ const SignUpCom = () => {
       const registerNumber3 = data.get("registerNumber3");
       const address = data.get("address");
       const logo = data.get("chooseFile");
-      if (c_password === pwCheck) {
-        navigate("/login/company");
-        await api.company.signUp({
-          c_id,
-          c_password,
-          address,
-          c_name,
-          c_type,
-          phone: phoneNumber1 + "-" + phoneNumber2 + "-" + phoneNumber3,
-          rnum: registerNumber1 + "-" + registerNumber2 + "-" + registerNumber3,
-        });
-      } else {
-        alert("비밀번호가 서로 다릅니다.");
-      }
+      await api.company.signUp({
+        c_id,
+        c_password,
+        address,
+        c_name,
+        c_type,
+        phone: phoneNumber1 + "-" + phoneNumber2 + "-" + phoneNumber3,
+        rnum: registerNumber1 + "-" + registerNumber2 + "-" + registerNumber3,
+      });
+      navigate("/login/company");
+    } else if (isDuplicateId === null) {
+      alert("아이디 중복 체크를 먼저 해주세요.");
+    } else if (isDuplicateId === true) {
+      alert("이미 존재하는 아이디입니다.")
+    } else {
+      alert("비밀번호가 다릅니다.")
     }
   };
 
@@ -58,7 +59,7 @@ const SignUpCom = () => {
     if (data === true) {
       alert("이미 사용중인 아이디입니다.");
     } else {
-      alert("사용 가능한 아이디입니다.")
+      alert("사용 가능한 아이디입니다.");
       setIsDuplicateId(data);
     }
   };
