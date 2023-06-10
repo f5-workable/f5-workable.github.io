@@ -33,9 +33,10 @@ const ResumeWrite = () => {
     serMemberAcademic(data.education);
     setMemberCareer(data.career === null ? "신입" : "경력");
     setMemberCareerDetail(data.career === null ? null : data.career);
-    if (data.region.region) {
+    if (data.region?.region) {
       setMemberCareerRegion(data.region.map((item) => item.region));
-    } else {
+    }
+    else {
       setMemberCareerRegion([]);
     }
     setMemberCareerType(data.job);
@@ -60,8 +61,6 @@ const ResumeWrite = () => {
   const updateMemberResume = async () => {
     console.log(memberCareerRegion);
     const { data } = await api.resume.update(resumeId, {
-      r_id: resumeId,
-      age: 23,
       place: memberCareerRegion,
       education: memberAcademic,
       job: memberCareerType,

@@ -50,7 +50,7 @@ const resume = {
    * @param {object} dto 수정한 이력서 데이터
    * @returns
    */
-  update: (id, dto) => request.put(`/resume/${id}`, dto),
+  update: (id, dto) => request.post(`/resume/${id}`, dto),
 
   /**
    *
